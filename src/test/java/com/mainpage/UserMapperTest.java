@@ -1,4 +1,4 @@
-package com.de;
+package com.mainpage;
 
 import com.mainpage.domain.User;
 import com.mainpage.service.impl.UserServiceImpl;
