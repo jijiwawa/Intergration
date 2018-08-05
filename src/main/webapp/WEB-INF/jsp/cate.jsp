@@ -10,6 +10,7 @@
     <script src="/ssm/js/jquery-3.2.1.js"></script>
     <script src="/ssm/js/bootstrap.min.js"></script>
     <style>
+
         li {list-style-type:none;}
         html, body {
             height: 100%;
