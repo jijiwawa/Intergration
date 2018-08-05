@@ -1,6 +1,6 @@
-package com.forums.dao;
+package com.mainpage.dao;
 
-import com.forums.domain.User;
+import com.mainpage.domain.User;
 
 public interface UserMapper {
 

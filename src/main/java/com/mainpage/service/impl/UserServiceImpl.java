@@ -1,8 +1,8 @@
-package com.forums.service.impl;
+package com.mainpage.service.impl;
 
-import com.forums.dao.UserMapper;
-import com.forums.domain.User;
-import com.forums.service.UserService;
+import com.mainpage.dao.UserMapper;
+import com.mainpage.domain.User;
+import com.mainpage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

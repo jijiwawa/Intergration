@@ -1,4 +1,4 @@
-package com.forums.domain;
+package com.mainpage.domain;
 
 public class User {
     private int id;
