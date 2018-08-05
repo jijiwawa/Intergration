@@ -14,8 +14,8 @@
         </div>
         <ul class="list-group" style="width: 100%">
             <li class="list-group-item">
-                <a  href="/ssm/signin" class="btn btn-primary btn-block">登录</a>
-                <a  href="/ssm/signup" class="btn btn-default btn-block">注册</a>
+                <a  href="/intergration/signin" class="btn btn-primary btn-block">登录</a>
+                <a  href="/intergration/signup" class="btn btn-default btn-block">注册</a>
             </li>
         </ul>
     </div>

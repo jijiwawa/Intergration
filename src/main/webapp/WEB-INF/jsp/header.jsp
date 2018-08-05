@@ -24,10 +24,10 @@
                 <!--未登陆-->
                  <ul class="nav navbar-nav navbar-right">
                        <li>
-                           <p class="navbar-text"><a href="/ssm/signin">登录</a></p>
+                           <p class="navbar-text"><a href="/intergration/signin">登录</a></p>
                        </li>
                        <li>
-                               <p class="navbar-text"><a href="/ssm/signup">注册</a></p>
+                               <p class="navbar-text"><a href="/intergration/signup">注册</a></p>
                        </li>
                  </ul>
                 </c:if>

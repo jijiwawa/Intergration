@@ -35,4 +35,19 @@ web配置\
 3.2.3 main-servlet.xml\
 因为spring-servlet.xml只是 controller 级别的上下文，说白了就是 servlet 级别的初始化，它不涉及到除了转发之外的任何实体，所以它的作用范围仅仅限制在 servlet 级别，所以它的初始化应该是跟spring 的 DispatcherServlet 初始化在一起，所以就是在 <servlet> 表情中初始化的。它有一个默认值就是【/WEB-INF/remoting-servlet.xml 】，注意配置文件的对应的名称是【 servlet-name】-servlet.xml，所以如果你没有给servlet 制定配置文件的位置，并且在默认位置下也没有配置文件，那么系统启动的时候就会报错。\
 
+# 强制UTF-8传输
+web.xml中使用filter
+```aidl
+<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+```
+
+# git
+Preference->VersionControl->Git设置Path to Git executable:/usr/local/bin/git
+
+Preference->VersionControl->GitHub:点击Create API Token输入用户名和密码，点击Test测试账户
+
 

@@ -6,9 +6,9 @@
     <meta name="Content-Type"  content="text/html;charset=utf-8">
     <meta name="keywords" content="Genesis,论坛,社区,程序员">
     <title>校园一体化服务平台</title>
-    <link href="/ssm/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/ssm/js/jquery-3.2.1.js"></script>
-    <script src="/ssm/js/bootstrap.min.js"></script>
+    <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/intergration/js/jquery-3.2.1.js"></script>
+    <script src="/intergration/js/bootstrap.min.js"></script>
     <style>
         li {list-style-type:none;}
         html, body {

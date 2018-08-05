@@ -20,8 +20,11 @@ public class MainController {
     }
 
     @RequestMapping("/signup")
-    public ModelAndView signUp(HttpSession session){
+    public ModelAndView signUp(){
         return new ModelAndView("signup");
     }
+
+    @RequestMapping("signin")
+    public ModelAndView signIn(){return new ModelAndView("signin");}
 
 }
