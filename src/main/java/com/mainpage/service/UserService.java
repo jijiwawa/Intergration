@@ -1,6 +1,6 @@
-package com.forums.service;
+package com.mainpage.service;
 
-import com.forums.domain.User;
+import com.mainpage.domain.User;
 
 public interface UserService {
     public boolean addUser(User user);

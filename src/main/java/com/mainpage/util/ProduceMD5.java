@@ -1,4 +1,4 @@
-package com.forums.util;
+package com.mainpage.util;
 
 import java.security.MessageDigest;
 

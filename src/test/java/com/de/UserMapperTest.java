@@ -1,7 +1,7 @@
 package com.de;
 
-import com.forums.domain.User;
-import com.forums.service.impl.UserServiceImpl;
+import com.mainpage.domain.User;
+import com.mainpage.service.impl.UserServiceImpl;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

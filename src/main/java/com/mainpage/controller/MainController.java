@@ -1,6 +1,6 @@
-package com.forums.controller;
+package com.mainpage.controller;
 
-import com.forums.service.impl.UserServiceImpl;
+import com.mainpage.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
