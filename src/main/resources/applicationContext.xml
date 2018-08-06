@@ -53,4 +53,6 @@
         <property name="basePackage" value="com.mainpage.dao" />
     </bean>
 
+    <!-- 5.测试冲突5555 -->
+
 </beans>
