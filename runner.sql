@@ -1,0 +1,21 @@
+create table orderform
+(
+  id int(11) not null auto_increment comment '用户唯一ID',
+  order_num varchar(15) not null comment '订单号',
+  express_comany varchar(10) not null comment '快递公司',
+  pickup_ads varchar(50) not null comment '取货地点',
+  latest_time time not null comment '最晚取货时间',
+  goods_size varchar(5) not null comment '货物大小',
+  paymoney decimal not null comment '支付金额',
+  client_id int(11) not null comment '委托人id',
+  remark varchar(100) comment '备注（货物描述）',
+  depute_time  timestamp default current_timestamp comment '委托时间',
+  trustee_id int(11) default null comment '受托人id',
+  take_time timestamp default null comment '接单时间',
+  pick_code varchar(10) comment '取货吗',
+  pick_phonenum char(11) comment '取货手机号码',
+  pick_name varchar comment '取货所需姓名',
+  primary key(id),
+  foreign key(client_id),
+  foreign key(trustee_id)
+)engine =InnoDB auto_increment=1 default charset =utf8;
