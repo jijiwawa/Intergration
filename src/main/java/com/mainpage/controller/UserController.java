@@ -1,8 +1,8 @@
-package com.forums.controller;
+package com.mainpage.controller;
 
-import com.forums.domain.User;
-import com.forums.service.impl.UserServiceImpl;
-import com.forums.util.ProduceMD5;
+import com.mainpage.domain.User;
+import com.mainpage.service.impl.UserServiceImpl;
+import com.mainpage.util.ProduceMD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

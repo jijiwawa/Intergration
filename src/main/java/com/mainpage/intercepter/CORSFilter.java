@@ -1,4 +1,4 @@
-package com.forums.intercepter;
+package com.mainpage.intercepter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
