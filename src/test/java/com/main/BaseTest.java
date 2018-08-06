@@ -1,4 +1,4 @@
-package com.de;
+package com.main;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
