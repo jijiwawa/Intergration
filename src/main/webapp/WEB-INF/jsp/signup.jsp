@@ -55,59 +55,73 @@
 <!-- 引入header文件 -->
 <%@ include file="header.jsp"%>
 
-<div class="panel panel-default" id="login" style="width: 55%;margin-left: 10%;margin-top: 5%;margin-bottom: 5%">
+<div class="panel panel-default" id="login" style="width: 30%;margin-left: 35%;margin-top: 5%;margin-bottom: 5%">
     <div class="panel-heading" style="background-color: #fff">
         <h3 class="panel-title">注册</h3>
     </div>
     <div class="panel-body">
-        <form action="/ssm/user/add" method="post" id="signupForm" class="form-horizontal" role="form" style="margin-left: 5%">
             <div class="form-group" >
-                <label class="col-sm-2 control-label">用户名</label>
-                <div class="col-sm-10" style="width: 40%;">
+                <label >用户名</label>
                     <input type="text" class="form-control" id="username" name="username" required="required">
-                </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">性别</label>
-                <div class="col-sm-10" style="width: 40%;">
+                <label >性别</label>
                     <select class="form-control" id="isMale" name="isMale">
                         <option value="男">男</option>
                         <option value="女">女</option>
                     </select>
-                </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">密码</label>
-                <div class="col-sm-10" style="width: 40%;">
+                <label >密码</label>
                     <input type="password" class="form-control" id="password" name="password" required="required">
-                </div>
             </div>
 
             <div class="form-group">
-                <label class="col-sm-2 control-label">手机号</label>
-                <div class="col-sm-10" style="width: 40%;">
+                <label >手机号</label>
                     <input type="tel" class="form-control" id="tel" name="tel" required="required">
-                </div>
             </div>
-            <input type="submit" class="btn btn-default" id="signup" style="margin-left: 17%">
-        </form>
+            <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
+            <%--<input type="submit" class="btn btn-default" id="signup" style="margin-left: 17%">--%>
+            <button id="signUp" class="btn btn-success btn-block">注册</button>
     </div>
 </div>
 <!-- 引入footer文件 -->
 <%@ include file="footer.jsp"%>
 
 <script>
-    function submitValidate(flag){
-        return flag;
-    }
-    $("#signupForm").submit(function () {
-        if($("#username").val()==''||$("#password").val()==''||$("#email").val()==''||$("#tel").val()==''){
-            alert("请将注册信息填写完整！");
-            return submitValidate(false);
-        }else {
-
+    $("#signUp").click(function(){
+        var yhm=$("#username").val();
+        var xb=$("#isMale").val();
+        var mm=$("#password").val();
+        var sjh=$("#tel").val();
+        console.log(sjh);
+        if(yhm==''){
+            $("#info").text("提示：用户名不能为空");
+        }else if(mm==''){
+            $("#info").text("提示：密码不能为空");
+        }else if(sjh=''){
+            $("#info").text("提示：手机号不能为空");
+        }else{
+            $.ajax({
+                type:"POST",
+                url:"/intergration/user/add",
+                data:{
+                    username:yhm,
+                    isMale:xb,
+                    password:mm,
+                    tel:sjh
+                },
+                dataType:"json",
+                success:function (data) {
+                    if(data.stateCode.trim()=="0"){
+                        $("#info").text("提示：用户名已存在");
+                    }else if(data.stateCode.trim()=="1"){
+                        window.location.href="/intergration"
+                    }
+                }
+            })
         }
     })
 </script>

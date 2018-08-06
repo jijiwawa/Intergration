@@ -8,8 +8,8 @@
     </select>
 
     <insert id="addUser" parameterType="com.mainpage.domain.User">
-        insert into dbe.user(phone_number, user_name, is_male, password) VALUES (
-                #{phoneNumber},#{userName},#{isMale},#{password}
+        insert into dbe.user(phone_number, user_name, is_male, password,head_sculpture) VALUES (
+                #{phoneNumber},#{userName},#{isMale},#{password},#{headSculpture}
         )
     </insert>
 

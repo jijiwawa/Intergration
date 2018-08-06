@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.Random;
 
 @Controller
 public class UserController {
@@ -18,18 +19,29 @@ public class UserController {
     private UserServiceImpl userService;
 
     @RequestMapping("/user/add")
-    public String addUser(HttpServletRequest request){
+    @ResponseBody
+    public Object addUser(HttpServletRequest request){
 
-        User user=new User();
-        int isMale=request.getParameter("isMale").equals("男")? 0:1;
-        String password=ProduceMD5.getMD5(request.getParameter("password"));
-        user.setUserName(request.getParameter("username"));
-        System.out.println(user.getUserName());
-        user.setPhoneNumber(request.getParameter("tel"));
-        user.setIsMale((byte)isMale);
-        user.setPassword(password);
-        userService.addUser(user);
-        return "redirect:/";
+        HashMap<String, String> res = new HashMap<String, String>();
+        if(userService.isUserNameExist(request.getParameter("username"))){
+            //用户名已存在
+            res.put("stateCode","0");
+        }else {
+            User user = new User();
+            int isMale = request.getParameter("isMale").equals("男") ? 0 : 1;
+            Random rand = new Random();
+            int randomNum = rand.nextInt(10) + 1;
+            String headSculptureUrl = "/img/avatar/avatar-default-" + randomNum + ".png";
+            String password = ProduceMD5.getMD5(request.getParameter("password"));
+            user.setUserName(request.getParameter("username"));
+            user.setPhoneNumber(request.getParameter("tel"));
+            user.setIsMale((byte) isMale);
+            user.setPassword(password);
+            user.setHeadSculpture(headSculptureUrl);
+            userService.addUser(user);
+            res.put("stateCode","1");
+        }
+        return res;
     }
 
     @RequestMapping("/user/loginCheck")
