@@ -96,32 +96,35 @@
         var xb=$("#isMale").val();
         var mm=$("#password").val();
         var sjh=$("#tel").val();
-        console.log(sjh);
         if(yhm==''){
             $("#info").text("提示：用户名不能为空");
         }else if(mm==''){
             $("#info").text("提示：密码不能为空");
         }else if(sjh=''){
             $("#info").text("提示：手机号不能为空");
-        }else{
-            $.ajax({
-                type:"POST",
-                url:"/intergration/user/add",
-                data:{
-                    username:yhm,
-                    isMale:xb,
-                    password:mm,
-                    tel:sjh
-                },
-                dataType:"json",
-                success:function (data) {
-                    if(data.stateCode.trim()=="0"){
-                        $("#info").text("提示：用户名已存在");
-                    }else if(data.stateCode.trim()=="1"){
-                        window.location.href="/intergration"
+        }else {
+            if($("#tel").val().length!=11){
+                $("#info").text("提示：手机号应为11位");
+            }else {
+                $.ajax({
+                    type: "POST",
+                    url: "/intergration/user/add",
+                    data: {
+                        username: yhm,
+                        isMale: xb,
+                        password: mm,
+                        tel: $("#tel").val()
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.stateCode.trim() == "0") {
+                            $("#info").text("提示：用户名已存在");
+                        } else if (data.stateCode.trim() == "1") {
+                            window.location.href = "/intergration"
+                        }
                     }
-                }
-            })
+                });
+            }
         }
     })
 </script>

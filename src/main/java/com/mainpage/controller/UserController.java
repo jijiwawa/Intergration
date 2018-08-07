@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,7 +47,7 @@ public class UserController {
 
     @RequestMapping("/user/loginCheck")
     @ResponseBody
-    public Object sigInCheck(HttpServletRequest request,HttpSession session){
+    public Object signInCheck(HttpServletRequest request,HttpSession session){
 
         //处理参数
         String password=ProduceMD5.getMD5(request.getParameter("password"));
@@ -76,4 +77,18 @@ public class UserController {
         return res;
     }
 
+    @RequestMapping("/user/signout")
+    public String signOut(HttpSession session){
+        session.removeAttribute("userId");
+        session.removeAttribute("username");
+        return "redirect:/";
+    }
+
+    @RequestMapping("/user/settings")
+    public ModelAndView settings(HttpSession session){
+        User user=userService.getUserByUserName((String)session.getAttribute("username"));
+        ModelAndView modelAndView=new ModelAndView("settings");
+        modelAndView.addObject("user",user);
+        return modelAndView;
+    }
 }
