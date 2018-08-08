@@ -24,10 +24,10 @@
                 <!--未登陆-->
                  <ul class="nav navbar-nav navbar-right">
                        <li>
-                           <p class="navbar-text"><a href="/intergration/signin">登录</a></p>
+                           <p class="navbar-text"><a href="/Intergration/signin">登录</a></p>
                        </li>
                        <li>
-                               <p class="navbar-text"><a href="/intergration/signup">注册</a></p>
+                               <p class="navbar-text"><a href="/Intergration/signup">注册</a></p>
                        </li>
                  </ul>
                 </c:if>
@@ -35,16 +35,16 @@
                    <!--已登陆-->
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <p class="navbar-text"><a href="/intergration">首页</a></p>
+                        <p class="navbar-text"><a href="/Intergration">首页</a></p>
                     </li>
                     <li>
                         <p class="navbar-text"><a href="/member/${sessionScope.username}">${sessionScope.username}</a></p>
                     </li>
                     <li>
-                        <p class="navbar-text"><a href="/intergration/user/settings">设置</a></p>
+                        <p class="navbar-text"><a href="/Intergration/user/settings">设置</a></p>
                     </li>
                     <li>
-                        <p class="navbar-text"><a href="/intergration/user/signout">登出</a></p>
+                        <p class="navbar-text"><a href="/Intergration/user/signout">登出</a></p>
                     </li>
                 </ul>
             </c:if>

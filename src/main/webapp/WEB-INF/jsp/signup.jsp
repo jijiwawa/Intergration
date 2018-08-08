@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>注册 - Campus</title>
-    <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/intergration/js/jquery-3.2.1.js"></script>
-    <script src="/intergration/js/bootstrap.min.js"></script>
+    <link href="/Intergration/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/Intergration/js/jquery-3.2.1.js"></script>
+    <script src="/Intergration/js/bootstrap.min.js"></script>
     <style>
         li {list-style-type:none;}
         html, body {
@@ -108,7 +108,7 @@
             }else {
                 $.ajax({
                     type: "POST",
-                    url: "/intergration/user/add",
+                    url: "/Intergration/user/add",
                     data: {
                         username: yhm,
                         isMale: xb,
@@ -120,7 +120,7 @@
                         if (data.stateCode.trim() == "0") {
                             $("#info").text("提示：用户名已存在");
                         } else if (data.stateCode.trim() == "1") {
-                            window.location.href = "/intergration"
+                            window.location.href = "/Intergration"
                         }
                     }
                 });

@@ -4,9 +4,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/intergration/js/jquery-3.2.1.js"></script>
-    <script src="/intergration/js/bootstrap.min.js"></script>
+    <link href="/Intergration/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/Intergration/js/jquery-3.2.1.js"></script>
+    <script src="/Intergration/js/bootstrap.min.js"></script>
     <title>Genesis ›设置</title>
 </head>
 <body>
@@ -23,7 +23,7 @@
 
                 <form class="form-horizontal" role="form" >
                     <div style="margin-left: 17%">
-                        <img width="60px" height="60px" src="/intergration/${user.headSculpture}" class="img-rounded">
+                        <img width="60px" height="60px" src="/Intergration/${user.headSculpture}" class="img-rounded">
                         <a class="btn btn-default" href="/settings/avatar" role="button">更换头像</a>
                     </div>
                     <div class="form-group">
