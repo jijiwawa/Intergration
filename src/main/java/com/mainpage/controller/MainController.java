@@ -16,12 +16,15 @@ public class MainController {
 
     @RequestMapping("/")
     public ModelAndView toMain(HttpSession session){
-        return new ModelAndView("cate");
+        return new ModelAndView("main");
     }
 
     @RequestMapping("/signup")
-    public ModelAndView signUp(HttpSession session){
+    public ModelAndView signUp(){
         return new ModelAndView("signup");
     }
+
+    @RequestMapping("/signin")
+    public ModelAndView signIn(){return new ModelAndView("signin");}
 
 }

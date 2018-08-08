@@ -15,6 +15,7 @@ create table orderform
   pick_code varchar(10) comment '取货吗',
   pick_phonenum char(11) comment '取货手机号码',
   pick_name varchar comment '取货所需姓名',
+  order_state int default 0 comment '订单状态0待接单，1被接单，运送中，2已收货，3废弃或者暂时不用'
   primary key(id),
   foreign key(client_id),
   foreign key(trustee_id)

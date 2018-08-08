@@ -14,8 +14,8 @@
         </div>
         <ul class="list-group" style="width: 100%">
             <li class="list-group-item">
-                <a  href="/ssm/signin" class="btn btn-primary btn-block">登录</a>
-                <a  href="/ssm/signup" class="btn btn-default btn-block">注册</a>
+                <a  href="/intergration/signin" class="btn btn-primary btn-block">登录</a>
+                <a  href="/intergration/signup" class="btn btn-default btn-block">注册</a>
             </li>
         </ul>
     </div>
@@ -25,7 +25,7 @@
     <!-- 已登录 -->
     <div class="panel panel-default" id="sidebar2" style="width: 20%;margin:1% 2% 1% 0%;float: right">
         <div class="panel-heading" style="background-color: white;text-align: center">
-            <a href="/member/${user.username}">${user.username}</a>
+            <a href="/member/${user.userName}">${user.userName}</a>
         </div>
         <ul class="list-group" style="width: 100%">
             <li class="list-group-item"><a href="/new">创作新主题</a></li>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.runner.dao.OrderFormDao">
+    <!--
+    查
+    -->
+    <!--根据id查询订单-->
+    <select id="findOrderFormById" parameterType="java.lang.Integer" resultType="com.runner.po.OrderForm" >
+        select * from dbe.orderform where id=#{id};
+    </select>
+    <!--根据委托人id查询订单-->
+    <select id="findOrderFormByClientId" parameterType="java.lang.Integer" resultType="com.runner.po.OrderForm" >
+        select * from dbe.orderform where client_id=#{client_id};
+    </select>
+    <!--根据接单/受托人id查询订单-->
+    <select id="findOrderFormByTrusteeId" parameterType="java.lang.Integer" resultType="com.runner.po.OrderForm" >
+        select * from dbe.orderform where trustee_id=#{trustee_id};
+    </select>
+
+    <!--
+    删
+    -->
+
+    <!--
+    增
+    -->
+
+    <!--
+    改
+    -->
+</mapper>

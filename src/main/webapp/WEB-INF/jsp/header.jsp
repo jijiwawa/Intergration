@@ -24,10 +24,10 @@
                 <!--未登陆-->
                  <ul class="nav navbar-nav navbar-right">
                        <li>
-                           <p class="navbar-text"><a href="/ssm/signin">登录</a></p>
+                           <p class="navbar-text"><a href="/intergration/signin">登录</a></p>
                        </li>
                        <li>
-                               <p class="navbar-text"><a href="/ssm/signup">注册</a></p>
+                               <p class="navbar-text"><a href="/intergration/signup">注册</a></p>
                        </li>
                  </ul>
                 </c:if>
@@ -35,16 +35,16 @@
                    <!--已登陆-->
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <p class="navbar-text"><a href="/">首页</a></p>
+                        <p class="navbar-text"><a href="/intergration">首页</a></p>
                     </li>
                     <li>
                         <p class="navbar-text"><a href="/member/${sessionScope.username}">${sessionScope.username}</a></p>
                     </li>
                     <li>
-                        <p class="navbar-text"><a href="/settings">设置</a></p>
+                        <p class="navbar-text"><a href="/intergration/user/settings">设置</a></p>
                     </li>
                     <li>
-                        <p class="navbar-text"><a href="javascript:signout_confirm();">登出</a></p>
+                        <p class="navbar-text"><a href="/intergration/user/signout">登出</a></p>
                     </li>
                 </ul>
             </c:if>
@@ -54,17 +54,3 @@
 
 
 </header>
-<script>
-    function signout_confirm()
-    {
-        var r=confirm("确定退出?")
-        if (r==true)
-        {
-            window.location.href="/signout";
-        }
-        else
-        {
-
-        }
-    }
-</script>
