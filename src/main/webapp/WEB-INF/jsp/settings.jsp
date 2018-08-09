@@ -16,7 +16,7 @@
 <div style="width: 70%;margin:1% 2% 1% 5%;float: left;">
     <div class="panel panel-default" id="main" style="">
         <div class="panel-heading" style="background-color: white">
-            <a href="/">Genesis</a> › 设置
+            <a href="/intergration">Campus</a> › 设置
         </div>
 
         <div class="panel-body">
@@ -24,13 +24,7 @@
                 <form class="form-horizontal" role="form" >
                     <div style="margin-left: 17%">
                         <img width="60px" height="60px" src="/intergration/${user.headSculpture}" class="img-rounded">
-                        <a class="btn btn-default" href="/settings/avatar" role="button">更换头像</a>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">uid</label>
-                        <div class="col-sm-10">
-                            <p class="form-control-static">${user.id}</p>
-                        </div>
+                        <a class="btn btn-default" href="/intergration/user/settings/headsculpture" role="button">更换头像</a>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>

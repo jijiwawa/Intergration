@@ -5,7 +5,7 @@
     <nav class="navbar navbar-default" role="navigation" style="background-color: white">
         <div class="container-fluid" style="margin-left: 10%">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">Campus</a>
+                <a class="navbar-brand" href="/intergration">Campus</a>
             </div>
             <div>
 
@@ -38,7 +38,7 @@
                         <p class="navbar-text"><a href="/intergration">首页</a></p>
                     </li>
                     <li>
-                        <p class="navbar-text"><a href="/member/${sessionScope.username}">${sessionScope.username}</a></p>
+                        <p class="navbar-text"><a href="/intergration/member/${sessionScope.username}">${sessionScope.username}</a></p>
                     </li>
                     <li>
                         <p class="navbar-text"><a href="/intergration/user/settings">设置</a></p>

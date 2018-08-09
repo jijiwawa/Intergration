@@ -36,5 +36,8 @@ public class UserServiceImpl implements UserService {
         return 0;
     }
 
+    public boolean updateUser(User user) {
+        return userDao.updateUserById(user)>0;
+    }
 
 }

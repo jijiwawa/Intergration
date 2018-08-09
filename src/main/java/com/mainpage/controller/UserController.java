@@ -5,13 +5,16 @@ import com.mainpage.service.impl.UserServiceImpl;
 import com.mainpage.util.ProduceMD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 @Controller
@@ -91,4 +94,62 @@ public class UserController {
         modelAndView.addObject("user",user);
         return modelAndView;
     }
+
+    @RequestMapping(value = "/user/settings/headsculpture",method = RequestMethod.GET)
+    public ModelAndView updateHeadSculpture(HttpServletRequest request, HttpSession session){
+
+        User user=userService.getUserByUserName((String)session.getAttribute("username"));
+
+        ModelAndView mv=new ModelAndView("update_headsculpture");
+        mv.addObject("user",user);
+        return mv;
+    }
+
+    @RequestMapping(value = "/user/settings/headsculpture/update",method = RequestMethod.POST)
+    public ModelAndView updateHeadSculptureDo(@RequestPart("avatar")MultipartFile avatarFile, HttpServletRequest request, HttpSession session){
+        Integer uid=(Integer) session.getAttribute("userId");
+
+        String fileName=avatarFile.getOriginalFilename();
+        String suffix=fileName.substring(fileName.lastIndexOf(".")+1, fileName.length());
+        Long date=new Date().getTime();
+        String newFileName=date+"-"+uid+"."+suffix;
+        String absolutePath=session.getServletContext().getRealPath("/static/img/avatar")+"/"+newFileName;
+        String relativePath="/img/avatar"+"/"+newFileName;
+        User newUser=new User();
+        newUser.setHeadSculpture(relativePath);
+        newUser.setId(uid);
+        File file=new File(absolutePath);
+
+        if (!file.exists()){
+            try {
+                avatarFile.transferTo(file);
+                userService.updateUser(newUser);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        User user=userService.getUserByUserName((String)session.getAttribute("username"));
+        ModelAndView mv=new ModelAndView("update_headsculpture");
+        mv.addObject("user",user);
+        return mv;
+    }
+
+    @RequestMapping("/member/{username}")
+    public ModelAndView personalCenter(@PathVariable("username")String username, HttpSession session){
+        boolean ifExistUser=userService.isUserNameExist(username);
+
+        ModelAndView mv=new ModelAndView("user_info");
+        if (ifExistUser){
+            User resultUser=userService.getUserByUserName(username);
+            mv.addObject("user",resultUser);
+            return mv;
+        }else {
+            String errorInfo=new String("会员未找到");
+            mv.addObject("errorInfo",errorInfo);
+            return mv;
+        }
+    }
+
+
 }

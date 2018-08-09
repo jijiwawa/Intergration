@@ -50,4 +50,41 @@ Preference->VersionControl->Git设置Path to Git executable:/usr/local/bin/git
 
 Preference->VersionControl->GitHub:点击Create API Token输入用户名和密码，点击Test测试账户
 
+# 打包
+Build -> Build Artifact -> intergration.war
+
+# 文件上传
+pom.xml中设置commons
+```aidl
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+```
+HTML5
+```aidl
+表单提交需满足3个条件：
+(1)form表单的method属性设置为post
+(2)form表单的enctype属性设置为multipart/form-data，浏览器就会采用二进制流的方式来处理表单数据
+(3)提供<input type="file"  name="filename"/>的上传输入框
+```
+main-servlet.xml中
+```aidl
+        <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->
+            <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+                <property name="defaultEncoding" value="UTF-8"/>
+                <!-- 指定所上传文件的总大小不能超过200KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
+                <property name="maxUploadSize" value="2000000"/>
+            </bean>
+```
+
+# TODO
+password headSculpture
+
 

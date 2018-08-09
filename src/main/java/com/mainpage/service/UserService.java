@@ -7,4 +7,5 @@ public interface UserService {
     public boolean isUserNameExist(String username);
     public User getUserByUserName(String username);
     public int loginCheck(String username,String password);
+    public boolean updateUser(User user);
 }
