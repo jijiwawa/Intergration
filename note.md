@@ -83,8 +83,21 @@ main-servlet.xml中
                 <property name="maxUploadSize" value="2000000"/>
             </bean>
 ```
+Controller
+```aidl
+@RequestMapping(value = "...",method = RequestMethod.POST)
+public String handlerFormUpload(@RequestPart("filename")MultipartFile file, ...){...}
+
+```
+
+# @ResponseBody
+@Responsebody 注解表示该方法的返回的结果直接写入 HTTP 响应正文（ResponseBody）中，一般在异步获取数据时使用，通常是在使用 @RequestMapping 后，返回值通常解析为跳转路径，加上 @Responsebody 后返回结果不会被解析为跳转路径，而是直接写入HTTP 响应正文中。 
+作用： 
+该注解用于将Controller的方法返回的对象，通过适当的HttpMessageConverter转换为指定格式后，写入到Response对象的body数据区。 
+使用时机： 
+返回的数据不是html标签的页面，而是其他某种格式的数据时（如json、xml等）使用；
 
 # TODO
-password headSculpture
+论坛表，管理员设置
 
 

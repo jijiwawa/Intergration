@@ -25,6 +25,7 @@
                     <div style="margin-left: 17%">
                         <img width="60px" height="60px" src="/intergration/${user.headSculpture}" class="img-rounded">
                         <a class="btn btn-default" href="/intergration/user/settings/headsculpture" role="button">更换头像</a>
+                        <a class="btn btn-default" href="/intergration/user/settings/password" role="button">更改密码</a>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>

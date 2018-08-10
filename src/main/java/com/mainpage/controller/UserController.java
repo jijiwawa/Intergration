@@ -135,6 +135,36 @@ public class UserController {
         return mv;
     }
 
+    @RequestMapping(value = "/user/settings/password",method = RequestMethod.GET)
+    public ModelAndView updatePassword(HttpServletRequest request, HttpSession session){
+
+        User user=userService.getUserByUserName((String)session.getAttribute("username"));
+
+        ModelAndView mv=new ModelAndView("update_password");
+        mv.addObject("user",user);
+        return mv;
+    }
+
+    @RequestMapping(value="/user/settings/password/update",method = RequestMethod.POST)
+    @ResponseBody
+    public Object updatePasswordDo(HttpSession session,HttpServletRequest request){
+        Integer uid=(Integer) session.getAttribute("userId");
+        String password=ProduceMD5.getMD5(request.getParameter("password"));
+        HashMap<String, String> res = new HashMap<String, String>();
+        User newUser=new User();
+        newUser.setId(uid);
+        newUser.setPassword(password);
+        boolean hasUpdate=userService.updateUser(newUser);
+        if(hasUpdate){
+            session.removeAttribute("userId");
+            session.removeAttribute("username");
+            res.put("stateCode", "1");
+        }else{
+            res.put("stateCode", "0");
+        }
+        return res;
+    }
+
     @RequestMapping("/member/{username}")
     public ModelAndView personalCenter(@PathVariable("username")String username, HttpSession session){
         boolean ifExistUser=userService.isUserNameExist(username);
@@ -150,6 +180,5 @@ public class UserController {
             return mv;
         }
     }
-
 
 }
