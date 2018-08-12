@@ -8,7 +8,10 @@ public interface OrderFormDao {
     /**
      * 增
      */
-    public void addOrderForm(OrderForm orderForm);
+    //新增订单，添加成功返回1
+    public boolean addOrderForm(OrderForm orderForm);
+    //新增前检验订单号是否存在
+    public boolean isOrderNumExist(String order_num);
     /**
      * 删
      */

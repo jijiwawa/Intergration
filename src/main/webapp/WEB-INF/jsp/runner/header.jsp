@@ -11,9 +11,6 @@
 
                 <!--向左对齐-->
                 <ul class="nav navbar-nav navbar-left">
-                    <%--<li <c:if test="${tab.tabNameEn == 'runner'}">
-                        class="active" </c:if>><a href="/tab/runner">跑腿</a>
-                    </li>--%>
                     <li><a href="/Intergration/tab/runner">跑腿</a>
                     </li>
                     <li <c:if test="${tab.tabNameEn == 'play'}">class="active"

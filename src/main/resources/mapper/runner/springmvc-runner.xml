@@ -16,7 +16,7 @@
     <mvc:annotation-driven/>
     <!-- 配置视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="WEB-INF/jsp_runner/"/>
+        <property name="prefix" value="WEB-INF/jsp/runner/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 </beans>

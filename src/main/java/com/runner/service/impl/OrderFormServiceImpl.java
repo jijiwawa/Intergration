@@ -25,4 +25,13 @@ public class OrderFormServiceImpl implements OrderFormService {
     public OrderForm findOrderFormByTrusteeId(Integer trustee_id) {
         return this.orderFormDao.findOrderFormByTrusteeId(trustee_id);
     }
+
+    //新增订单
+    public boolean addOrderForm(OrderForm orderForm) {
+        return  this.orderFormDao.addOrderForm(orderForm);
+    }
+    //新增前检验订单号是否存在
+    public boolean isOrderNumExist(String order_num) {
+        return this.orderFormDao.isOrderNumExist(order_num);
+    }
 }

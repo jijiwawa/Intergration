@@ -26,7 +26,11 @@
     <!--
     增
     -->
-
+    <insert id="addOrderForm" parameterType="com.runner.dao.OrderFormDao">
+        insert into orderform()(order_num, express_comany, pickup_ads, latest_time,goods_size,paymoney,client_id,remark,pick_code,pick_phonenum,pick_name) VALUES (
+                #{order_num},#{express_comany},#{pickup_ads},#{latest_time,#{goods_size},#{paymoney},#{client_id},#{remark},#{pick_code},#{pick_phonenum},#{pick_name})
+        )
+    </insert>
     <!--
     改
     -->

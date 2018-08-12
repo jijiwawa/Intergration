@@ -10,16 +10,16 @@ import java.util.Date;
 public class OrderForm {
     private Integer id;                      //主键id
     private String order_num;                //订单号
-    private String express_comany;           //快递公司
+    private String express_company;           //快递公司
     private String pickup_ads;               //取货地点
-    private Timestamp latest_time;           //最晚取货时间
+    private String latest_time;           //最晚取货时间
     private String goods_size;               //货物大小
     private BigDecimal paymoney;             //支付金额
     private Integer client_id;               //委托人id
     private String remark;                   //备注（货物描述）
     private Timestamp depute_time;           //委托时间
     private Integer trustee_id;              //受托人id
-    private Date take_time;                  //接单时间
+    private Timestamp take_time;                  //接单时间
     private String pick_code;                //取货码
     private String pick_phonenum;            //取货手机号码
     private String pick_name;                //取货所需姓名
@@ -41,12 +41,12 @@ public class OrderForm {
         this.order_num = order_num;
     }
 
-    public String getExpress_comany() {
-        return express_comany;
+    public String getExpress_company() {
+        return express_company;
     }
 
-    public void setExpress_comany(String express_comany) {
-        this.express_comany = express_comany;
+    public void setExpress_company(String express_company) {
+        this.express_company = express_company;
     }
 
     public String getPickup_ads() {
@@ -57,11 +57,11 @@ public class OrderForm {
         this.pickup_ads = pickup_ads;
     }
 
-    public Timestamp getLatest_time() {
+    public String getLatest_time() {
         return latest_time;
     }
 
-    public void setLatest_time(Timestamp latest_time) {
+    public void setLatest_time(String  latest_time) {
         this.latest_time = latest_time;
     }
 
@@ -117,7 +117,7 @@ public class OrderForm {
         return take_time;
     }
 
-    public void setTake_time(Date take_time) {
+    public void setTake_time(Timestamp take_time) {
         this.take_time = take_time;
     }
 
