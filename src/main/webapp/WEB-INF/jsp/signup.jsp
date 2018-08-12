@@ -83,7 +83,6 @@
                     <input type="tel" class="form-control" id="tel" name="tel" required="required">
             </div>
             <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
-            <%--<input type="submit" class="btn btn-default" id="signup" style="margin-left: 17%">--%>
             <button id="signUp" class="btn btn-success btn-block">注册</button>
     </div>
 </div>

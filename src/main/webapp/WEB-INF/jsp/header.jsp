@@ -12,12 +12,12 @@
                 <!--向左对齐-->
                 <ul class="nav navbar-nav navbar-left">
                     <li <c:if test="${tab.tabNameEn == 'tech'}">
-                            class="active" </c:if>><a href="/tab/tech">跑腿</a>
+                            class="active" </c:if>><a href="/intergration">跑腿</a>
                     </li>
                     <li <c:if test="${tab.tabNameEn == 'play'}">class="active"
-                        </c:if>><a href="/tab/play">时事</a></li>
+                        </c:if>><a href="/intergration/forum/main">时事</a></li>
                     <li <c:if test="${tab.tabNameEn == 'creative'}">class="active"
-                        </c:if>><a href="/tab/creative">课程评价</a></li>
+                        </c:if>><a href="/intergration">课程评价</a></li>
                 </ul>
 
                 <c:if test="${empty userId}">

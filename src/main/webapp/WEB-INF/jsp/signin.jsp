@@ -78,8 +78,6 @@
 
         <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
             <button id="loginButton" class="btn btn-success btn-block">登录</button>
-        </input>
-
     </div>
 </div>
 <script>
