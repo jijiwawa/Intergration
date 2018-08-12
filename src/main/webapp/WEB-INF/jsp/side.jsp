@@ -30,7 +30,7 @@
         <ul class="list-group" style="width: 100%">
             <li class="list-group-item"><a href="/new">创作新主题</a></li>
             <li class="list-group-item"><a href="">0条未读提醒</a></li>
-            <li class="list-group-item"><a href="">积分:${user.credit}</a></li>
+            <li class="list-group-item"><a href="">信誉度:${user.credit}</a></li>
         </ul>
     </div>
 </c:if>
