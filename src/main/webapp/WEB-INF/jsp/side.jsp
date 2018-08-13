@@ -28,7 +28,12 @@
             <a href="/member/${user.userName}">${user.userName}</a>
         </div>
         <ul class="list-group" style="width: 100%">
-            <li class="list-group-item"><a href="/intergration/forum/addpage">创作新主题</a></li>
+            <c:if test="${userType!=0}">
+                <li class="list-group-item"><a href="/intergration/forum/addpage">发布新帖子</a></li>
+            </c:if>
+            <c:if test="${userType==2}">
+                <li class="list-group-item"><a href="/intergration/user/rightpage">发帖权限管理</a></li>
+            </c:if>
             <li class="list-group-item"><a href="">0条未读提醒</a></li>
             <li class="list-group-item"><a href="">积分:${user.credit}</a></li>
         </ul>

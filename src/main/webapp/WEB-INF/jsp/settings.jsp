@@ -45,7 +45,7 @@
                             <p class="form-control-static">
                                 <c:if test="${user.isMale == 0}">男
                                 </c:if>
-                                <c:if test="${user.isMale == 1}">男
+                                <c:if test="${user.isMale == 1}">女
                                 </c:if>
                             </p>
                         </div>
@@ -56,7 +56,12 @@
                             <p class="form-control-static">${user.credit}</p>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">余额</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">${user.property}</p>
+                        </div>
+                    </div>
                 </form>
 
         </div>

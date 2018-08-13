@@ -67,7 +67,7 @@
                         <img width="50px" height="50px" src="/intergration/${topic.user.headSculpture}" class="img-rounded">
                     </div>
                     <div style="width: 89%;float: left">
-                        <a href="/t/${topic.id}">${topic.title}</a><br/>
+                        <a href="/intergration/forum/t/${topic.id}">${topic.title}</a><br/>
                         <div>
                             <a href="/intergration/member/${topic.user.userName}"><span ><strong>${topic.user.userName}</strong></span></a>&nbsp;&nbsp;&nbsp;
                             <small class="text-muted">${topic.createTime}</small>

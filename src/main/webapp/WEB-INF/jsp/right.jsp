@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录 - Campus</title>
+    <title>发帖权限管理 - Campus</title>
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
     <script src="/intergration/js/bootstrap.min.js"></script>
@@ -57,7 +57,7 @@
 
 <div class="panel panel-default" id="login" style="width: 20%;margin-left: 40%;margin-top: 5%;margin-bottom: 5%">
     <div class="panel-heading" style="background-color: #fff">
-        <h3 class="panel-title">登录</h3>
+        <h3 class="panel-title">发帖权限管理</h3>
     </div>
     <div class="panel-body">
 
@@ -66,88 +66,40 @@
             <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" required="required">
         </div>
         <div class="form-group">
-            <label for="passwd">密码</label>
-            <input type="password" class="form-control" id="passwd" name="password" placeholder="请输入密码" required="required">
-        </div>
-        <div class="checkbox text-left">
-            <label>
-                <input type="checkbox" id="remember">记住密码
-            </label>
+            <label >发帖权限</label>
+            <select class="form-control" id="hasRight" name="hasRight">
+                <option value="1">允许发帖</option>
+                <option value="0">禁止发帖</option>
+            </select>
         </div>
 
         <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
-            <button id="loginButton" class="btn btn-success btn-block">登录</button>
+            <button id="commitButton" class="btn btn-success btn-block">确定</button>
     </div>
 </div>
 <script>
-    $("#id").keyup(
-        function () {
-            if(isNaN($("#id").val())){
-                $("#info").text("提示:账号只能为数字");
-            }
-            else {
-                $("#info").text("");
-            }
-        }
-    )
-    // 记住登录信息
-    function rememberLogin(username, password, checked) {
-        Cookies.set('loginStatus', {
-            username: username,
-            password: password,
-            remember: checked
-        }, {expires: 30, path: ''})
-    }
-    // 若选择记住登录信息，则进入页面时设置登录信息
-    function setLoginStatus() {
-        var loginStatusText = Cookies.get('loginStatus')
-        if (loginStatusText) {
-            var loginStatus
-            try {
-                loginStatus = JSON.parse(loginStatusText);
-                $('#username').val(loginStatus.username);
-                $('#passwd').val(loginStatus.password);
-                $("#remember").prop('checked',true);
-            } catch (__) {}
-        }
-    }
-    // 设置登录信息
-    setLoginStatus();
-    $("#loginButton").click(function () {
+    $("#commitButton").click(function () {
         var id =$("#username").val();
-        var passwd=$("#passwd").val();
-        var remember=$("#remember").prop('checked');
-        if( id=='' && passwd==''){
-            $("#info").text("提示:账号和密码不能为空");
-        }
-        else if ( id ==''){
-            $("#info").text("提示:账号不能为空");
-        }
-        else if( passwd ==''){
-            $("#info").text("提示:密码不能为空");
+        var right=$("#hasRight").val();
+        if( id=='' ){
+            $("#info").text("提示:目标用户名不能为空");
         }
         else {
             $.ajax({
                 type: "POST",
-                url: "/intergration/user/loginCheck",
+                url: "/intergration/user/manageright",
                 data: {
                     username:id ,
-                    password: passwd
+                    hasRight: right
                 },
                 dataType: "json",
                 success: function(data) {
                     if(data.stateCode.trim() == "0") {
-                        $("#info").text("提示:用户名不存在!");
+                        $("#info").text("提示:目标用户名不存在!");
                     } else if(data.stateCode.trim() == "1") {
-                        $("#info").text("提示:密码错误!");
+                        $("#info").text("提示:操作未成功，请重试");
                     } else if(data.stateCode.trim() == "2"){
-                        if(remember){
-                            rememberLogin(id,passwd,remember);
-                        }else {
-                            Cookies.remove('loginStatus');
-                        }
-                        $("#info").text("提示:登陆成功，跳转中...");
-                        window.location.href="/intergration";
+                        $("#info").text("提示:操作成功");
                     }
                 }
             });

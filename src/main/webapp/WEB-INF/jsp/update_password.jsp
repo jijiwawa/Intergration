@@ -22,12 +22,16 @@
         <div class="panel-body">
 
             <div class="form-group">
+                <label for="oldPassword">旧密码</label>
+                <input type="password" class="form-control" id="oldPassword" name="ousername" placeholder="请输入旧密码" required="required">
+            </div>
+            <div class="form-group">
                 <label for="newPassword">新密码</label>
-                <input type="password" class="form-control" id="newPassword" name="username" placeholder="请输入密码" required="required">
+                <input type="password" class="form-control" id="newPassword" name="username" placeholder="请输入新密码" required="required">
             </div>
             <div class="form-group">
                 <label for="checkPasswd">密码</label>
-                <input type="password" class="form-control" id="checkPasswd" name="password" placeholder="请再次输入密码" required="required">
+                <input type="password" class="form-control" id="checkPasswd" name="password" placeholder="请再次输入新密码" required="required">
             </div>
 
             <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
@@ -41,7 +45,10 @@
     $("#changePasswordButton").click(function(){
         if($("#newPassword").val()==''){
             $("#info").text("新密码不能为空");
-        }else if($("#checkPasswd").val()==''){
+        }else if($("#oldPassword").val()==''){
+            $("#info").text("请输入旧密码");
+        }
+        else if($("#checkPasswd").val()==''){
             $("#info").text("请输入确认密码");
         }
         else if($("#newPassword").val()!=$("#checkPasswd").val()){
@@ -51,13 +58,16 @@
                 type: "POST",
                 url: "/intergration/user/settings/password/update",
                 data:{
-                    password:$("#newPassword").val()
+                    newPassword:$("#newPassword").val(),
+                    oldPassword:$("#oldPassword").val()
                 },
                 dataType: "json",
                 success: function (data) {
                     if (data.stateCode.trim() == "0") {
-                        $("#info").text("未成功请重试");
+                        $("#info").text("操作未成功，请重试");
                     } else if (data.stateCode.trim() == "1") {
+                        $("#info").text("旧密码错误");
+                    }else if (data.stateCode.trim() == "2") {
                         window.location.href = "/intergration";
                     }
                 }
