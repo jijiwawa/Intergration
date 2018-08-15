@@ -11,11 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -51,12 +53,13 @@ public class TopicController {
         return  newTopicPage;
     }
     @RequestMapping("/post")
-    public ModelAndView postTopic(HttpSession session, HttpServletRequest request){
-        ModelAndView indexPage;
+    @ResponseBody
+    public Object postTopic(HttpSession session, HttpServletRequest request){
+        HashMap<String, String> res = new HashMap<String, String>();
         //未登陆
         if(session.getAttribute("userId")==null){
-            indexPage=new ModelAndView("redirect:/signin");
-            return  indexPage;
+            res.put("stateCode", "0");
+            return res;
         }
         //处理参数
         int userId=(Integer) session.getAttribute("userId");
@@ -73,10 +76,11 @@ public class TopicController {
         //添加topic
         if(userType!=0) {
             topicService.addTopic(topic);
+            res.put("stateCode", "2");
+        }else {
+            res.put("stateCode", "1");
         }
-        indexPage=new ModelAndView("redirect:/");
-
-        return  indexPage;
+        return res;
     }
 
     @RequestMapping("/t/{id}")

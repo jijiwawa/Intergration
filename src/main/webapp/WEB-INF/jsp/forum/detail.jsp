@@ -5,9 +5,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/intergration/css/editormd.min.css" />
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
     <script src="/intergration/js/bootstrap.min.js"></script>
+    <script src="/intergration/js/editormd.min.js"></script>
+    <script src="/intergration/js/lib/marked.min.js"></script>
     <title>${topic.title} - Campus </title>
 </head>
 <body>
@@ -33,11 +36,14 @@
             </div>
         </div>
 
-        <ul class="list-group" style="width: 100%">
-            <li class="list-group-item">
-                ${topic.content}
-            </li>
-        </ul>
+        <%--<ul class="list-group" style="width: 100%">--%>
+            <%--<li class="list-group-item">--%>
+                <%--${topic.content}--%>
+            <%--</li>--%>
+        <%--</ul>--%>
+        <div id="test-editormd">
+            <textarea style="display:none;">${topic.content}</textarea>
+        </div>
     </div>
 
     <c:if test="${!empty replies}">
@@ -103,6 +109,17 @@
 
 <!-- 引入footer文件 -->
 <%@ include file="../footer.jsp"%>
+<script type="text/javascript">
+    var testEditor;
 
+    $(function() {
+        testEditor = editormd.markdownToHTML("test-editormd", {
+            htmlDecode      : "style,script,iframe",  // you can filter tags decode
+            emoji           : true,
+            taskList        : true,
+        });
+
+    });
+</script>
 </body>
 </html>

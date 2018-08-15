@@ -147,7 +147,7 @@
                             Cookies.remove('loginStatus');
                         }
                         $("#info").text("提示:登陆成功，跳转中...");
-                        window.location.href="/intergration";
+                        window.location.href="/intergration/";
                     }
                 }
             });
