@@ -16,7 +16,7 @@
 <div style="width: 70%;margin:1% 2% 1% 5%;float: left;">
     <div class="panel panel-default" id="main" style="">
         <div class="panel-heading" style="background-color: white">
-            <a href="/intergration">Genesis</a> › 创作新主题
+            <a href="/intergration">Intergration</a> › 创作新主题
         </div>
 
         <div class="panel-body">
@@ -69,7 +69,7 @@
         <li class="list-group-item">
             <h5>尊重原创</h5>
             <p>
-                请不要发布任何盗版下载链接，包括软件、音乐、电影等等。Genesis是创意工作者的社区，我们尊重原创。
+                请不要发布任何盗版下载链接，包括软件、音乐、电影等等。Intergration是创意工作者的社区，我们尊重原创。
             </p>
         </li>
 

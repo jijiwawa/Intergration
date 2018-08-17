@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Service
-@Transactional
 public class OrderFormServiceImpl implements OrderFormService {
     //注解注入OrderFormDao
     @Autowired
@@ -32,6 +32,7 @@ public class OrderFormServiceImpl implements OrderFormService {
     }
     //新增前检验订单号是否存在
     public boolean isOrderNumExist(String order_num) {
-        return this.orderFormDao.isOrderNumExist(order_num);
+        return orderFormDao.isOrderNumExist(order_num)==1;
     }
 }
+

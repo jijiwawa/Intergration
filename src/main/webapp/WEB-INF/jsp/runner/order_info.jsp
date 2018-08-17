@@ -24,9 +24,8 @@
 <c:if test="${!empty userId}">
     <!-- 已登录 -->
     <div class="panel panel-default" id="sidebar2" style="width: 20%;margin:1% 2% 1% 0%;float: right">
-        <!-- 个人订单信息，发单与接单信息 -->
         <div class="panel-heading" style="background-color: white;text-align: center">
-            <a href="/member/${user.userName}">${user.userName}</a>
+            <%--<a href="m${user.userName}">${user.userName}</a>--%>
         </div>
         <ul class="list-group" style="width: 100%">
             <li class="list-group-item"><a href="/new">创作新主题</a></li>

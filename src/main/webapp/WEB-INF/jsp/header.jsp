@@ -40,7 +40,7 @@
                         <p class="navbar-text"><a href="/Intergration">首页</a></p>
                     </li>
                     <li>
-                        <p class="navbar-text"><a href="/member/${sessionScope.username}">${sessionScope.username}</a></p>
+                        <p class="navbar-text"><a href="/Intergration/member/${sessionScope.username}">${sessionScope.username}</a></p>
                     </li>
                     <li>
                         <p class="navbar-text"><a href="/Intergration/user/settings">设置</a></p>

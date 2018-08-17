@@ -2,7 +2,7 @@ create table orderform
 (
   id int(11) not null auto_increment comment '订单唯一id',
   order_num varchar(15) not null comment '快递单号',
-  express_comany varchar(10) not null comment '快递公司',
+  express_company varchar(10) not null comment '快递公司',
   pickup_ads varchar(50) not null comment '取货地点',
   latest_time varchar(5) not null comment '最晚取货时间',
   goods_size varchar(5) not null comment '货物大小',

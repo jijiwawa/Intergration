@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.forum.dao.TopicMapper">
+
+    <!-- 主题基本结果集  -->
+    <resultMap id="BaseResultMap" type="com.forum.domain.Topic" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="click" property="click" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 主题基本结果集+ 主题内容  用于主题详情-->
+    <resultMap id="ResultMapWithBLOBs" type="com.forum.domain.Topic" extends="BaseResultMap" >
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    </resultMap>
+
+    <!-- 主题和用户信息结果集 用于首页显示  -->
+    <resultMap id="topicAndUserInfo" type="com.forum.domain.Topic" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="click" property="click" jdbcType="INTEGER" />
+        <result column="count_replies" property="countReplies" jdbcType="INTEGER" />
+        <association property="user" javaType="com.mainpage.domain.User">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="user_name" property="userName" jdbcType="VARCHAR" />
+            <result column="head_sculpture" property="headSculpture" jdbcType="VARCHAR" />
+        </association>
+    </resultMap>
+
+    <!-- 主题详情及用户必要信息 用于主题详情页  -->
+    <resultMap id="topicAndUserDetail" type="com.forum.domain.Topic">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />
+        <result column="click" property="click" jdbcType="INTEGER" />
+        <association property="user" javaType="com.mainpage.domain.User">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="user_name" property="userName" jdbcType="VARCHAR" />
+            <result column="head_sculpture" property="headSculpture" jdbcType="VARCHAR" />
+        </association>
+    </resultMap>
+
+    <!-- 最多评论主题列表 -->
+    <resultMap id="mostCommentsTopic" type="com.forum.domain.Topic">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="count_replies" property="countReplies" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, user_id, create_time, update_time, title, click, tab_id
+    </sql>
+
+    <sql id="Blob_Column_List" >
+        content
+    </sql>
+
+    <insert id="insertTopic" parameterType="com.forum.domain.Topic" >
+        insert into topic
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="userId != null" >
+                user_id,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="title != null" >
+                title,
+            </if>
+            <if test="click != null" >
+                click,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,},
+            </if>
+            <if test="userId != null" >
+                #{userId},
+            </if>
+            <if test="createTime != null" >
+                #{createTime},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime},
+            </if>
+            <if test="title != null" >
+                #{title},
+            </if>
+            <if test="click != null" >
+                #{click},
+            </if>
+            <if test="content != null" >
+                #{content},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="listTopicsAndUsers" resultMap="topicAndUserInfo" >
+        select topic.id,topic.user_id,topic.create_time,topic.update_time,topic.title,topic.click,
+            user.user_name,user.head_sculpture ,count(reply.id) as count_replies
+        from topic
+            LEFT JOIN user on  topic.user_id = user.id
+            LEFT JOIN reply on topic.id=reply.topic_id
+        group by topic.id order by topic.id desc ;
+    </select>
+
+    <select id="listMostCommentsTopics" resultMap="mostCommentsTopic">
+        SELECT topic.id,topic.title,count(reply.id) as count_replies  from topic ,reply
+        where topic.id = reply.topic_id group by topic.id order by count_replies desc limit 5;
+    </select>
+
+    <select id="selectById" parameterType="int" resultMap="topicAndUserDetail">
+        SELECT topic.*,user.user_name,user.head_sculpture from topic,user
+        where topic.user_id = user.id and topic.id = #{id,jdbcType=INTEGER};
+    </select>
+
+    <update id="clickAddOne" parameterType="int" >
+        update topic
+        set
+        click = click+1
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getTopicsNum" resultType="int" >
+        select
+        COUNT(*)
+        from topic
+    </select>
+
+    <update id="updateTopic" parameterType="com.forum.domain.Topic" >
+        update topic
+        <set >
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="click != null" >
+                click = #{click,jdbcType=INTEGER},
+            </if>
+            <if test="content != null" >
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

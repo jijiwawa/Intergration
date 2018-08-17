@@ -1,5 +1,6 @@
 package com.runner.controller;
 
+import com.mainpage.service.impl.UserServiceImpl;
 import com.runner.dao.OrderFormDao;
 import com.runner.po.OrderForm;
 import com.runner.service.OrderFormService;
@@ -14,16 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.ws.RequestWrapper;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.HashMap;
 
 @Controller
 public class OrderFormController {
     @Autowired
     private OrderFormServiceImpl orderFormService;
+    private UserServiceImpl userService;
     /**
      * 根据id查询订单详情
      */
-    @RequestWrapper(className = "findOrderFormById")
+    @RequestWrapper(className = "/findOrderFormById")
     public String findOrderFormById(Integer id, Model model){
         OrderForm orderForm = orderFormService.findOrderFormById(id);
         model.addAttribute("orderForm",orderForm);
@@ -32,12 +35,12 @@ public class OrderFormController {
     /**
      * 新增订单
      */
-    @RequestMapping("orderForm/add")
+    @RequestMapping("/order_form/add")
     @ResponseBody
     public Object addOrderForm(HttpServletRequest request, HttpSession HttpSession){
         HashMap<String, String> res = new HashMap<String, String>();
         if(orderFormService.isOrderNumExist(request.getParameter("order_num"))){
-            //用户名已存在
+            //订单已存在
             res.put("stateCode","0");
         }else {
             OrderForm orderForm = new OrderForm();
@@ -49,11 +52,13 @@ public class OrderFormController {
             String goods_size = (String) request.getAttribute("goods_size");
             BigDecimal paymoney = (BigDecimal) request.getAttribute("paymoney");
             String remark = (String) request.getAttribute("remark");
+            Timestamp depute_time= new Timestamp(System.currentTimeMillis());
             String pick_code = (String) request.getAttribute("pick_code");
             String pick_phonenum = (String) request.getAttribute("pick_phonenum");
             String pick_name = (String) request.getAttribute("pick_name");
             orderForm.setClient_id(client_id);
             orderForm.setOrder_num(order_num);
+            orderForm.setDepute_time(depute_time);
             orderForm.setExpress_company(express_company);
             orderForm.setPickup_ads(pickup_ads);
             orderForm.setLatest_time(latest_time);
@@ -64,6 +69,8 @@ public class OrderFormController {
             orderForm.setPick_phonenum(pick_phonenum);
             orderForm.setPick_name(pick_name);
             orderFormService.addOrderForm(orderForm);
+            // 发单用户扣钱
+
             res.put("stateCode","1");
         }
         return res;

@@ -7,7 +7,7 @@
     <link href="/Intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/Intergration/js/jquery-3.2.1.js"></script>
     <script src="/Intergration/js/bootstrap.min.js"></script>
-    <title>Genesis ›设置</title>
+    <title>Intergration ›设置</title>
 </head>
 <body>
 <!-- 引入header文件 -->
@@ -16,7 +16,7 @@
 <div style="width: 70%;margin:1% 2% 1% 5%;float: left;">
     <div class="panel panel-default" id="main" style="">
         <div class="panel-heading" style="background-color: white">
-            <a href="/">Genesis</a> › 设置
+            <a href="/">Intergration</a> › 设置
         </div>
 
         <div class="panel-body">

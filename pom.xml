@@ -210,7 +210,7 @@
 
     </dependencies>
     <build>
-        <finalName>Genesis</finalName>
+        <finalName>Intergation</finalName>
         <plugins>
             <!-- jetty插件 -->
             <plugin>

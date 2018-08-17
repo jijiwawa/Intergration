@@ -18,7 +18,14 @@
     <select id="findOrderFormByTrusteeId" parameterType="java.lang.Integer" resultType="com.runner.po.OrderForm" >
         select * from dbe.orderform where trustee_id=#{trustee_id};
     </select>
-
+    <!--查订单号是否已存在-->
+    <select id="isOrderNumExist" resultType="int" parameterType="java.lang.String">
+        select count(*) from dbe.orderform where order_num=#{order_num};
+    </select>
+    <!--查所有order_state=0的订单，用于订单的显示-->
+    <select id="showOrderLatest" resultType="List" parameterType="int">
+        select *
+    </select>
     <!--
     删
     -->
@@ -27,10 +34,10 @@
     增
     -->
     <insert id="addOrderForm" parameterType="com.runner.dao.OrderFormDao">
-        insert into orderform()(order_num, express_comany, pickup_ads, latest_time,goods_size,paymoney,client_id,remark,pick_code,pick_phonenum,pick_name) VALUES (
-                #{order_num},#{express_comany},#{pickup_ads},#{latest_time,#{goods_size},#{paymoney},#{client_id},#{remark},#{pick_code},#{pick_phonenum},#{pick_name})
-        )
+        insert into dbe.orderform(order_num, express_company, pickup_ads, latest_time,goods_size,paymoney,client_id,remark,pick_code,pick_phonenum,pick_name,depute_time) VALUES (
+                #{order_num},#{express_company},#{pickup_ads},#{latest_time},#{goods_size},#{paymoney},#{client_id},#{remark},#{pick_code},#{pick_phonenum},#{pick_name},#{depute_time})
     </insert>
+
     <!--
     改
     -->

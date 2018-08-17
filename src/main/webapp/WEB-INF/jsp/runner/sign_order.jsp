@@ -64,7 +64,7 @@
     <div class="panel-body">
             <div class="form-group" >
                 <label >快递公司</label>
-                <select class="form-control" id="express_comany" name="express_comany">
+                <select class="form-control" id="express_company" name="express_company">
                     <option value="default">---请选择---</option>
                     <option value="顺丰">顺丰</option>
                     <option value="申通">申通</option>
@@ -138,17 +138,18 @@
 
 <script>
     $("#creat_order").click(function(){
-        var express_comany=$("#express_company").val();  //快递公司
-        var order_num=$("#order_num").val();            //快递单号
-        var pickup_ads=$("#pickup_ads").val();          //快递地址
-        var latest_time=$("latest_time").val();         //最晚取货时间
-        var goods_size=$("#goods_size").val();          //货物大小
-        var paymoney=$("#paymoney").val();              //支付金额
-        var pick_code=$("#pick_code").val();            //取货码
-        var pick_phonenum=$("#pick_phonenum").val();    //取货电话号码
-        var pick_name=$("#pick_name").val();            //取货姓名
+        var express_company1=$("#express_company").val();  //快递公司
+        var order_num1=$("#order_num").val();            //快递单号
+        var pickup_ads1=$("#pickup_ads").val();          //快递地址
+        var latest_time1=$("latest_time").val();         //最晚取货时间
+        var goods_size1=$("#goods_size").val();          //货物大小
+        var paymoney1=$("#paymoney").val();              //支付金额
+        var pick_code1=$("#pick_code").val();            //取货码
+        var pick_phonenum1=$("#pick_phonenum").val();    //取货电话号码
+        var pick_name1=$("#pick_name").val();            //取货姓名
+        var remark1=$("remark").val();
 
-        if(express_company==''||order_num==''||pickup_ads==''||latest_time==''||goods_size==''||paymoney==''||pick_code==''||pick_phonenum==''||pick_name==''){
+        if(express_company1==''||order_num1==''||pickup_ads1==''||latest_time1==''||goods_size1==''||paymoney1==''||pick_code1==''||pick_phonenum1==''||pick_name1==''){
             $("#info").text("提示：发单信息除备注外不能为空");
         }else {
             if($("#pick_phonenum").val().length!=11){
@@ -158,16 +159,16 @@
                     type: "POST",
                     url: "/Intergration/order_form/add",
                     data: {
-                        order_num: order_num,
-                        express_comany: express_company,
-                        pickup_ads: pickup_ads,
-                        latest_time: latest_time,
-                        goods_size: goods_size,
-                        paymoney:  paymoney,
-                        remark: remark,
-                        pick_code: pick_code,
-                        pick_phonenum: pick_phonenum,
-                        pick_name:pick_name,
+                        order_num: order_num1,
+                        express_company: express_company1,
+                        pickup_ads: pickup_ads1,
+                        latest_time: latest_time1,
+                        goods_size: goods_size1,
+                        paymoney:  paymoney1,
+                        remark: remark1,
+                        pick_code: pick_code1,
+                        pick_phonenum: pick_phonenum1,
+                        pick_name:pick_name1
                     },
                     dataType: "json",
                     success: function (data) {
