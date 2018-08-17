@@ -9,7 +9,7 @@ public interface TopicService {
     /**
      * 获取全部主题及用户信息 用于渲染首页
      */
-    List<Topic> listTopicsAndUsers();
+    List<Topic> listTopicsAndUsers(int index);
 
     /**
      * 获取最多评论主题列表

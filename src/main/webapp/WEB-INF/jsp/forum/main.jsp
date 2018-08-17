@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta name="Content-Type"  content="text/html;charset=utf-8">
-    <meta name="keywords" content="Genesis,论坛,社区,程序员">
+    <meta name="keywords" content="校园一体化服务平台">
     <title>校园一体化服务平台</title>
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
@@ -70,7 +70,7 @@
                         <a href="/intergration/forum/t/${topic.id}">${topic.title}</a><br/>
                         <div>
                             <a href="/intergration/member/${topic.user.userName}"><span ><strong>${topic.user.userName}</strong></span></a>&nbsp;&nbsp;&nbsp;
-                            <small class="text-muted">${topic.createTime}</small>
+                            <small class="text-muted">${topic.localCreateTime}</small>
                         </div>
                     </div>
                     <div style="width: 5%;float: right;text-align: center">
@@ -81,9 +81,21 @@
         </c:forEach>
 
     </ul>
-
+    <div>
+        共<b>${pageUtil.pageNumber}</b>条
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=1" class='first'>首页</a>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=
+<c:if test="${pageUtil.pageIndex>1}">${pageUtil.pageIndex-1}</c:if>
+<c:if test="${pageUtil.pageIndex==1}">1</c:if>" class='pre'>上一页</a>
+        <c:forEach begin="1" end="${pageUtil.pageCount}" var="i">
+            <a class="btn <c:if test="${pageUtil.pageIndex==i}">btn-success</c:if> btn-small" href="/intergration/forum/main?pageIndex=${i}" >${i}</a>
+        </c:forEach>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=
+<c:if test="${pageUtil.pageIndex<pageUtil.pageCount}">${pageUtil.pageIndex+1}</c:if>
+<c:if test="${pageUtil.pageIndex==pageUtil.pageCount}">${pageUtil.pageCount}</c:if>">下一页</a>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=${pageUtil.pageCount}" class='last'>末页</a>
+    </div>
 </div>
-
 <!-- 引入侧边栏文件 -->
 <%@ include file="../side.jsp"%>
 

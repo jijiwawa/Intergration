@@ -9,7 +9,7 @@
     <script src="/intergration/js/jquery.min.js"></script>
     <script src="/intergration/js/editormd.min.js"></script>
     <script src="/intergration/js/bootstrap.min.js"></script>
-    <title>Campus › 发布新帖子 </title>
+    <title>Campus › 修改帖子 </title>
 </head>
 <body>
 <!-- 引入header文件 -->
@@ -18,19 +18,19 @@
 <div style="width: 90%;margin:1% 2% 1% 5%;">
     <div class="panel panel-default" id="main" style="">
         <div class="panel-heading" style="background-color: white">
-            <a href="/intergration">Genesis</a> › 发布新帖子
+            <a href="/intergration">Genesis</a> › 修改帖子
         </div>
 
         <div class="panel-body">
                 <div class="form-group">
                     <label for="title">主题标题</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入主题标题" required="required">
+                    <input type="text" class="form-control" id="title" name="title" value="${topic.title}" required="required">
                 </div>
                 <div id="test-editormd">
-                    <textarea style="display:none;">#Hello</textarea>
+                    <textarea style="display:none;">${topic.content}</textarea>
                 </div>
                 <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
-                <button id="post" class="btn btn-success btn-small">发布</button>
+                <button id="post" class="btn btn-success btn-small">确定修改</button>
         </div>
 
     </div>
@@ -54,16 +54,18 @@
     $("#post").click(function () {
         var ptitle=$("#title").val();
         var pcontent=editor.getMarkdown();
+        var tid=${topic.id}
         if(ptitle==''){
             $("#info").text("提示：请输入标题");
         }else if(pcontent==''){
             $("#info").text("提示：请输入内容");
         }else{
             $.ajax({type: "POST",
-                url: "/intergration/forum/post",
+                url: "/intergration/forum/topic/updatedo",
                 data: {
                     title: ptitle,
                     content: pcontent,
+                    id: tid
                 },
                 dataType: "json",
                 success: function(data){

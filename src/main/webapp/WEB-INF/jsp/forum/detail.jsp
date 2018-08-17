@@ -21,13 +21,16 @@
         <div class="panel-heading" style="background-color: white">
             <div>
                 <div class="panel-heading" style="background-color: white">
-                    <a href="/intergration">Campus</a> › 主题
+                    <a href="/intergration">Campus</a> › 帖子
                 </div>
                 <h3>${topic.title}</h3><br/>
                 <div>
-                    <a href="/member/${topic.user.userName}"><span ><strong>${topic.user.userName}</strong></span></a>&nbsp;&nbsp;
-                    <small class="text-muted">${topic.createTime}&nbsp;&nbsp;&nbsp;+08:00</small>&nbsp;&nbsp;
-                    <small class="text-muted">${topic.click}次点击</small>
+                    <a href="/intergration/member/${topic.user.userName}"><span ><strong>${topic.user.userName}</strong></span></a>&nbsp;&nbsp;
+                    <small class="text-muted">${topic.localCreateTime}</small>&nbsp;&nbsp;
+                    <small class="text-muted">${topic.click}次点击</small>&nbsp;&nbsp;
+                    <c:if test="${allowUpdate==1}">
+                    <a class="btn btn-success  btn-small" href="/intergration/forum/topic/updatepage?id=${topic.id}">修改</a>
+                    </c:if>
                 </div>
             </div>
 
@@ -69,7 +72,7 @@
                             </div>
                             <div style="width: 89%;float: left">
                                 <a href="/member/${reply.user.userName}"><strong>${reply.user.userName}</strong></a>&nbsp;&nbsp;
-                                <small class="text-muted">${reply.createTime}</small>
+                                <small class="text-muted">${reply.localCreateTime}</small>
                                 <br/>
                                 <div>
                                     <p>${reply.content}</p>

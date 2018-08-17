@@ -142,8 +142,27 @@ session.setAttribute("loginUser", user);
 
 ${user.name}
 
-# TODO
-forum tab分类
-管理员设置
+# 分页
+```asp
+<div>
+        共<b>${pageUtil.pageNumber}</b>条
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=1" class='first'>首页</a>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=
+<c:if test="${pageUtil.pageIndex>1}">${pageUtil.pageIndex-1}</c:if>
+<c:if test="${pageUtil.pageIndex==1}">1</c:if>" class='pre'>上一页</a>
+        <c:forEach begin="1" end="${pageUtil.pageCount}" var="i">
+            <a class="btn <c:if test="${pageUtil.pageIndex==i}">btn-success</c:if> btn-small" href="/intergration/forum/main?pageIndex=${i}" >${i}</a>
+        </c:forEach>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=
+<c:if test="${pageUtil.pageIndex<pageUtil.pageCount}">${pageUtil.pageIndex+1}</c:if>
+<c:if test="${pageUtil.pageIndex==pageUtil.pageCount}">${pageUtil.pageCount}</c:if>">下一页</a>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=${pageUtil.pageCount}" class='last'>末页</a>
+    </div>
+```
+
+# Docker中Tomcat时区设为东八区
+```text
+docker run -d --name tomcat8 -v  /root/tomcat8_projects/:/bitnami -v /etc/localtime:/etc/localtime -p 8090:8080 -e TZ="Asia/Shanghai" -e TOMCAT_USERNAME=de -e TOMCAT_PASSWORD=123  bitnami/tomcat:8.0
+```
 
 

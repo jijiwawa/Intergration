@@ -16,8 +16,6 @@
                     </li>
                     <li <c:if test="${tab.tabNameEn == 'play'}">class="active"
                         </c:if>><a href="/intergration/forum/main">时事</a></li>
-                    <li <c:if test="${tab.tabNameEn == 'creative'}">class="active"
-                        </c:if>><a href="/intergration">课程评价</a></li>
                 </ul>
 
                 <c:if test="${empty userId}">
