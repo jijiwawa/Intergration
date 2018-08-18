@@ -34,5 +34,10 @@ public class OrderFormServiceImpl implements OrderFormService {
     public boolean isOrderNumExist(String order_num) {
         return orderFormDao.isOrderNumExist(order_num)==1;
     }
+
+    // 更新订单
+    public void updateOrderForm(OrderForm orderForm) {
+        orderFormDao.updateOrderForm(orderForm);
+    }
 }
 

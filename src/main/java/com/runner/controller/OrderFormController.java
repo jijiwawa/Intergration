@@ -1,5 +1,6 @@
 package com.runner.controller;
 
+import com.mainpage.domain.User;
 import com.mainpage.service.impl.UserServiceImpl;
 import com.runner.dao.OrderFormDao;
 import com.runner.po.OrderForm;
@@ -41,37 +42,47 @@ public class OrderFormController {
         HashMap<String, String> res = new HashMap<String, String>();
         if(orderFormService.isOrderNumExist(request.getParameter("order_num"))){
             //订单已存在
-            res.put("stateCode","0");
+            res.put("orderState","0");
         }else {
-            OrderForm orderForm = new OrderForm();
+            //用户余额是否足够
             Integer client_id = (Integer) HttpSession.getAttribute("userId");
-            String order_num = (String) request.getAttribute("order_num");
-            String express_company = (String) request.getAttribute("express_company");
-            String pickup_ads = (String) request.getAttribute("pickup_ads");
-            String latest_time = (String) request.getAttribute("latest_time");
-            String goods_size = (String) request.getAttribute("goods_size");
             BigDecimal paymoney = (BigDecimal) request.getAttribute("paymoney");
-            String remark = (String) request.getAttribute("remark");
-            Timestamp depute_time= new Timestamp(System.currentTimeMillis());
-            String pick_code = (String) request.getAttribute("pick_code");
-            String pick_phonenum = (String) request.getAttribute("pick_phonenum");
-            String pick_name = (String) request.getAttribute("pick_name");
-            orderForm.setClient_id(client_id);
-            orderForm.setOrder_num(order_num);
-            orderForm.setDepute_time(depute_time);
-            orderForm.setExpress_company(express_company);
-            orderForm.setPickup_ads(pickup_ads);
-            orderForm.setLatest_time(latest_time);
-            orderForm.setGoods_size(goods_size);
-            orderForm.setPaymoney(paymoney);
-            orderForm.setRemark(remark);
-            orderForm.setPick_code(pick_code);
-            orderForm.setPick_phonenum(pick_phonenum);
-            orderForm.setPick_name(pick_name);
-            orderFormService.addOrderForm(orderForm);
-            // 发单用户扣钱
-
-            res.put("stateCode","1");
+            User user = userService.getUserByUserId(client_id);
+            BigDecimal havemoney = user.getProperty();
+            if(havemoney.compareTo(paymoney)>=0){
+                OrderForm orderForm = new OrderForm();
+                String order_num = (String) request.getAttribute("order_num");
+                String express_company = (String) request.getAttribute("express_company");
+                String pickup_ads = (String) request.getAttribute("pickup_ads");
+                String latest_time = (String) request.getAttribute("latest_time");
+                String goods_size = (String) request.getAttribute("goods_size");
+                String remark = (String) request.getAttribute("remark");
+                Timestamp depute_time= new Timestamp(System.currentTimeMillis());
+                String pick_code = (String) request.getAttribute("pick_code");
+                String pick_phonenum = (String) request.getAttribute("pick_phonenum");
+                String pick_name = (String) request.getAttribute("pick_name");
+                orderForm.setClient_id(client_id);
+                orderForm.setOrder_num(order_num);
+                orderForm.setDepute_time(depute_time);
+                orderForm.setExpress_company(express_company);
+                orderForm.setPickup_ads(pickup_ads);
+                orderForm.setLatest_time(latest_time);
+                orderForm.setGoods_size(goods_size);
+                orderForm.setPaymoney(paymoney);
+                orderForm.setRemark(remark);
+                orderForm.setPick_code(pick_code);
+                orderForm.setPick_phonenum(pick_phonenum);
+                orderForm.setPick_name(pick_name);
+                orderFormService.addOrderForm(orderForm);
+                // 发单用户扣钱
+                user.setProperty(havemoney.subtract(paymoney));
+                userService.updateUser(user);
+                res.put("orderState","1");
+            }
+            else{
+                //余额不足
+                res.put("orderState","2");
+            }
         }
         return res;
     }

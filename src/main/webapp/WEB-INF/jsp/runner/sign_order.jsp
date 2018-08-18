@@ -130,6 +130,7 @@
                 <textarea class="form-control" id="remark" name="remark"  cols="30" rows="10"></textarea>
             </div>
             <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
+            <button id="refresh" class="btn btn-success btn-block">重置</button>
             <button id="creat_order" class="btn btn-success btn-block">发单</button>
     </div>
 </div>
@@ -172,10 +173,12 @@
                     },
                     dataType: "json",
                     success: function (data) {
-                        if (data.stateCode.trim() == "0") {
+                        if (data.orderState.trim() == "0") {
                             $("#info").text("提示：订单号已存在");
-                        } else if (data.stateCode.trim() == "1") {
+                        } else if (data.orderState.trim() == "2") {
                             window.location.href = "/Intergration/tab/runner"
+                        } else if(data.orderState.trim()=="1"){
+                            $("#info").text("提示：余额不足");
                         }
                     }
                 });

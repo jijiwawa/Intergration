@@ -1,11 +1,13 @@
 package com.mainpage.domain;
 
+import java.math.BigDecimal;
+
 public class User {
     private int id;
     private String phoneNumber;
     private String userName;
     private byte isMale;
-    private double property;
+    private BigDecimal property;
     private String headSculpture;
     private byte type;
     private String password;
@@ -43,11 +45,11 @@ public class User {
         this.isMale = isMale;
     }
 
-    public double getProperty() {
+    public BigDecimal getProperty() {
         return property;
     }
 
-    public void setProperty(double property) {
+    public void setProperty(BigDecimal property) {
         this.property = property;
     }
 
@@ -82,4 +84,6 @@ public class User {
     public void setCredit(double credit) {
         this.credit = credit;
     }
+
+
 }

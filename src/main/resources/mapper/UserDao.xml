@@ -16,6 +16,9 @@
     <select id="getUserByUserName" resultType="com.mainpage.domain.User" parameterType="java.lang.String">
         select * from dbe.user where user_name=#{username}
     </select>
+    <select id="getUserByUserId" resultType="com.mainpage.domain.User" parameterType="java.lang.Integer">
+        select * from dbe.user where id=#{id}
+    </select>
 
 
     <update id="updateUserById" parameterType="com.mainpage.domain.User">

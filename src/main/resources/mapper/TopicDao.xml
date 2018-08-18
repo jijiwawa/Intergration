@@ -5,7 +5,7 @@
 <mapper namespace="com.forum.dao.TopicMapper">
 
     <!-- 主题基本结果集  -->
-    <resultMap id="BaseResultMap" type="com.forum.domain.Topic" >
+    <resultMap id="    " type="com.forum.domain.Topic" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="user_id" property="userId" jdbcType="INTEGER" />
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />

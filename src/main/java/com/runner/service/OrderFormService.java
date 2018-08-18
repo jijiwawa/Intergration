@@ -15,4 +15,9 @@ public interface OrderFormService {
     //新增前检验订单号是否存在
     public boolean isOrderNumExist(String order_num);
 
+
+
+    // 更新订单
+    public void updateOrderForm(OrderForm orderForm);
+
 }
