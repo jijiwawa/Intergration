@@ -7,6 +7,10 @@
         SELECT count(*) FROM dbe.user WHERE user_name=#{username};
     </select>
 
+    <select id="isPhoneNumExist" resultType="int" parameterType="java.lang.String">
+        SELECT count(*) FROM dbe.user WHERE phone_number=#{phone};
+    </select>
+
     <insert id="addUser" parameterType="com.mainpage.domain.User">
         insert into dbe.user(phone_number, user_name, is_male, password,head_sculpture) VALUES (
                 #{phoneNumber},#{userName},#{isMale},#{password},#{headSculpture}

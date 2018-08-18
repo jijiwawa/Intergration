@@ -40,4 +40,8 @@ public class UserServiceImpl implements UserService {
         return userDao.updateUserById(user)>0;
     }
 
+    public boolean isPhoneNumExist(String phone) {
+        return userDao.isPhoneNumExist(phone)>=1;
+    }
+
 }

@@ -56,7 +56,30 @@
 
 <!-- 引入侧边栏文件 -->
 <%@ include file="side.jsp"%>
-
+<div class="row">
+    <div class="col-xs-6 col-md-2">
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <div class="thumbnail">
+            <img src="https://www.baidu.com/img/bd_logo1.png" >
+            <div class="caption">
+                <h3>跑腿服务</h3>
+                <p>todo</p>
+                <a href="/intergration/todo" class="btn btn-primary" role="button">进入</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-3">
+        <div class="thumbnail">
+            <img src="https://www.baidu.com/img/bd_logo1.png" >
+            <div class="caption">
+                <h3>校园时事</h3>
+                <p>一个传播校园信息的平台</p>
+                <a href="/intergration/forum/main" class="btn btn-primary" role="button">进入</a>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- 引入footer文件 -->
 <%@ include file="footer.jsp"%>
 </body>

@@ -27,4 +27,7 @@ public class MainController {
     @RequestMapping("/signin")
     public ModelAndView signIn(){return new ModelAndView("signin");}
 
+    @RequestMapping("/todo")
+    public ModelAndView toDo(){return new ModelAndView("todo");}
+
 }

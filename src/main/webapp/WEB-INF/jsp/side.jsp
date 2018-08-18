@@ -35,7 +35,6 @@
                 <li class="list-group-item"><a href="/intergration/user/rightpage">发帖权限管理</a></li>
             </c:if>
             <li class="list-group-item"><a href="">0条未读提醒</a></li>
-            <li class="list-group-item"><a href="">积分:${user.credit}</a></li>
         </ul>
     </div>
 </c:if>

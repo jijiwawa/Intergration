@@ -120,6 +120,8 @@
                             $("#info").text("提示：用户名已存在");
                         } else if (data.stateCode.trim() == "1") {
                             window.location.href = "/intergration"
+                        }else if(data.stateCode.trim() == "2"){
+                            $("#info").text("提示：电话号码已存在");
                         }
                     }
                 });

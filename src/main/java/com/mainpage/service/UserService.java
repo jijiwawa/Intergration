@@ -8,4 +8,5 @@ public interface UserService {
     public User getUserByUserName(String username);
     public int loginCheck(String username,String password);
     public boolean updateUser(User user);
+    public boolean isPhoneNumExist(String phone);
 }

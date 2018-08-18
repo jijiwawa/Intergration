@@ -11,4 +11,6 @@ public interface UserMapper {
     User getUserByUserName(String username);
 
     int updateUserById(User user);
+
+    int isPhoneNumExist(String phone);
 }
