@@ -40,15 +40,4 @@
     </div>
 </c:if>
 
-<div class="panel panel-default" id="sidebar1" style="width: 20%;margin:1% 2% 1% 0%;float: right">
-    <div class="panel-heading" style="background-color: white;text-align: center">
-        热议主题
-    </div>
-    <ul class="list-group" style="width: 100%">
-        <c:forEach items="${hotestTopics}" var="hotestTopic">
-            <li class="list-group-item"><a href="/t/${hotestTopic.id}">${hotestTopic.title}</a></li>
-        </c:forEach>
-    </ul>
-</div>
-
 

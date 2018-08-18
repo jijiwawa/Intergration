@@ -56,7 +56,10 @@
 
 <div class="panel panel-default" id="main" style="width: 70%;margin:1% 2% 5% 5%;float: left;">
     <div class="panel-heading" style="background-color: white">
-        <a style="margin-right: 2%">活跃</a><a style="margin-right: 2%">精华</a><a style="margin-right: 2%">最近</a>
+        <a class="btn <c:if test="${shouldOrderByTime==0}">btn-success</c:if>  btn-small"
+        href="/intergration/forum/main?pageIndex=1&shouldOrderByTime=0">最新</a>&nbsp;&nbsp;
+        <a class="btn <c:if test="${shouldOrderByTime==1}">btn-success</c:if> btn-small"
+           href="/intergration/forum/main?pageIndex=1&shouldOrderByTime=1">热评</a>
     </div>
 
     <ul class="list-group" style="width: 100%">
@@ -79,21 +82,21 @@
                 </div>
             </li>
         </c:forEach>
-
     </ul>
     <div>
         共<b>${pageUtil.pageNumber}</b>条
-        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=1" class='first'>首页</a>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=1&shouldOrderByTime=${shouldOrderByTime}" >首页</a>
         <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=
 <c:if test="${pageUtil.pageIndex>1}">${pageUtil.pageIndex-1}</c:if>
-<c:if test="${pageUtil.pageIndex==1}">1</c:if>" class='pre'>上一页</a>
+<c:if test="${pageUtil.pageIndex==1}">1</c:if>&shouldOrderByTime=${shouldOrderByTime}" >上一页</a>
         <c:forEach begin="1" end="${pageUtil.pageCount}" var="i">
-            <a class="btn <c:if test="${pageUtil.pageIndex==i}">btn-success</c:if> btn-small" href="/intergration/forum/main?pageIndex=${i}" >${i}</a>
+            <a class="btn <c:if test="${pageUtil.pageIndex==i}">btn-success</c:if> btn-small"
+               href="/intergration/forum/main?pageIndex=${i}&shouldOrderByTime=${shouldOrderByTime}" >${i}</a>
         </c:forEach>
         <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=
 <c:if test="${pageUtil.pageIndex<pageUtil.pageCount}">${pageUtil.pageIndex+1}</c:if>
-<c:if test="${pageUtil.pageIndex==pageUtil.pageCount}">${pageUtil.pageCount}</c:if>">下一页</a>
-        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=${pageUtil.pageCount}" class='last'>末页</a>
+<c:if test="${pageUtil.pageIndex==pageUtil.pageCount}">${pageUtil.pageCount}</c:if>&shouldOrderByTime=${shouldOrderByTime}">下一页</a>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=${pageUtil.pageCount}&shouldOrderByTime=${shouldOrderByTime}" >末页</a>
     </div>
 </div>
 <!-- 引入侧边栏文件 -->

@@ -15,7 +15,7 @@ public interface TopicService {
      * 获取最多评论主题列表
      * @return
      */
-    List<Topic> listMostCommentsTopics();
+    List<Topic> listMostCommentsTopics(int index);
 
     /**
      * 获取指定ID主题

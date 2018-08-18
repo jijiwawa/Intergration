@@ -17,8 +17,8 @@ public class TopicServiceImpl implements TopicService {
         return topicDao.listTopicsAndUsers(index);
     }
 
-    public List<Topic> listMostCommentsTopics() {
-        return topicDao.listMostCommentsTopics();
+    public List<Topic> listMostCommentsTopics(int index) {
+        return topicDao.listMostCommentsTopics(index);
     }
 
     public Topic selectById(int id) {

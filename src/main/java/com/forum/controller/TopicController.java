@@ -35,25 +35,37 @@ public class TopicController {
     public ModelAndView toMain(HttpSession session,HttpServletRequest request){
         int pageIndex = 1;//设置初始的当前页，页面显示的都是第一页
         int pageSize = 4;//设置每一页显示几条数据
+        int shouldOrderByTime=0;
         PageUtil<Topic> pageUtil = new PageUtil<Topic>();//初始化工具类
         ModelAndView indexPage=new ModelAndView("forum/main");
         if(request.getParameter("pageIndex")!=null){
             pageIndex=Integer.parseInt(request.getParameter("pageIndex"));
         }
+        if(request.getParameter("shouldOrderByTime")!=null){
+            shouldOrderByTime=Integer.parseInt(request.getParameter("shouldOrderByTime"));
+        }
         pageUtil.setPageIndex(pageIndex);
         int topicsNum=topicService.getTopicsNum();
         pageUtil.setPageNumber(topicsNum);
         pageUtil.setPageSize(pageSize);
-        pageUtil.setPageCount((int) Math.ceil((double) (pageUtil
-                .getPageNumber() / pageUtil.getPageSize())));
+//        pageUtil.setPageCount((int) Math.ceil((double) (pageUtil
+//                .getPageNumber() / pageUtil.getPageSize())));
+        pageUtil.setPageCount((pageUtil.getPageNumber()%pageSize)==0
+        ?(pageUtil.getPageNumber()/pageSize):(pageUtil.getPageNumber()/pageSize+1));
         int index=(pageIndex-1)*pageSize;
-        List<Topic> topics=topicService.listTopicsAndUsers(index);
+        List<Topic> topics;
+        if(shouldOrderByTime==0){
+            topics=topicService.listTopicsAndUsers(index);
+        }else{
+            topics=topicService.listMostCommentsTopics(index);
+        }
         //获取用户信息
         String name=(String) session.getAttribute("username");
         User user=userService.getUserByUserName(name);
         indexPage.addObject("topics",topics);
         indexPage.addObject("user",user);
         indexPage.addObject("pageUtil",pageUtil);
+        indexPage.addObject("shouldOrderByTime",shouldOrderByTime);
         return  indexPage;
     }
     @RequestMapping("/addpage")
@@ -114,7 +126,6 @@ public class TopicController {
         String name=(String) session.getAttribute("username");
         User user=userService.getUserByUserName(name);
         //最热主题
-        List<Topic> hotestTopics=topicService.listMostCommentsTopics();
 
         int allowUpdate=0;
         //渲染视图
@@ -124,7 +135,6 @@ public class TopicController {
         topicPage.addObject("repliesNum",repliesNum);
         topicPage.addObject("topicsNum",topicsNum);
         topicPage.addObject("user",user);
-        topicPage.addObject("hotestTopics",hotestTopics);
         if(topic.getUserId()==uid){
             allowUpdate=1;
         }
