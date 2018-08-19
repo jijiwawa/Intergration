@@ -57,4 +57,9 @@ public class OrderFormMapperTest extends BaseTest{
             System.out.println(a.getOrder_num()+","+a.getLatest_time()+","+a.getPick_code()+","+a.getRemark());
         }
     }
+
+    @Test
+    public void addOrderFormTest3() {
+
+    }
 }

@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-=======
-<%--
-  Created by IntelliJ IDEA.
-  User: suxik
-  Date: 2018/8/12
-  Time: 21:56
-  To change this template use File | Settings | File Templates.
---%>
->>>>>>> master
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>

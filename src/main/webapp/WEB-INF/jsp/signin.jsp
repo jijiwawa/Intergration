@@ -5,17 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <title>登录 - Campus</title>
-<<<<<<< HEAD
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
     <script src="/intergration/js/bootstrap.min.js"></script>
     <script src="/intergration/js/js.cookie.js"></script>
-=======
-    <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/intergration/js/jquery-3.2.1.js"></script>
-    <script src="/intergration/js/bootstrap.min.js"></script>
-    <script src="/intergration/js/js.cookie.js"></script>
->>>>>>> master
 
     <style>
         li {list-style-type:none;}
