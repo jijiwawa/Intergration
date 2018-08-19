@@ -12,7 +12,7 @@ public class OrderForm {
     private String order_num;                //订单号
     private String express_company;           //快递公司
     private String pickup_ads;               //取货地点
-    private String latest_time;           //最晚取货时间
+    private String latest_time;             //最晚取货时间
     private String goods_size;               //货物大小
     private BigDecimal paymoney;             //支付金额
     private Integer client_id;               //委托人id

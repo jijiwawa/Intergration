@@ -64,9 +64,12 @@ public class UserController {
         if(loginVerify == 2){
             User user =userService.getUserByUserName(username);
             Integer userId=user.getId();
+            int userType=user.getType();
             //用户信息写入session
             session.setAttribute("userId",userId);
             session.setAttribute("username",username);
+            session.setAttribute("userType",userType);
+
             res.put("stateCode", "2");
         }
         //密码错误
@@ -149,16 +152,25 @@ public class UserController {
     @ResponseBody
     public Object updatePasswordDo(HttpSession session,HttpServletRequest request){
         Integer uid=(Integer) session.getAttribute("userId");
-        String password=ProduceMD5.getMD5(request.getParameter("password"));
+
+        String newPassword=ProduceMD5.getMD5(request.getParameter("newPassword"));
+        String oldPassword=ProduceMD5.getMD5(request.getParameter("oldPassword"));
         HashMap<String, String> res = new HashMap<String, String>();
+        User oldUser=userService.getUserByUserName((String) session.getAttribute("username"));
+        if(!oldPassword.equals(oldUser.getPassword())){
+            res.put("stateCode", "1");
+            return res;
+        }
         User newUser=new User();
         newUser.setId(uid);
-        newUser.setPassword(password);
+        newUser.setPassword(newPassword);
+
         boolean hasUpdate=userService.updateUser(newUser);
         if(hasUpdate){
             session.removeAttribute("userId");
             session.removeAttribute("username");
-            res.put("stateCode", "1");
+            res.put("stateCode", "2");
+
         }else{
             res.put("stateCode", "0");
         }
@@ -179,6 +191,44 @@ public class UserController {
             mv.addObject("errorInfo",errorInfo);
             return mv;
         }
+    }
+
+    @RequestMapping(value="/user/rightpage",method = RequestMethod.GET)
+    @ResponseBody
+    public ModelAndView rightPage(HttpSession session){
+        int userType=(Integer)session.getAttribute("userType");
+        if(userType==2){
+            return new ModelAndView("right");
+        }
+        return new ModelAndView("main");
+    }
+
+    @RequestMapping(value="/user/manageright",method = RequestMethod.POST)
+    @ResponseBody
+    public Object manageRight(HttpSession session,HttpServletRequest request){
+        HashMap<String, String> res = new HashMap<String, String>();
+        int userType=(Integer) session.getAttribute("userType");
+        if(userType!=2){
+            res.put("stateCode","0");
+            return res;
+        }
+        String userName=request.getParameter("username");
+        if(!userService.isUserNameExist(userName)){
+            res.put("stateCode","0");
+            return res;
+        }
+        int hasRight=Integer.parseInt(request.getParameter("hasRight"));
+        User oldUser=userService.getUserByUserName(userName);
+        User newUser=new User();
+        newUser.setId(oldUser.getId());
+        newUser.setType((byte)hasRight);
+        boolean hasUpdate=userService.updateUser(newUser);
+        if(hasUpdate){
+            res.put("stateCode", "2");
+        }else {
+            res.put("stateCode", "1");
+        }
+        return res;
     }
 
 }

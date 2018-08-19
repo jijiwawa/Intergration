@@ -1,6 +1,8 @@
 package com.runner.dao;
 import com.runner.po.OrderForm;
 
+import java.util.List;
+
 /**
  * OrderForm接口文件
  */
@@ -25,7 +27,8 @@ public interface OrderFormDao {
     public OrderForm findOrderFormByClientId(Integer client_id);
     //根据接单/受托人id查询订单
     public OrderForm findOrderFormByTrusteeId(Integer trustee_id);
-
+    //查询订单状态为0且按时间最新顺序排列的结果，用于对所有用户显示
+    public List<OrderForm> showOrderFormLatest(int index);
     /**
      * 改
      */

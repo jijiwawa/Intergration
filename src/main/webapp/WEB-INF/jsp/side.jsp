@@ -14,8 +14,8 @@
         </div>
         <ul class="list-group" style="width: 100%">
             <li class="list-group-item">
-                <a  href="/Intergration/signin" class="btn btn-primary btn-block">登录</a>
-                <a  href="/Intergration/signup" class="btn btn-default btn-block">注册</a>
+                <a  href="/intergration/signin" class="btn btn-primary btn-block">登录</a>
+                <a  href="/intergration/signup" class="btn btn-default btn-block">注册</a>
             </li>
         </ul>
     </div>
@@ -28,22 +28,16 @@
             <a href="/member/${user.userName}">${user.userName}</a>
         </div>
         <ul class="list-group" style="width: 100%">
-            <li class="list-group-item"><a href="/new">创作新主题</a></li>
+            <c:if test="${userType!=0}">
+                <li class="list-group-item"><a href="/intergration/forum/addpage">发布新帖子</a></li>
+            </c:if>
+            <c:if test="${userType==2}">
+                <li class="list-group-item"><a href="/intergration/user/rightpage">发帖权限管理</a></li>
+            </c:if>
             <li class="list-group-item"><a href="">0条未读提醒</a></li>
             <li class="list-group-item"><a href="">信誉度:${user.credit}</a></li>
         </ul>
     </div>
 </c:if>
-
-<div class="panel panel-default" id="sidebar1" style="width: 20%;margin:1% 2% 1% 0%;float: right">
-    <div class="panel-heading" style="background-color: white;text-align: center">
-        热议主题
-    </div>
-    <ul class="list-group" style="width: 100%">
-        <c:forEach items="${hotestTopics}" var="hotestTopic">
-            <li class="list-group-item"><a href="/t/${hotestTopic.id}">${hotestTopic.title}</a></li>
-        </c:forEach>
-    </ul>
-</div>
 
 

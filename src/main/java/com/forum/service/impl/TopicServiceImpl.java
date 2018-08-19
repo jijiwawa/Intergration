@@ -13,12 +13,14 @@ public class TopicServiceImpl implements TopicService {
     @Autowired
     public TopicMapper topicDao;
 
-    public List<Topic> listTopicsAndUsers() {
-        return topicDao.listTopicsAndUsers();
+
+    public List<Topic> listTopicsAndUsers(int index) {
+        return topicDao.listTopicsAndUsers(index);
     }
 
-    public List<Topic> listMostCommentsTopics() {
-        return topicDao.listMostCommentsTopics();
+    public List<Topic> listMostCommentsTopics(int index) {
+        return topicDao.listMostCommentsTopics(index);
+
     }
 
     public Topic selectById(int id) {

@@ -23,6 +23,7 @@ import java.util.HashMap;
 public class OrderFormController {
     @Autowired
     private OrderFormServiceImpl orderFormService;
+    @Autowired
     private UserServiceImpl userService;
     /**
      * 根据id查询订单详情
@@ -46,21 +47,22 @@ public class OrderFormController {
         }else {
             //用户余额是否足够
             Integer client_id = (Integer) HttpSession.getAttribute("userId");
-            BigDecimal paymoney = (BigDecimal) request.getAttribute("paymoney");
+            System.out.println((String)request.getParameter("paymoney"));
+            BigDecimal paymoney = new BigDecimal((String) request.getParameter("paymoney"));
             User user = userService.getUserByUserId(client_id);
             BigDecimal havemoney = user.getProperty();
             if(havemoney.compareTo(paymoney)>=0){
                 OrderForm orderForm = new OrderForm();
-                String order_num = (String) request.getAttribute("order_num");
-                String express_company = (String) request.getAttribute("express_company");
-                String pickup_ads = (String) request.getAttribute("pickup_ads");
-                String latest_time = (String) request.getAttribute("latest_time");
-                String goods_size = (String) request.getAttribute("goods_size");
-                String remark = (String) request.getAttribute("remark");
+                String order_num = (String) request.getParameter("order_num");
+                String express_company = (String) request.getParameter("express_company");
+                String pickup_ads = (String) request.getParameter("pickup_ads");
+                String latest_time = (String) request.getParameter("latest_time");
+                String goods_size = (String) request.getParameter("goods_size");
+                String remark = (String) request.getParameter("remark");
                 Timestamp depute_time= new Timestamp(System.currentTimeMillis());
-                String pick_code = (String) request.getAttribute("pick_code");
-                String pick_phonenum = (String) request.getAttribute("pick_phonenum");
-                String pick_name = (String) request.getAttribute("pick_name");
+                String pick_code = (String) request.getParameter("pick_code");
+                String pick_phonenum = (String) request.getParameter("pick_phonenum");
+                String pick_name = (String) request.getParameter("pick_name");
                 orderForm.setClient_id(client_id);
                 orderForm.setOrder_num(order_num);
                 orderForm.setDepute_time(depute_time);

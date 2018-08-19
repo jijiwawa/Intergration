@@ -5,7 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.de</groupId>
-    <artifactId>Intergration</artifactId>
+
+    <artifactId>intergration</artifactId>
+
+
     <version>1.0-SNAPSHOT</version>
 
     <packaging>war</packaging>
@@ -210,7 +213,8 @@
 
     </dependencies>
     <build>
-        <finalName>Intergation</finalName>
+        <finalName>intergration</finalName>
+
         <plugins>
             <!-- jetty插件 -->
             <plugin>
@@ -224,11 +228,10 @@
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>
-                    <contextPath>/</contextPath>
+                    <contextPath>/intergration</contextPath>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

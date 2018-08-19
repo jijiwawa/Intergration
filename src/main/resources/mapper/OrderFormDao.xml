@@ -23,9 +23,24 @@
         select count(*) from dbe.orderform where order_num=#{order_num};
     </select>
     <!--查所有order_state=0的订单，用于订单的显示-->
-    <select id="showOrderLatest" resultType="List" parameterType="int">
-        select *
+    <resultMap id="showOrderInfoToAll" type="com.runner.po.OrderForm">
+        <id property="id" column="id"/>
+        <result property="depute_time" column="depute_time"/>
+        <result property="order_num" column="order_num"/>
+        <result property="pickup_ads" column="pickup_ads"/>
+        <result property="express_company" column="express_company"/>
+        <result property="latest_time" column="latest_time"/>
+        <result property="paymoney" column="paymoney"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+    <select id="showOrderFormLatest" resultMap="showOrderInfoToAll">
+        select id,depute_time,order_num,pickup_ads,express_company,latest_time,paymoney,remark
+        from dbe.orderform
+        where order_state=0
+        order by depute_time desc
+        limit #{index},6;
     </select>
+
     <!--
     删
     -->

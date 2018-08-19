@@ -4,7 +4,9 @@
 <html lang="en">
 <head>
     <meta name="Content-Type"  content="text/html;charset=utf-8">
-    <meta name="keywords" content="Intergration,论坛,社区,程序员">
+
+    <meta name="keywords" content="校园一体化服务平台">
+
     <title>校园一体化服务平台</title>
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
@@ -56,7 +58,10 @@
 
 <div class="panel panel-default" id="main" style="width: 70%;margin:1% 2% 5% 5%;float: left;">
     <div class="panel-heading" style="background-color: white">
-        <a style="margin-right: 2%">活跃</a><a style="margin-right: 2%">精华</a><a style="margin-right: 2%">最近</a>
+        <a class="btn <c:if test="${shouldOrderByTime==0}">btn-success</c:if>  btn-small"
+        href="/intergration/forum/main?pageIndex=1&shouldOrderByTime=0">最新</a>&nbsp;&nbsp;
+        <a class="btn <c:if test="${shouldOrderByTime==1}">btn-success</c:if> btn-small"
+           href="/intergration/forum/main?pageIndex=1&shouldOrderByTime=1">热评</a>
     </div>
 
     <ul class="list-group" style="width: 100%">
@@ -67,10 +72,10 @@
                         <img width="50px" height="50px" src="/intergration/${topic.user.headSculpture}" class="img-rounded">
                     </div>
                     <div style="width: 89%;float: left">
-                        <a href="/t/${topic.id}">${topic.title}</a><br/>
+                        <a href="/intergration/forum/t/${topic.id}">${topic.title}</a><br/>
                         <div>
                             <a href="/intergration/member/${topic.user.userName}"><span ><strong>${topic.user.userName}</strong></span></a>&nbsp;&nbsp;&nbsp;
-                            <small class="text-muted">${topic.createTime}</small>
+                            <small class="text-muted">${topic.localCreateTime}</small>
                         </div>
                     </div>
                     <div style="width: 5%;float: right;text-align: center">
@@ -79,9 +84,22 @@
                 </div>
             </li>
         </c:forEach>
-
     </ul>
-
+    <div>
+        共<b>${pageUtil.pageNumber}</b>条
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=1&shouldOrderByTime=${shouldOrderByTime}" >首页</a>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=
+<c:if test="${pageUtil.pageIndex>1}">${pageUtil.pageIndex-1}</c:if>
+<c:if test="${pageUtil.pageIndex==1}">1</c:if>&shouldOrderByTime=${shouldOrderByTime}" >上一页</a>
+        <c:forEach begin="1" end="${pageUtil.pageCount}" var="i">
+            <a class="btn <c:if test="${pageUtil.pageIndex==i}">btn-success</c:if> btn-small"
+               href="/intergration/forum/main?pageIndex=${i}&shouldOrderByTime=${shouldOrderByTime}" >${i}</a>
+        </c:forEach>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=
+<c:if test="${pageUtil.pageIndex<pageUtil.pageCount}">${pageUtil.pageIndex+1}</c:if>
+<c:if test="${pageUtil.pageIndex==pageUtil.pageCount}">${pageUtil.pageCount}</c:if>&shouldOrderByTime=${shouldOrderByTime}">下一页</a>
+        <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=${pageUtil.pageCount}&shouldOrderByTime=${shouldOrderByTime}" >末页</a>
+    </div>
 </div>
 
 <!-- 引入侧边栏文件 -->

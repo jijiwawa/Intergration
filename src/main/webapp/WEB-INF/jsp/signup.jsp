@@ -4,10 +4,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>注册 - Campus</title>
-    <link href="/Intergration/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/Intergration/js/jquery-3.2.1.js"></script>
-    <script src="/Intergration/js/bootstrap.min.js"></script>
+
+    <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/intergration/js/jquery-3.2.1.js"></script>
+    <script src="/intergration/js/bootstrap.min.js"></script>
+
     <style>
         li {list-style-type:none;}
         html, body {
@@ -83,7 +84,7 @@
                     <input type="tel" class="form-control" id="tel" name="tel" required="required">
             </div>
             <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
-            <%--<input type="submit" class="btn btn-default" id="signup" style="margin-left: 17%">--%>
+
             <button id="signUp" class="btn btn-success btn-block">注册</button>
     </div>
 </div>
@@ -108,7 +109,9 @@
             }else {
                 $.ajax({
                     type: "POST",
-                    url: "/Intergration/user/add",
+
+                    url: "/intergration/user/add",
+
                     data: {
                         username: yhm,
                         isMale: xb,
@@ -120,7 +123,8 @@
                         if (data.stateCode.trim() == "0") {
                             $("#info").text("提示：用户名已存在");
                         } else if (data.stateCode.trim() == "1") {
-                            window.location.href = "/Intergration"
+                  window.location.href = "/intergration"
+
                         }
                     }
                 });

@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>注册 - Campus</title>
-    <link href="/Intergration/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/Intergration/js/jquery-3.2.1.js"></script>
-    <script src="/Intergration/js/bootstrap.min.js"></script>
+    <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/intergration/js/jquery-3.2.1.js"></script>
+    <script src="/intergration/js/bootstrap.min.js"></script>
     <style>
         li {list-style-type:none;}
         html, body {
@@ -142,9 +142,10 @@
         var express_company1=$("#express_company").val();  //快递公司
         var order_num1=$("#order_num").val();            //快递单号
         var pickup_ads1=$("#pickup_ads").val();          //快递地址
-        var latest_time1=$("latest_time").val();         //最晚取货时间
+        var latest_time1=$("#latest_time").val();         //最晚取货时间
         var goods_size1=$("#goods_size").val();          //货物大小
         var paymoney1=$("#paymoney").val();              //支付金额
+        console.log(paymoney1);
         var pick_code1=$("#pick_code").val();            //取货码
         var pick_phonenum1=$("#pick_phonenum").val();    //取货电话号码
         var pick_name1=$("#pick_name").val();            //取货姓名
@@ -158,14 +159,14 @@
             }else {
                 $.ajax({
                     type: "POST",
-                    url: "/Intergration/order_form/add",
+                    url: "/intergration/order_form/add",
                     data: {
                         order_num: order_num1,
                         express_company: express_company1,
                         pickup_ads: pickup_ads1,
                         latest_time: latest_time1,
                         goods_size: goods_size1,
-                        paymoney:  paymoney1,
+                        paymoney:  $("#paymoney").val(),
                         remark: remark1,
                         pick_code: pick_code1,
                         pick_phonenum: pick_phonenum1,
@@ -175,15 +176,28 @@
                     success: function (data) {
                         if (data.orderState.trim() == "0") {
                             $("#info").text("提示：订单号已存在");
-                        } else if (data.orderState.trim() == "2") {
-                            window.location.href = "/Intergration/tab/runner"
-                        } else if(data.orderState.trim()=="1"){
+                        } else if (data.orderState.trim() == "1") {
+                            window.location.href = "/intergration/tab/runner"
+                        } else if(data.orderState.trim()=="2"){
                             $("#info").text("提示：余额不足");
                         }
                     }
                 });
             }
         }
+    })
+
+    $("#refresh").click(function() {
+        $("#express_company").text('');  //快递公司
+        $("#order_num").text('');           //快递单号
+        $("#pickup_ads").text('');        //快递地址
+        $("#latest_time").text('');     //最晚取货时间
+        $("#goods_size").text('');        //货物大小
+        $("#paymoney").text('');         //支付金额
+        $("#pick_code").text('');        //取货码
+        $("#pick_phonenum").text('');    //取货电话号码
+        $("#pick_name").text('');           //取货姓名
+        $("remark").text('');
     })
 </script>
 </body>

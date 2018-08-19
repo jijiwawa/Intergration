@@ -14,8 +14,8 @@
         </div>
         <ul class="list-group" style="width: 100%">
             <li class="list-group-item">
-                <a  href="/Intergration/signin" class="btn btn-primary btn-block">登录</a>
-                <a  href="/Intergration/signup" class="btn btn-default btn-block">注册</a>
+                <a  href="/intergration/signin" class="btn btn-primary btn-block">登录</a>
+                <a  href="/intergration/signup" class="btn btn-default btn-block">注册</a>
             </li>
         </ul>
     </div>
@@ -37,6 +37,6 @@
 <!-- 发订单按钮 -->
 <div class="panel panel-default" id="sidebar1" style="width: 20%;margin:1% 2% 1% 0%;float: right">
     <div class="panel-heading" style="background-color: white;text-align: center">
-        <button id="signUp" class="btn btn-success btn-block" onclick="window.location.href='/Intergration/toSign_order'">申请发单</button>
+        <button id="signUp" class="btn btn-success btn-block" onclick="window.location.href='/intergration/toSign_order'">申请发单</button>
     </div>
 </div>

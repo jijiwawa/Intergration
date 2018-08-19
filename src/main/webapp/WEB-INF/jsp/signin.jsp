@@ -5,10 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <title>登录 - Campus</title>
-    <link href="/Intergration/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/Intergration/js/jquery-3.2.1.js"></script>
-    <script src="/Intergration/js/bootstrap.min.js"></script>
-    <script src="/Intergration/js/js.cookie.js"></script>
+<<<<<<< HEAD
+    <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/intergration/js/jquery-3.2.1.js"></script>
+    <script src="/intergration/js/bootstrap.min.js"></script>
+    <script src="/intergration/js/js.cookie.js"></script>
+=======
+    <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/intergration/js/jquery-3.2.1.js"></script>
+    <script src="/intergration/js/bootstrap.min.js"></script>
+    <script src="/intergration/js/js.cookie.js"></script>
+>>>>>>> master
 
     <style>
         li {list-style-type:none;}
@@ -78,8 +85,6 @@
 
         <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
             <button id="loginButton" class="btn btn-success btn-block">登录</button>
-        </input>
-
     </div>
 </div>
 <script>
@@ -132,7 +137,8 @@
         else {
             $.ajax({
                 type: "POST",
-                url: "/Intergration/user/loginCheck",
+                url: "/intergration/user/loginCheck",
+
                 data: {
                     username:id ,
                     password: passwd
@@ -150,7 +156,9 @@
                             Cookies.remove('loginStatus');
                         }
                         $("#info").text("提示:登陆成功，跳转中...");
-                        window.location.href="/Intergration";
+
+                        window.location.href="/intergration/";
+
                     }
                 }
             });

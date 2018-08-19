@@ -4,11 +4,13 @@
 <html lang="en">
 <head>
     <meta name="Content-Type"  content="text/html;charset=utf-8">
-    <meta name="keywords" content="Intergration,论坛,社区,程序员">
+    <meta name="keywords" content="intergration,论坛,社区,程序员">
     <title>校园一体化服务平台</title>
-    <link href="/Intergration/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/Intergration/js/jquery-3.2.1.js"></script>
-    <script src="/Intergration/js/bootstrap.min.js"></script>
+
+    <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/intergration/js/jquery-3.2.1.js"></script>
+    <script src="/intergration/js/bootstrap.min.js"></script>
+
     <style>
         li {list-style-type:none;}
         html, body {
@@ -53,14 +55,6 @@
 <body>
 <!-- 引入header文件 -->
 <%@ include file="header.jsp"%>
-
-<div class="panel panel-default" id="main" style="width: 70%;margin:1% 2% 5% 5%;float: left;">
-    <div class="panel-heading" style="background-color: white">
-        <a style="margin-right: 2%">活跃</a><a style="margin-right: 2%">精华</a><a style="margin-right: 2%">最近</a>
-    </div>
-
-
-</div>
 
 <!-- 引入侧边栏文件 -->
 <%@ include file="side.jsp"%>

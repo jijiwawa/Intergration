@@ -4,105 +4,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/intergration/css/editormd.min.css" />
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/intergration/js/jquery-3.2.1.js"></script>
+    <script src="/intergration/js/jquery.min.js"></script>
+    <script src="/intergration/js/editormd.min.js"></script>
     <script src="/intergration/js/bootstrap.min.js"></script>
-    <title>Campus › 创作新主题 </title>
+    <title>Campus › 发布新帖子 </title>
 </head>
 <body>
 <!-- 引入header文件 -->
 <%@ include file="../header.jsp"%>
 
-<div style="width: 70%;margin:1% 2% 1% 5%;float: left;">
+<div style="width: 90%;margin:1% 2% 1% 5%;">
     <div class="panel panel-default" id="main" style="">
         <div class="panel-heading" style="background-color: white">
-            <a href="/intergration">Intergration</a> › 创作新主题
+            <a href="/intergration">Genesis</a> › 发布新帖子
         </div>
 
         <div class="panel-body">
-            <form action="/intergration/forum/post" method="post" id="replyForm">
                 <div class="form-group">
                     <label for="title">主题标题</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入主题标题，如果标题能够表达完整内容，则正文可以为空" required="required">
+                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入主题标题" required="required">
                 </div>
-                <div class="form-group">
-                    <label for="content">正文</label>
-                    <textarea class="form-control" rows="10" id="content" name="content"></textarea>
+                <div id="test-editormd">
+                    <textarea style="display:none;">#Hello</textarea>
                 </div>
-                <input type="submit" class="btn btn-default btn-sm" value="发布主题">
-
-            </form>
+                <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
+                <button id="post" class="btn btn-success btn-small">发布</button>
         </div>
 
     </div>
 
 </div>
-
-
-<div class="panel panel-default" id="sidebar2" style="width: 20%;margin:1% 2% 1% 0%;float: right">
-    <div class="panel-heading" style="background-color: white;text-align: center">
-        发帖提示
-    </div>
-    <ul class="list-group" style="width: 100%">
-        <li class="list-group-item">
-            <h5>主题标题</h5>
-            <p>
-                请在标题中描述内容要点。如果一件事情在标题的长度内就已经可以说清楚，那就没有必要写正文了。
-            </p>
-        </li>
-
-        <li class="list-group-item">
-            <h5>正文</h5>
-            <p>
-                请清楚地表达所要说明的内容。
-            </p>
-        </li>
-    </ul>
-</div>
-
-
-<div class="panel panel-default" id="sidebar1" style="width: 20%;margin:1% 2% 1% 0%;float: right">
-    <div class="panel-heading" style="background-color: white;text-align: center">
-        社区指导原则
-    </div>
-    <ul class="list-group" style="width: 100%">
-        <li class="list-group-item">
-            <h5>尊重原创</h5>
-            <p>
-                请不要发布任何盗版下载链接，包括软件、音乐、电影等等。Intergration是创意工作者的社区，我们尊重原创。
-            </p>
-        </li>
-
-        <li class="list-group-item">
-            <h5>友好互助</h5>
-            <p>
-                保持对陌生人的友善。用知识去帮助别人。
-            </p>
-        </li>
-    </ul>
-</div>
-
 
 <!-- 引入footer文件 -->
 <%@ include file="../footer.jsp"%>
 
 <script>
-    function submitValidate(flag){
-        return flag;
-    }
-    $("#replyForm").submit(function () {
-        if($("#title").val()==''){
-            alert("请填写标题！");
-            return submitValidate(false);
-        }else {
-            var ifSubmit=confirm("确定发表该主题吗?");
-            if (ifSubmit == true){
-
-            }else {
-                return submitValidate(false);
-            }
+    var editor;
+    $(function() {
+        editor = editormd("test-editormd", {
+            width   : "100%",
+            height  : 640,
+            syncScrolling : "single",
+            path : "/intergration/js/lib/"
+        });
+    });
+    $("#post").click(function () {
+        var ptitle=$("#title").val();
+        var pcontent=editor.getMarkdown();
+        if(ptitle==''){
+            $("#info").text("提示：请输入标题");
+        }else if(pcontent==''){
+            $("#info").text("提示：请输入内容");
+        }else{
+            $.ajax({type: "POST",
+                url: "/intergration/forum/post",
+                data: {
+                    title: ptitle,
+                    content: pcontent,
+                },
+                dataType: "json",
+                success: function(data){
+                    if(data.stateCode.trim() == "0") {
+                        $("#info").text("提示:请先登录");
+                    } else if(data.stateCode.trim() == "1") {
+                        $("#info").text("提示:无发帖权限!");
+                    } else if(data.stateCode.trim() == "2"){
+                        window.location.href="/intergration/forum/main";
+                    }
+                }
+            })
         }
-    })
+    });
 </script>
 </body>
 </html>
