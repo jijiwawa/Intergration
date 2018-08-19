@@ -5,10 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <title>登录 - Campus</title>
+<<<<<<< HEAD
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
     <script src="/intergration/js/bootstrap.min.js"></script>
     <script src="/intergration/js/js.cookie.js"></script>
+=======
+    <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/intergration/js/jquery-3.2.1.js"></script>
+    <script src="/intergration/js/bootstrap.min.js"></script>
+    <script src="/intergration/js/js.cookie.js"></script>
+>>>>>>> master
 
     <style>
         li {list-style-type:none;}
@@ -73,6 +80,7 @@
             <label>
                 <input type="checkbox" id="remember">记住密码
             </label>
+            <a style="margin-left: 30%" href="#">忘记密码?</a>
         </div>
 
         <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
@@ -130,6 +138,7 @@
             $.ajax({
                 type: "POST",
                 url: "/intergration/user/loginCheck",
+
                 data: {
                     username:id ,
                     password: passwd
@@ -147,7 +156,9 @@
                             Cookies.remove('loginStatus');
                         }
                         $("#info").text("提示:登陆成功，跳转中...");
+
                         window.location.href="/intergration/";
+
                     }
                 }
             });

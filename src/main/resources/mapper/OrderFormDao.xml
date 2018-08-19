@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.runner.dao.OrderFormDao">
+    <!--
+    查
+    -->
+    <!--根据id查询订单-->
+    <select id="findOrderFormById" parameterType="java.lang.Integer" resultType="com.runner.po.OrderForm" >
+        select * from dbe.orderform where id=#{id};
+    </select>
+    <!--根据委托人id查询订单-->
+    <select id="findOrderFormByClientId" parameterType="java.lang.Integer" resultType="com.runner.po.OrderForm" >
+        select * from dbe.orderform where client_id=#{client_id};
+    </select>
+    <!--根据接单/受托人id查询订单-->
+    <select id="findOrderFormByTrusteeId" parameterType="java.lang.Integer" resultType="com.runner.po.OrderForm" >
+        select * from dbe.orderform where trustee_id=#{trustee_id};
+    </select>
+    <!--查订单号是否已存在-->
+    <select id="isOrderNumExist" resultType="int" parameterType="java.lang.String">
+        select count(*) from dbe.orderform where order_num=#{order_num};
+    </select>
+    <!--查所有order_state=0的订单，用于订单的显示-->
+    <resultMap id="showOrderInfoToAll" type="com.runner.po.OrderForm">
+        <id property="id" column="id"/>
+        <result property="depute_time" column="depute_time"/>
+        <result property="order_num" column="order_num"/>
+        <result property="pickup_ads" column="pickup_ads"/>
+        <result property="express_company" column="express_company"/>
+        <result property="latest_time" column="latest_time"/>
+        <result property="paymoney" column="paymoney"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+    <select id="showOrderFormLatest" resultMap="showOrderInfoToAll">
+        select id,depute_time,order_num,pickup_ads,express_company,latest_time,paymoney,remark
+        from dbe.orderform
+        where order_state=0
+        order by depute_time desc
+        limit #{index},6;
+    </select>
+
+    <!--
+    删
+    -->
+
+    <!--
+    增
+    -->
+    <insert id="addOrderForm" parameterType="com.runner.dao.OrderFormDao">
+        insert into dbe.orderform(order_num, express_company, pickup_ads, latest_time,goods_size,paymoney,client_id,remark,pick_code,pick_phonenum,pick_name,depute_time) VALUES (
+                #{order_num},#{express_company},#{pickup_ads},#{latest_time},#{goods_size},#{paymoney},#{client_id},#{remark},#{pick_code},#{pick_phonenum},#{pick_name},#{depute_time})
+    </insert>
+
+    <!--
+    改
+    -->
+</mapper>

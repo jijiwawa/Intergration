@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface TopicMapper {
     int insertTopic(Topic topic);
+
     List<Topic> listTopicsAndUsers(int index);
     List<Topic>  listMostCommentsTopics(int index);
     Topic selectById(int id);

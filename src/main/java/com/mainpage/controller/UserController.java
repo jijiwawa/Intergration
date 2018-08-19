@@ -69,6 +69,7 @@ public class UserController {
             session.setAttribute("userId",userId);
             session.setAttribute("username",username);
             session.setAttribute("userType",userType);
+
             res.put("stateCode", "2");
         }
         //密码错误
@@ -99,7 +100,9 @@ public class UserController {
 
     @RequestMapping(value = "/user/settings/headsculpture",method = RequestMethod.GET)
     public ModelAndView updateHeadSculpture(HttpServletRequest request, HttpSession session){
+
         User user=userService.getUserByUserName((String)session.getAttribute("username"));
+
         ModelAndView mv=new ModelAndView("update_headsculpture");
         mv.addObject("user",user);
         return mv;
@@ -149,6 +152,7 @@ public class UserController {
     @ResponseBody
     public Object updatePasswordDo(HttpSession session,HttpServletRequest request){
         Integer uid=(Integer) session.getAttribute("userId");
+
         String newPassword=ProduceMD5.getMD5(request.getParameter("newPassword"));
         String oldPassword=ProduceMD5.getMD5(request.getParameter("oldPassword"));
         HashMap<String, String> res = new HashMap<String, String>();
@@ -160,11 +164,13 @@ public class UserController {
         User newUser=new User();
         newUser.setId(uid);
         newUser.setPassword(newPassword);
+
         boolean hasUpdate=userService.updateUser(newUser);
         if(hasUpdate){
             session.removeAttribute("userId");
             session.removeAttribute("username");
             res.put("stateCode", "2");
+
         }else{
             res.put("stateCode", "0");
         }

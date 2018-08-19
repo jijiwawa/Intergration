@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+<%--
+  Created by IntelliJ IDEA.
+  User: suxik
+  Date: 2018/8/12
+  Time: 21:56
+  To change this template use File | Settings | File Templates.
+--%>
+>>>>>>> master
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -20,7 +30,6 @@
         </div>
 
         <div class="panel-body">
-
             <form  action="/intergration/user/settings/headsculpture/update" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
                 <div style="margin-left: 17%">
                     <img width="60px" height="60px" src="/intergration/${user.headSculpture}" class="img-rounded">
@@ -29,12 +38,9 @@
                     <input class="btn btn-default" type="submit" value="上传头像">
                 </div>
             </form>
-
         </div>
 
     </div>
-
-
 
 </div>
 

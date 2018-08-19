@@ -5,40 +5,47 @@
 <mapper namespace="com.mainpage.dao.UserMapper">
     <select id="isUserNameExist" resultType="int" parameterType="java.lang.String">
         SELECT count(*) FROM dbe.user WHERE user_name=#{username};
-    </select>
+        </select>
 
-    <insert id="addUser" parameterType="com.mainpage.domain.User">
+<insert id="addUser" parameterType="com.mainpage.domain.User">
         insert into dbe.user(phone_number, user_name, is_male, password,head_sculpture) VALUES (
                 #{phoneNumber},#{userName},#{isMale},#{password},#{headSculpture}
         )
     </insert>
 
-    <select id="getUserByUserName" resultType="com.mainpage.domain.User" parameterType="java.lang.String">
+<select id="getUserByUserName" resultType="com.mainpage.domain.User" parameterType="java.lang.String">
         select * from dbe.user where user_name=#{username}
     </select>
 
-    <update id="updateUserById" parameterType="com.mainpage.domain.User">
-        update user
-        <set>
-            <if test="userName != null" >
-                user_name = #{userName},
-            </if>
-            <if test="password != null" >
-                password = #{password},
-            </if>
-            <if test="isMale != null" >
-                is_male = #{isMale},
-            </if>
-            <if test="phoneNumber != null" >
-                phone_number = #{phoneNumber},
-            </if>
-            <if test="headSculpture != null" >
-                head_sculpture = #{headSculpture},
-            </if>
-            <if test="type != null" >
-                type = #{type},
-            </if>
-        </set>
-        where id=#{id}
-    </update>
-</mapper>
+<select id="getUserByUserId" resultType="com.mainpage.domain.User" parameterType="java.lang.Integer">
+        select * from dbe.user where id=#{id}
+    </select>
+
+<update id="updateUserById" parameterType="com.mainpage.domain.User">
+update user
+<set>
+    <if test="userName != null" >
+        user_name = #{userName},
+    </if>
+    <if test="password != null" >
+        password = #{password},
+    </if>
+    <if test="isMale != null" >
+        is_male = #{isMale},
+    </if>
+    <if test="property != null" >
+        property = #{property},
+    </if>
+    <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber},
+    </if>
+    <if test="headSculpture != null" >
+        head_sculpture = #{headSculpture},
+    </if>
+    <if test="type != null" >
+        type = #{type}
+    </if>
+</set>
+where id=#{id}
+</update>
+        </mapper>

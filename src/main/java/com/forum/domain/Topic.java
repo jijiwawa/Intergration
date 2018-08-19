@@ -2,7 +2,9 @@ package com.forum.domain;
 
 import com.mainpage.domain.User;
 
+
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 
 public class Topic {
@@ -87,6 +89,7 @@ public class Topic {
     public void setUser(User user) {
         this.user = user;
     }
+
     public String getLocalCreateTime() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd HH:mm:ss");//设置日期格式
         String date = df.format(this.createTime);
@@ -97,4 +100,5 @@ public class Topic {
         String date = df.format(updateTime);
         return date;
     }
+
 }

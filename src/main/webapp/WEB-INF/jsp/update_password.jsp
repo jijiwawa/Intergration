@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+=======
+<%--
+  Created by IntelliJ IDEA.
+  User: suxik
+  Date: 2018/8/12
+  Time: 21:57
+  To change this template use File | Settings | File Templates.
+--%>
+>>>>>>> master
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -18,7 +28,6 @@
         <div class="panel-heading" style="background-color: white">
             <a href="/intergration">Campus</a> › 设置 ›修改密码
         </div>
-
         <div class="panel-body">
 
             <div class="form-group">
@@ -38,7 +47,6 @@
             <button id="changePasswordButton" class="btn btn-success btn-block">确定</button>
             </input>
         </div>
-
     </div>
 </div>
 <script>
@@ -49,6 +57,7 @@
             $("#info").text("请输入旧密码");
         }
         else if($("#checkPasswd").val()==''){
+
             $("#info").text("请输入确认密码");
         }
         else if($("#newPassword").val()!=$("#checkPasswd").val()){

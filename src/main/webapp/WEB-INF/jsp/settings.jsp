@@ -4,10 +4,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
     <script src="/intergration/js/bootstrap.min.js"></script>
     <title>Genesis ›设置</title>
+
 </head>
 <body>
 <!-- 引入header文件 -->
@@ -16,16 +18,31 @@
 <div style="width: 70%;margin:1% 2% 1% 5%;float: left;">
     <div class="panel panel-default" id="main" style="">
         <div class="panel-heading" style="background-color: white">
+<<<<<<< HEAD
             <a href="/intergration">Campus</a> › 设置
+=======
+            <a href="/">intergration</a> › 设置
+>>>>>>> master
         </div>
 
         <div class="panel-body">
 
                 <form class="form-horizontal" role="form" >
                     <div style="margin-left: 17%">
+<<<<<<< HEAD
                         <img width="60px" height="60px" src="/intergration/${user.headSculpture}" class="img-rounded">
                         <a class="btn btn-default" href="/intergration/user/settings/headsculpture" role="button">更换头像</a>
                         <a class="btn btn-default" href="/intergration/user/settings/password" role="button">更改密码</a>
+=======
+                        <img width="60px" height="60px" src="/intergration/${user.headSculpture}" class="img-rounded">
+                        <a class="btn btn-default" href="/settings/avatar" role="button">更换头像</a>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">uid</label>
+                        <div class="col-sm-10">
+                            <p class="form-control-static">${user.id}</p>
+                        </div>
+>>>>>>> master
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">用户名</label>
@@ -56,12 +73,16 @@
                             <p class="form-control-static">${user.credit}</p>
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div class="form-group">
                         <label class="col-sm-2 control-label">余额</label>
                         <div class="col-sm-10">
                             <p class="form-control-static">${user.property}</p>
                         </div>
                     </div>
+=======
+
+>>>>>>> master
                 </form>
 
         </div>

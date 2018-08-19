@@ -23,6 +23,9 @@ public class UserServiceImpl implements UserService {
     public User getUserByUserName(String username) {
         return userDao.getUserByUserName(username);
     }
+    public User getUserByUserId(int id) {
+        return userDao.getUserByUserId(id);
+    }
 
     //登录验证 0:用户名不存在 1:密码错误 2:验证成功
     public int loginCheck(String username, String password) {

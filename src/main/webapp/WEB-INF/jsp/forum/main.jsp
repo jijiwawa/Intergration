@@ -4,7 +4,9 @@
 <html lang="en">
 <head>
     <meta name="Content-Type"  content="text/html;charset=utf-8">
+
     <meta name="keywords" content="校园一体化服务平台">
+
     <title>校园一体化服务平台</title>
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
@@ -99,6 +101,7 @@
         <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=${pageUtil.pageCount}&shouldOrderByTime=${shouldOrderByTime}" >末页</a>
     </div>
 </div>
+
 <!-- 引入侧边栏文件 -->
 <%@ include file="../side.jsp"%>
 
