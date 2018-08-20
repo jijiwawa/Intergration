@@ -173,7 +173,7 @@ public class OrderFormController {
                     // 信用不足，不能接单
                 }else{
                     // 接单数是否小于等于3
-                    if(orderFormService.getUserPickNum(client_id)<=3){
+                    if(orderFormService.getUserPickNum(client_id)<3){
                         //是否有未评价的订单
                         if(3<1){
                             //存在未评价订单，不能接单
