@@ -5,6 +5,7 @@
 <mapper namespace="com.forum.dao.TopicMapper">
 
     <!-- 主题基本结果集  -->
+
     <resultMap id="BaseResultMap" type="com.forum.domain.Topic" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="user_id" property="userId" jdbcType="INTEGER" />
@@ -12,6 +13,11 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
         <result column="title" property="title" jdbcType="VARCHAR" />
         <result column="click" property="click" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 主题基本结果集+ 主题内容  用于主题详情-->
+    <resultMap id="ResultMapWithBLOBs" type="com.forum.domain.Topic" extends="BaseResultMap" >
+        <result column="content" property="content" jdbcType="LONGVARCHAR" />
     </resultMap>
 
     <!-- 主题和用户信息结果集 用于首页显示  -->
@@ -111,7 +117,9 @@
         </trim>
     </insert>
 
+
     <select id="listTopicsAndUsers" resultMap="topicAndUserInfo" parameterType="int">
+
         select topic.id,topic.user_id,topic.create_time,topic.update_time,topic.title,topic.click,
             user.user_name,user.head_sculpture ,count(reply.id) as count_replies
         from topic
@@ -155,6 +163,7 @@
             </if>
             <if test="content != null" >
                 content = #{content,jdbcType=LONGVARCHAR}
+
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}

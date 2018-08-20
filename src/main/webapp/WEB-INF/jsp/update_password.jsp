@@ -18,7 +18,6 @@
         <div class="panel-heading" style="background-color: white">
             <a href="/intergration">Campus</a> › 设置 ›修改密码
         </div>
-
         <div class="panel-body">
 
             <div class="form-group">
@@ -38,7 +37,6 @@
             <button id="changePasswordButton" class="btn btn-success btn-block">确定</button>
             </input>
         </div>
-
     </div>
 </div>
 <script>
@@ -49,6 +47,7 @@
             $("#info").text("请输入旧密码");
         }
         else if($("#checkPasswd").val()==''){
+
             $("#info").text("请输入确认密码");
         }
         else if($("#newPassword").val()!=$("#checkPasswd").val()){

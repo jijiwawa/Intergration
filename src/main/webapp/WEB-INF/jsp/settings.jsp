@@ -4,10 +4,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
     <script src="/intergration/js/bootstrap.min.js"></script>
     <title>Genesis ›设置</title>
+
 </head>
 <body>
 <!-- 引入header文件 -->
@@ -62,6 +64,7 @@
                             <p class="form-control-static">${user.property}</p>
                         </div>
                     </div>
+
                 </form>
 
         </div>

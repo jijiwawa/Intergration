@@ -5,7 +5,7 @@
 <mapper namespace="com.mainpage.dao.UserMapper">
     <select id="isUserNameExist" resultType="int" parameterType="java.lang.String">
         SELECT count(*) FROM dbe.user WHERE user_name=#{username};
-    </select>
+        </select>
 
     <select id="isPhoneNumExist" resultType="int" parameterType="java.lang.String">
         SELECT count(*) FROM dbe.user WHERE phone_number=#{phone};
@@ -17,8 +17,12 @@
         )
     </insert>
 
-    <select id="getUserByUserName" resultType="com.mainpage.domain.User" parameterType="java.lang.String">
+<select id="getUserByUserName" resultType="com.mainpage.domain.User" parameterType="java.lang.String">
         select * from dbe.user where user_name=#{username}
+    </select>
+
+<select id="getUserByUserId" resultType="com.mainpage.domain.User" parameterType="java.lang.Integer">
+        select * from dbe.user where id=#{id}
     </select>
 
     <update id="updateUserById" parameterType="com.mainpage.domain.User">
@@ -33,6 +37,9 @@
             <if test="isMale != null" >
                 is_male = #{isMale},
             </if>
+            <if test="property != null" >
+                property = #{property},
+            </if>
             <if test="phoneNumber != null" >
                 phone_number = #{phoneNumber},
             </if>
@@ -40,9 +47,9 @@
                 head_sculpture = #{headSculpture},
             </if>
             <if test="type != null" >
-                type = #{type},
+                type = #{type}
             </if>
         </set>
         where id=#{id}
     </update>
-</mapper>
+        </mapper>

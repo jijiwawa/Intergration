@@ -37,7 +37,6 @@
 
 </div>
 
-
 <!-- 引入footer文件 -->
 <%@ include file="../footer.jsp"%>
 
@@ -76,7 +75,7 @@
                 }
             })
         }
-    })
+    });
 </script>
 </body>
 </html>

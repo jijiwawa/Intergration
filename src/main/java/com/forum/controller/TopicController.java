@@ -88,6 +88,7 @@ public class TopicController {
         //处理参数
         int userId=(Integer) session.getAttribute("userId");
         int userType=(Integer)session.getAttribute("userType");
+
         String title=request.getParameter("title");
         String content=request.getParameter("content");
         //新建Topic

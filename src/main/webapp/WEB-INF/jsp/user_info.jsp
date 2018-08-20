@@ -1,13 +1,22 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: suxik
+  Date: 2018/8/12
+  Time: 21:57
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
     <script src="/intergration/js/bootstrap.min.js"></script>
     <title>Genesis › <c:if test="${!empty user}">${user.userName}</c:if><c:if test="${!empty errorInfo}">会员未找到</c:if></title>
+
 </head>
 <body>
 <!-- 引入header文件 -->

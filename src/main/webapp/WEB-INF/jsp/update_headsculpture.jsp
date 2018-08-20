@@ -20,7 +20,6 @@
         </div>
 
         <div class="panel-body">
-
             <form  action="/intergration/user/settings/headsculpture/update" enctype="multipart/form-data" method="post" class="form-horizontal" role="form">
                 <div style="margin-left: 17%">
                     <img width="60px" height="60px" src="/intergration/${user.headSculpture}" class="img-rounded">
@@ -29,12 +28,9 @@
                     <input class="btn btn-default" type="submit" value="上传头像">
                 </div>
             </form>
-
         </div>
 
     </div>
-
-
 
 </div>
 

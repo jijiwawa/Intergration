@@ -63,7 +63,7 @@ a{
     <div class="info" >
         <p style="text-align: center;font-size: 16px;">其他信息</p>
         <ul >
-            <li><a href="https://github.com/jijiwawa/Intergration">关于本站</a></li>
+            <li><a href="https://github.com/jijiwawa/intergration">关于本站</a></li>
         </ul>
     </div>
 </footer>
