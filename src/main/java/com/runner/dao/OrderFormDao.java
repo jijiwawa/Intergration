@@ -1,5 +1,6 @@
 package com.runner.dao;
 import com.runner.po.OrderForm;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,7 +30,19 @@ public interface OrderFormDao {
     public OrderForm findOrderFormByTrusteeId(Integer trustee_id);
     //查询订单状态为0且按时间最新顺序排列的结果，用于对所有用户显示
     public List<OrderForm> showOrderFormLatest(int index);
-    /**
+    //取货地点排序
+    public List<OrderForm> showOrderFormAds(int index);
+    //查收益排序
+    public List<OrderForm> showOrderFormMoney(int index);
+    //货物大小顺序排序
+    public List<OrderForm> showOrderFormSize(int index);
+    //查询订单状态为0的订单数量
+    public int getOrderFormNum();
+    //判断订单号是否自己发出的
+    public int isMyOrderForm(@Param("order_id")int order_id,@Param("user_id")int user_id);
+    //获取某用户接单数state=08
+    int getUserPickNum(int user_id);
+     /**
      * 改
      */
     public void updateOrderForm(OrderForm orderForm);

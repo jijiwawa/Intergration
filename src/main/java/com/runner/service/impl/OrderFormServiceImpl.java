@@ -15,6 +15,10 @@ public class OrderFormServiceImpl implements OrderFormService {
     //注解注入OrderFormDao
     @Autowired
     private OrderFormDao orderFormDao;
+
+    /**
+     *查
+     */
     //根据id查询订单
     public OrderForm findOrderFormById(Integer id) {
         return this.orderFormDao.findOrderFormById(id);
@@ -32,6 +36,35 @@ public class OrderFormServiceImpl implements OrderFormService {
         return orderFormDao.showOrderFormLatest(index);
     }
 
+    public List<OrderForm> showOrderFormAds(int index) {
+        return orderFormDao.showOrderFormAds(index);
+    }
+
+    public List<OrderForm> showOrderFormMoney(int index) {
+        return orderFormDao.showOrderFormMoney(index);
+    }
+
+    public List<OrderForm> showOrderFormSize(int index) {
+        return orderFormDao.showOrderFormSize(index);
+    }
+
+    //查询订单状态为0的订单数量
+    public int getOrderFormNum() {
+        return orderFormDao.getOrderFormNum();
+    }
+
+    public boolean isMyOrderForm(int order_id,int user_id) {
+        return orderFormDao.isMyOrderForm(user_id,order_id)>0;
+    }
+
+    //获取某用户接单数state=1
+    public int getUserPickNum(int user_id){
+        return orderFormDao.getUserPickNum(user_id);
+    }
+
+    /**
+     *增
+     */
     //新增订单
     public boolean addOrderForm(OrderForm orderForm) {
         if(isOrderNumExist(orderForm.getOrder_num())){
@@ -45,9 +78,15 @@ public class OrderFormServiceImpl implements OrderFormService {
         return orderFormDao.isOrderNumExist(order_num)>0;
     }
 
+    /**
+     *改
+     */
     // 更新订单
     public void updateOrderForm(OrderForm orderForm) {
         orderFormDao.updateOrderForm(orderForm);
     }
+    /**
+     *删
+     */
 }
 

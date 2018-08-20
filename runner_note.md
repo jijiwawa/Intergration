@@ -15,3 +15,9 @@
 Ⅱ DateTime在你需要同时包含日期和时间信息的值时,支持的范围是'1000-01-01 00:00:00'到'9999-12-31 23:59:59'
 Ⅲ TimeStamp列类型，提供一种类型，你可以使用它自动地用当前的日期和时间标记insert和update的操作如果有多个列，则只有第一个会自动更新
 
+#Integer与int
+当查询不到结果时，若使用Integer则会返回null，使用int会出现异常情况
+
+#count(*)与*
+当想判断是否有该记录是最好使用select count(*) from e where a=#{a}来查询是否存在
+若使用select * from e where a=#{a},则会返回空值null与实际所想得到的值int不符

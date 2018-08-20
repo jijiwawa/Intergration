@@ -2,6 +2,7 @@ package com.runner.po;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -151,5 +152,11 @@ public class OrderForm {
 
     public void setOrder_state(Integer order_state) {
         this.order_state = order_state;
+    }
+
+    public String getLocalCreateTime() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd HH:mm:ss");//设置日期格式
+        String date = df.format(this.depute_time);
+        return date;
     }
 }

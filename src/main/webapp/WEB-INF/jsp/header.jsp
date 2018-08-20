@@ -11,7 +11,7 @@
 
                 <!--向左对齐-->
                 <ul class="nav navbar-nav navbar-left">
-                    <li><a href="/intergration/tab/runner">跑腿</a>
+                    <li><a href="/intergration/updateOrderformShow">跑腿</a>
                     </li>
                     <li <c:if test="${tab.tabNameEn == 'play'}">class="active"
                         </c:if>><a href="/intergration/forum/main">时事</a></li>

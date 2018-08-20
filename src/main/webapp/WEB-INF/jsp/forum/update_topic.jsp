@@ -43,43 +43,43 @@
 
 <script>
     var editor;
-    $(function() {
-        editor = editormd("test-editormd", {
-            width   : "100%",
-            height  : 640,
-            syncScrolling : "single",
-            path : "/intergration/js/lib/"
-        });
-    });
-    $("#post").click(function () {
-        var ptitle=$("#title").val();
-        var pcontent=editor.getMarkdown();
-        var tid=${topic.id}
-        if(ptitle==''){
-            $("#info").text("提示：请输入标题");
-        }else if(pcontent==''){
-            $("#info").text("提示：请输入内容");
-        }else{
-            $.ajax({type: "POST",
-                url: "/intergration/forum/topic/updatedo",
-                data: {
-                    title: ptitle,
-                    content: pcontent,
-                    id: tid
-                },
-                dataType: "json",
-                success: function(data){
-                    if(data.stateCode.trim() == "0") {
-                        $("#info").text("提示:请先登录");
-                    } else if(data.stateCode.trim() == "1") {
-                        $("#info").text("提示:无发帖权限!");
-                    } else if(data.stateCode.trim() == "2"){
-                        window.location.href="/intergration/forum/main";
-                    }
-                }
-            })
-        }
-    })
+$(function() {
+editor = editormd("test-editormd", {
+width   : "100%",
+height  : 640,
+syncScrolling : "single",
+path : "/intergration/js/lib/"
+});
+});
+$("#post").click(function () {
+var ptitle=$("#title").val();
+var pcontent=editor.getMarkdown();
+var tid=${topic.id}
+if(ptitle==''){
+$("#info").text("提示：请输入标题");
+}else if(pcontent==''){
+$("#info").text("提示：请输入内容");
+}else{
+$.ajax({type: "POST",
+url: "/intergration/forum/topic/updatedo",
+data: {
+title: ptitle,
+content: pcontent,
+id: tid
+},
+dataType: "json",
+success: function(data){
+if(data.stateCode.trim() == "0") {
+$("#info").text("提示:请先登录");
+} else if(data.stateCode.trim() == "1") {
+$("#info").text("提示:无发帖权限!");
+} else if(data.stateCode.trim() == "2"){
+window.location.href="/intergration/forum/main";
+}
+}
+})
+}
+})
 </script>
 </body>
 </html>

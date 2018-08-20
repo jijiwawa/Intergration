@@ -68,13 +68,13 @@
                     <option value="default">---请选择---</option>
                     <option value="顺丰">顺丰</option>
                     <option value="申通">申通</option>
-                    <option value="顺风">圆通</option>
-                    <option value="顺风">天天</option>
-                    <option value="顺风">EMS</option>
-                    <option value="顺风">中通</option>
-                    <option value="顺风">韵达</option>
-                    <option value="顺风">万象物流</option>
-                    <option value="顺风">菜鸟驿站</option>
+                    <option value="圆通">圆通</option>
+                    <option value="天天">天天</option>
+                    <option value="EMS">EMS</option>
+                    <option value="中通">中通</option>
+                    <option value="韵达">韵达</option>
+                    <option value="万象物流">万象物流</option>
+                    <option value="菜鸟驿站">菜鸟驿站</option>
                 </select>
                 <label >快递单号</label>
                 <input type="text" class="form-control" id="order_num" name="order_num">
@@ -149,7 +149,7 @@
         var pick_code1=$("#pick_code").val();            //取货码
         var pick_phonenum1=$("#pick_phonenum").val();    //取货电话号码
         var pick_name1=$("#pick_name").val();            //取货姓名
-        var remark1=$("remark").val();
+        var remark1=$("#remark").val();
 
         if(express_company1==''||order_num1==''||pickup_ads1==''||latest_time1==''||goods_size1==''||paymoney1==''||pick_code1==''||pick_phonenum1==''||pick_name1==''){
             $("#info").text("提示：发单信息除备注外不能为空");
@@ -177,7 +177,7 @@
                         if (data.orderState.trim() == "0") {
                             $("#info").text("提示：订单号已存在");
                         } else if (data.orderState.trim() == "1") {
-                            window.location.href = "/intergration/tab/runner"
+                            window.location.href = "/intergration/updateOrderformShow"
                         } else if(data.orderState.trim()=="2"){
                             $("#info").text("提示：余额不足");
                         }
@@ -188,16 +188,16 @@
     })
 
     $("#refresh").click(function() {
-        $("#express_company").text('');  //快递公司
-        $("#order_num").text('');           //快递单号
-        $("#pickup_ads").text('');        //快递地址
-        $("#latest_time").text('');     //最晚取货时间
-        $("#goods_size").text('');        //货物大小
-        $("#paymoney").text('');         //支付金额
-        $("#pick_code").text('');        //取货码
-        $("#pick_phonenum").text('');    //取货电话号码
-        $("#pick_name").text('');           //取货姓名
-        $("remark").text('');
+        $("#express_company").val("");  //快递公司
+        $("#order_num").val("");         //快递单号
+        $("#pickup_ads").val("");        //快递地址
+        $("#latest_time").val("");     //最晚取货时间
+        $("#goods_size").val("");        //货物大小
+        $("#paymoney").val("");         //支付金额
+        $("#pick_code").val("");        //取货码
+        $("#pick_phonenum").val("");    //取货电话号码
+        $("#pick_name").val("");           //取货姓名
+        $("#remark").val("");
     })
 </script>
 </body>

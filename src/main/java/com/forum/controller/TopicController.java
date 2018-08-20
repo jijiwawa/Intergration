@@ -28,7 +28,6 @@ public class TopicController {
     public TopicServiceImpl topicService;
     @Autowired
     public UserServiceImpl userService;
-
     @Autowired
     public ReplyService replyService;
 

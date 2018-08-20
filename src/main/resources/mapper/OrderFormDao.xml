@@ -22,6 +22,10 @@
     <select id="isOrderNumExist" resultType="int" parameterType="java.lang.String">
         select count(*) from dbe.orderform where order_num=#{order_num};
     </select>
+    <!--查询订单数-->
+    <select id="getOrderFormNum" resultType="java.lang.Integer">
+        select count(*) from dbe.orderform where order_state=0;
+    </select>
     <!--查所有order_state=0的订单，用于订单的显示-->
     <resultMap id="showOrderInfoToAll" type="com.runner.po.OrderForm">
         <id property="id" column="id"/>
@@ -29,18 +33,51 @@
         <result property="order_num" column="order_num"/>
         <result property="pickup_ads" column="pickup_ads"/>
         <result property="express_company" column="express_company"/>
+        <result property="goods_size" column="goods_size"/>
         <result property="latest_time" column="latest_time"/>
         <result property="paymoney" column="paymoney"/>
         <result property="remark" column="remark"/>
     </resultMap>
+    <!--按时间顺序排序-->
     <select id="showOrderFormLatest" resultMap="showOrderInfoToAll">
-        select id,depute_time,order_num,pickup_ads,express_company,latest_time,paymoney,remark
+        select id,depute_time,order_num,pickup_ads,express_company,goods_size,latest_time,paymoney,remark
         from dbe.orderform
         where order_state=0
         order by depute_time desc
         limit #{index},6;
     </select>
-
+    <!--按取货地点排序-->
+    <select id="showOrderFormAds" resultMap="showOrderInfoToAll">
+        select id,depute_time,order_num,pickup_ads,express_company,goods_size,latest_time,paymoney,remark
+        from dbe.orderform
+        where order_state=0
+        order by pickup_ads desc
+        limit #{index},6;
+    </select>
+    <!--按收益排序-->
+    <select id="showOrderFormMoney" resultMap="showOrderInfoToAll">
+        select id,depute_time,order_num,pickup_ads,express_company,goods_size,latest_time,paymoney,remark
+        from dbe.orderform
+        where order_state=0
+        order by paymoney desc
+        limit #{index},6;
+    </select>
+    <!--按货物大小排序-->
+    <select id="showOrderFormSize" resultMap="showOrderInfoToAll">
+        select id,depute_time,order_num,pickup_ads,express_company,goods_size,latest_time,paymoney,remark
+        from dbe.orderform
+        where order_state=0
+        order by goods_size desc
+        limit #{index},6;
+    </select>
+    <select id="isMyOrderForm" resultType="java.lang.Integer" >
+        select count(*) from orderform where id=#{user_id} and client_id=#{order_id};
+    </select>
+    <!--获取某用户接单数-->
+    <select id="getUserPickNum" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*) from orderform
+        where trustee_id=#{user_id} and order_state=1
+    </select>
     <!--
     删
     -->
@@ -48,7 +85,7 @@
     <!--
     增
     -->
-    <insert id="addOrderForm" parameterType="com.runner.dao.OrderFormDao">
+    <insert id="addOrderForm" parameterType="com.runner.po.OrderForm">
         insert into dbe.orderform(order_num, express_company, pickup_ads, latest_time,goods_size,paymoney,client_id,remark,pick_code,pick_phonenum,pick_name,depute_time) VALUES (
                 #{order_num},#{express_company},#{pickup_ads},#{latest_time},#{goods_size},#{paymoney},#{client_id},#{remark},#{pick_code},#{pick_phonenum},#{pick_name},#{depute_time})
     </insert>
@@ -56,4 +93,52 @@
     <!--
     改
     -->
+    <update id="updateOrderForm" parameterType="com.runner.po.OrderForm">
+        update orderform
+        <set>
+            <if test="express_company != null" >
+                express_company = #{express_company},
+            </if>
+            <if test="pickup_ads != null" >
+                pickup_ads = #{pickup_ads},
+            </if>
+            <if test="latest_time != null" >
+                latest_time = #{latest_time},
+            </if>
+            <if test="goods_size != null" >
+                goods_size = #{goods_size},
+            </if>
+            <if test="paymoney != null" >
+                paymoney = #{paymoney},
+            </if>
+            <if test="client_id != null" >
+                client_id = #{client_id},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark},
+            </if>
+            <if test="depute_time != null" >
+                depute_time = #{depute_time},
+            </if>
+            <if test="trustee_id != null" >
+                trustee_id = #{trustee_id},
+            </if>
+            <if test="take_time != null" >
+                take_time = #{take_time},
+            </if>
+            <if test="pick_code != null" >
+                pick_code = #{pick_code},
+            </if>
+            <if test="pick_phonenum != null" >
+                pick_phonenum = #{pick_phonenum},
+            </if>
+            <if test="pick_name != null" >
+                pick_name = #{pick_name},
+            </if>
+            <if test="order_state != null" >
+                order_state = #{order_state},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
 </mapper>

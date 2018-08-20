@@ -60,6 +60,11 @@ public class OrderFormMapperTest extends BaseTest{
 
     @Test
     public void addOrderFormTest3() {
-
+        OrderForm orderForm = orderFormService.findOrderFormById(13);
+        orderForm.setOrder_state(1);
+        orderForm.setTrustee_id(31);
+        orderForm.setTake_time(new Timestamp(System.currentTimeMillis()));
+        orderFormService.updateOrderForm(orderForm);
+        System.out.println(orderFormService.getUserPickNum(31));
     }
 }
