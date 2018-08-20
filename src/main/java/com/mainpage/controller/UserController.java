@@ -30,7 +30,9 @@ public class UserController {
         if(userService.isUserNameExist(request.getParameter("username"))){
             //用户名已存在
             res.put("stateCode","0");
-        }else {
+        }else if(userService.isPhoneNumExist(request.getParameter("tel"))){
+            res.put("stateCode","2");
+        }else{
             User user = new User();
             int isMale = request.getParameter("isMale").equals("男") ? 0 : 1;
             Random rand = new Random();

@@ -125,8 +125,7 @@
         from topic
             LEFT JOIN user on  topic.user_id = user.id
             LEFT JOIN reply on topic.id=reply.topic_id
-
-        group by topic.id order by topic.id desc limit #{index},4;
+        group by topic.id order by topic.id desc limit #{index},8;
     </select>
 
     <select id="listMostCommentsTopics" resultMap="topicAndUserInfo" parameterType="int">
@@ -135,7 +134,7 @@
         from topic
             LEFT JOIN user on  topic.user_id = user.id
             LEFT JOIN reply on topic.id=reply.topic_id
-        group by topic.id order by count(reply.id) desc limit #{index},4;
+        group by topic.id order by count(reply.id) desc limit #{index},8;
     </select>
 
     <select id="selectById" parameterType="int" resultMap="topicAndUserDetail">

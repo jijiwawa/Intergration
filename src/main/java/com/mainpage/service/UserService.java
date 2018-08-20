@@ -10,5 +10,5 @@ public interface UserService {
     public int loginCheck(String username,String password);
 
     public boolean updateUser(User user);
-
+    public boolean isPhoneNumExist(String phone);
 }

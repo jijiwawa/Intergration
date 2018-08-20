@@ -46,7 +46,6 @@
         editor = editormd("test-editormd", {
             width   : "100%",
             height  : 640,
-            syncScrolling : "single",
             path : "/intergration/js/lib/"
         });
     });

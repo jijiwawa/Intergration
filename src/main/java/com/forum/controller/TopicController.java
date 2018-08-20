@@ -34,7 +34,7 @@ public class TopicController {
     @RequestMapping("/main")
     public ModelAndView toMain(HttpSession session,HttpServletRequest request){
         int pageIndex = 1;//设置初始的当前页，页面显示的都是第一页
-        int pageSize = 4;//设置每一页显示几条数据
+        int pageSize = 8;//设置每一页显示几条数据
         int shouldOrderByTime=0;
         PageUtil<Topic> pageUtil = new PageUtil<Topic>();//初始化工具类
         ModelAndView indexPage=new ModelAndView("forum/main");
@@ -48,8 +48,6 @@ public class TopicController {
         int topicsNum=topicService.getTopicsNum();
         pageUtil.setPageNumber(topicsNum);
         pageUtil.setPageSize(pageSize);
-//        pageUtil.setPageCount((int) Math.ceil((double) (pageUtil
-//                .getPageNumber() / pageUtil.getPageSize())));
         pageUtil.setPageCount((pageUtil.getPageNumber()%pageSize)==0
         ?(pageUtil.getPageNumber()/pageSize):(pageUtil.getPageNumber()/pageSize+1));
         int index=(pageIndex-1)*pageSize;
