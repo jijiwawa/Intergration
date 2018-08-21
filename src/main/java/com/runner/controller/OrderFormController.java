@@ -255,4 +255,30 @@ public class OrderFormController {
         return res;
     }
 
+    /**
+     * 点击确认收获按钮
+     */
+    @RequestMapping("/afterGetGood")
+    @ResponseBody
+    public Object afterGetGood(HttpServletRequest request, HttpSession HttpSession){
+        //3.确认后，发单者立刻评价接单者，通过公式计算接单着的信用度
+        //首先进行评价，获取评价的分数grade和评语 comment
+        //计算信用度
+
+        //1.将钱打给接单者，*90%，updateUser
+        Integer orderform_id = Integer.valueOf(request.getParameter("orderform_id"));
+        Integer client_id = (Integer) HttpSession.getAttribute("userId");
+        HashMap<String, String> res = new HashMap<String, String>();
+        OrderForm orderForm = orderFormService.findOrderFormById(orderform_id);
+        User user = userService.getUserByUserId(orderForm.getTrustee_id());
+        user.setProperty(user.getProperty().add(orderForm.getPaymoney().multiply(new BigDecimal(0.9))));
+        userService.updateUser(user);
+        //2.更改订单状态为2
+        orderForm.setOrder_state(2);
+        orderFormService.updateOrderForm(orderForm);
+
+        res.put("success_state","1");
+        // 接单者在历史订单中评价发单者，评价后同样通过公式计算发单者的信用度
+        return res;
+    }
 }

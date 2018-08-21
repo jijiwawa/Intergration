@@ -117,8 +117,8 @@
                                 </c:if>
                                 <c:if test="${orderfrom.user.userName!=null}">
                                     <div style="margin-top:1px;height: 30px;width: 100%;border:black 1px;">
-                                        <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
-                                            <small class="text-muted">接单时间:${orderfrom.take_time}</small>
+                                        <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 48%;display:inline;border:1px red;">
+                                            <small class="text-muted">接单时间:${orderfrom.localCreateTime1}</small>
                                         </div>
                                         <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
                                             <small class="text-muted">接单人:${orderfrom.user.userName}</small>
@@ -141,7 +141,7 @@
                                     </div>
                                 </c:if>
                                 <div style="margin-left: 2px;float:right;margin-left: 1%;width: 24%;display:inline;border:1px red;">
-                                    <button id="sure_orderform" class="btn btn-success btn-block" href="#"  >确认收获</button>
+                                    <button  class="btn btn-success btn-block <c:if test="${orderfrom.order_state==0}" >disabled</c:if>" style="<c:if test="${orderfrom.order_state==0}">cursor:not-allowed;</c:if>" onclick="afterGetGood(${orderfrom.id})">确认收货</button>
                                 </div>
                             </div>
                         </div>
@@ -160,6 +160,9 @@
         <div class="panel-heading" style="background-color: white;text-align: center">
             <button id="signUp" class="btn btn-success btn-block" onclick="window.location.href='/intergration/toSign_order'">申请发单</button>
         </div>
+        <div class="panel-heading" style="background-color: white;text-align: center">
+            <button id="test" class="btn btn-success btn-block">test</button>
+        </div>
     </div>
 
 </c:if>
@@ -167,4 +170,27 @@
     function showInfo_form(credit,code,phonenumber,name,remark){
         alert("委托人信用度:"+credit+"\n取货码："+code+"\n取货手机："+phonenumber+"\n取货姓名:"+name+"\n备注:"+remark);
     }
+    function afterGetGood(id) {
+        $("#myModalLabel").text("评价");
+        $('#myModal').modal();
+        var grade1=$("input[name='radio']:checked").val();
+        var comment1=$("#txt_statu").val();
+        alert(" "+grade1+".."+comment1+" .."+id)
+        $.ajax({
+            type: "post",
+            url: "/intergration/afterGetGood",
+            data: {"orderform_id": id},
+            dataType: "json",
+            success: function (data) {
+                if (data.success_state.trim() == "1") {
+                    // 弹出评价跑腿者按钮
+                    //window.location.href = "/intergration/orderFormReply_for_client"
+                }
+            }
+        });
+    }
+
+    $("#test").click(function () {
+        alert("test");
+    });
 </script>

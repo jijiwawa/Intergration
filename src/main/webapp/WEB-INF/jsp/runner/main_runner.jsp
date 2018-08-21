@@ -125,7 +125,7 @@
 <c:if test="${pageUtil.pageIndex==pageUtil.pageCount}">${pageUtil.pageCount}</c:if>&shouldOrderByTime=${shouldOrderByTime}">下一页</a>
     <a class="btn  btn-small" href="/intergration/updateOrderformShow?pageIndex=${pageUtil.pageCount}&shouldOrderByTime=${shouldOrderByTime}" >末页</a>
 </div>
-
+<%@ include file="../text.jsp"%>
 <!-- 引入侧边栏文件 -->
 <%@ include file="side_runner.jsp"%>
 
