@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>注册 - Campus</title>
+    <title>发单 - Campus</title>
     <link href="/intergration/css/bootstrap.min.css" rel="stylesheet">
     <script src="/intergration/js/jquery-3.2.1.js"></script>
     <script src="/intergration/js/bootstrap.min.js"></script>
@@ -55,7 +55,7 @@
 
 
 <!-- 引入header文件 -->
-<%@ include file="header.jsp"%>
+<%@ include file="../header.jsp"%>
 
 <div class="panel panel-default" id="login" style="width: 30%;margin-left: 35%;margin-top: 5%;margin-bottom: 5%">
     <div class="panel-heading" style="background-color: #fff">
@@ -129,13 +129,20 @@
                 <label >备注</label>
                 <textarea class="form-control" id="remark" name="remark"  cols="30" rows="10"></textarea>
             </div>
-            <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
-            <button id="refresh" class="btn btn-success btn-block">重置</button>
+            <p style="text-align: right;color: red;position: absolute" id="info"></p>
+                <div class="row" style="margin-bottom: 1%;">
+                    <div class="col-md-6">
+                        <button id="refresh" class="btn btn-success btn-block" style="display:inline;width: 104%;">重置</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button id="return" class="btn btn-success btn-block" style="float: right;background-color: red;width: 104%;" onclick="window.location.href = '/intergration/updateOrderformShow'" >返回</button>
+                    </div>
+                </div>
             <button id="creat_order" class="btn btn-success btn-block">发单</button>
     </div>
 </div>
 <!-- 引入footer文件 -->
-<%@ include file="footer.jsp"%>
+<%@ include file="../footer.jsp"%>
 
 <script>
     $("#creat_order").click(function(){

@@ -52,9 +52,9 @@
 </head>
 <body>
 <!-- 引入header文件 -->
-<%@ include file="header.jsp"%>
+<%@ include file="../header.jsp"%>
 
-<div class="panel panel-default" id="main" style="width: 70%;margin:1% 2% 5% 5%;float: left;">
+<div class="panel panel-default" style="width: 70%;margin:1% 2% 5% 5%;float: left;" onload="updateOrderForm_for_1s()" id="updateOrderForm_div">
     <!-- 检索 -->
     <div class="panel-heading" style="background-color: white">
         <a style="margin-right: 2%" class="btn <c:if test="${shouldOrderByTime==0}">btn-success</c:if>  btn-small"
@@ -127,10 +127,10 @@
 </div>
 
 <!-- 引入侧边栏文件 -->
-<%@ include file="order_info.jsp"%>
+<%@ include file="side_runner.jsp"%>
 
 <!-- 引入footer文件 -->
-<%@ include file="footer.jsp"%>
+<%@ include file="../footer.jsp"%>
 </body>
 <script>
     function pickOrderForm(id){
@@ -157,5 +157,53 @@
             }
         });
     }
+    function updateOrderForm_for_1s(){
+        var count=0;
+        $.ajax({
+            type:"post",
+            url:"/intergration/updateOrderformShow_1s",
+            async : false,  //同步请求
+            dataType: "json",
+            success:function(data){
+                //alert(dates);
+                //alert("#count");$("#updateOrderForm_div").html(data.orderforms,data.pageUtil,data.shouldOrderByTime); //要刷新的div
+                //count=count+1;
+               // alert("1");
+                if(data.refreshState.trim() == "1"){
+                    //alert("2");
+                    window.location.href = "/intergration/updateOrderformShow"
+
+                   // alert("3");
+                    setTimeout(updateOrderForm_for_1s(),3000);
+                }else{
+                    alert("it is too lazy!!")
+                }
+            },
+            error: function() {
+                alert("失败，请稍后再试！");
+            }
+        });
+
+    }
+
+    $("#waitWork").click(function(){
+        var url = "请求地址";
+        var data = {type:1};
+        $.ajax({
+            type : "get",
+            async : false,  //同步请求
+            url : url,
+            data : data,
+            timeout:1000,
+            success:function(dates){
+                //alert(dates);
+                $("#mainContent").html(dates);//要刷新的div
+            },
+            error: function() {
+                // alert("失败，请稍后再试！");
+            }
+        });
+    });
+
 </script>
 </html>

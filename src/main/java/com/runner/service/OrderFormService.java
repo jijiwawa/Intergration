@@ -25,6 +25,10 @@ public interface OrderFormService {
     public boolean isMyOrderForm(int order_id,int user_id);
     //获取某用户接单数state=08
     public int getUserPickNum(int user_id);
+    //获取接单信息
+    public List<OrderForm> getPickOrderForm_info(int trustee_id);
+    //获取发单信息
+    public List<OrderForm> getDeputeOrderForm_info(int client_id);
 
     //新增订单
     public boolean addOrderForm(OrderForm orderForm);

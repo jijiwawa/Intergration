@@ -41,7 +41,12 @@ public interface OrderFormDao {
     //判断订单号是否自己发出的
     public int isMyOrderForm(@Param("order_id")int order_id,@Param("user_id")int user_id);
     //获取某用户接单数state=08
-    int getUserPickNum(int user_id);
+    public int getUserPickNum(int user_id);
+    //获取接单信息
+    public List<OrderForm> getPickOrderForm_info(int trustee_id);
+    //获取接单信息
+    public List<OrderForm> getDeputeOrderForm_info(int client_id);
+
      /**
      * 改
      */

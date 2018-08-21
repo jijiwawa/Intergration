@@ -67,4 +67,11 @@ public class OrderFormMapperTest extends BaseTest{
         orderFormService.updateOrderForm(orderForm);
         System.out.println(orderFormService.getUserPickNum(31));
     }
+    @Test
+    public void addOrderFormTest4() {
+        List<OrderForm> orderForm = orderFormService.getPickOrderForm_info(35);
+        List<OrderForm> orderForm1 = orderFormService.getDeputeOrderForm_info(28);
+        System.out.println(orderForm.get(1).getUser().getPhoneNumber());
+        System.out.println(orderForm1.get(0).getUser().getPhoneNumber());
+    }
 }

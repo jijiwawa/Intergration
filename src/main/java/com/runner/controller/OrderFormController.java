@@ -33,11 +33,11 @@ public class OrderFormController {
      * 实时更新订单信息
      */
     @RequestMapping("/updateOrderformShow")
-    @ResponseBody
     public ModelAndView updateOrderformShow(HttpSession session,HttpServletRequest request){
         int pageIndex = 1;//设置初始的当前页，页面显示的都是第一页
         int pageSize = 6;//设置每一页显示几条数据
         int shouldOrderByTime=0;
+        int isPickOrderForm = 1;//判斷是接单还是发单信息
         PageUtil<Topic> pageUtil = new PageUtil<Topic>();//初始化工具类
         ModelAndView indexPage=new ModelAndView("runner/main_runner");
         if(request.getParameter("pageIndex")!=null){
@@ -46,6 +46,12 @@ public class OrderFormController {
         if(request.getParameter("shouldOrderByTime")!=null){
             shouldOrderByTime=Integer.parseInt(request.getParameter("shouldOrderByTime"));
         }
+        if(request.getParameter("isPickOrderForm")!=null){
+            isPickOrderForm=Integer.parseInt(request.getParameter("isPickOrderForm"));
+        }
+        //获取用户信息
+        String name=(String) session.getAttribute("username");
+        User user=userService.getUserByUserName(name);
         pageUtil.setPageIndex(pageIndex);
         int orderFormNum=orderFormService.getOrderFormNum();
         pageUtil.setPageNumber(orderFormNum);
@@ -70,14 +76,67 @@ public class OrderFormController {
         }else{
             orderforms=orderFormService.showOrderFormLatest(index);
         }
-        //获取用户信息
-        String name=(String) session.getAttribute("username");
-        User user=userService.getUserByUserName(name);
+        List<OrderForm> orderForms_pick;
+        List<OrderForm> orderForms_put;
+        //接单信息
+        orderForms_put=orderFormService.getDeputeOrderForm_info(user.getId());
+        orderForms_pick=orderFormService.getPickOrderForm_info(user.getId());
+        if(isPickOrderForm==1){
+            isPickOrderForm=1;
+        }else{
+            isPickOrderForm=0;
+        }
         indexPage.addObject("orderforms",orderforms);
         indexPage.addObject("user",user);
         indexPage.addObject("pageUtil",pageUtil);
+        indexPage.addObject("pageIndex",pageIndex);
         indexPage.addObject("shouldOrderByTime",shouldOrderByTime);
+        indexPage.addObject("orderForms_pick",orderForms_pick);
+        indexPage.addObject("orderForms_put",orderForms_put);
+        indexPage.addObject("isPickOrderForm",isPickOrderForm);
         return  indexPage;
+    }
+    @RequestMapping("/updateOrderformShow_1s")
+    @ResponseBody
+    public Object updateOrderformShow_1s(HttpSession session,HttpServletRequest request){
+       HashMap<String,String> res = new HashMap<String, String>();
+        res.put("refreshState","1");
+       return res;
+    }
+    /**
+     * 个人接单发单信息
+     */
+    @RequestMapping("/showOrderForm_info")
+    public ModelAndView showOrderForm_info(HttpSession session,HttpServletRequest request){
+        int isPickOrderForm = 1;
+        ModelAndView mav = new ModelAndView("runner/side_runner");
+        if(request.getParameter("isPickOrderForm")!=null){
+            isPickOrderForm=Integer.parseInt(request.getParameter("isPickOrderForm"));
+        }
+        String name=(String) session.getAttribute("username");
+        User user=userService.getUserByUserName(name);
+        List<OrderForm> orderForms_pick = null;
+        List<OrderForm> orderForms_put = null;
+        //接单信息
+//        if(isPickOrderForm==1){
+//            orderForms_pick=orderFormService.getPickOrderForm_info(user.getId());
+//            isPickOrderForm=1;
+//        }else{
+//            orderForms_put=orderFormService.getDeputeOrderForm_info(user.getId());
+//            isPickOrderForm=0;
+//        }
+        mav.addObject("orderForms_pick",orderForms_pick);
+        mav.addObject("orderForms_put",orderForms_put);
+        mav.addObject("user",user);
+        mav.addObject("isPickOrderForm",isPickOrderForm);
+        return mav;
+    }
+    @RequestMapping("/showOrderForm_info_before")
+    @ResponseBody
+    public Object showOrderForm_info_before(HttpSession session,HttpServletRequest request){
+        HashMap<String,String> res = new HashMap<String, String>();
+        res.put("state_show","1");
+        return res;
     }
     /**
      * 根据id查询订单详情
@@ -87,14 +146,6 @@ public class OrderFormController {
         OrderForm orderForm = orderFormService.findOrderFormById(id);
         model.addAttribute("orderForm",orderForm);
         return "orderForm";
-    }
-    /**
-     * 查询可接的订单
-     */
-    @RequestWrapper(className = "/show_allorderform")
-    public void showAllOrderform(HttpServletRequest request,Model model){
-        List<OrderForm> orderForms = orderFormService.showOrderFormLatest(0);
-        model.addAttribute("orderForms",orderForms);
     }
     /**
      * 新增订单

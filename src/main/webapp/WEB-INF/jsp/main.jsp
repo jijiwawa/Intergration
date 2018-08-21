@@ -67,7 +67,7 @@
             <div class="caption">
                 <h3>跑腿服务</h3>
                 <p>todo</p>
-                <a href="/intergration/todo" class="btn btn-primary" role="button">进入</a>
+                <a href="/intergration/updateOrderformShow" class="btn btn-primary" role="button">进入</a>
             </div>
         </div>
     </div>

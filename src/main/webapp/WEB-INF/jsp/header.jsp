@@ -16,7 +16,7 @@
                     <li <c:if test="${tab.tabNameEn == 'play'}">class="active"
                         </c:if>><a href="/intergration/forum/main">时事</a></li>
                     <li <c:if test="${tab.tabNameEn == 'creative'}">class="active"
-                    </c:if>><a href="/intergration">课程评价</a></li>
+                    </c:if>><a onclick="myFunction()" >课程评价</a></li>
                 </ul>
 
                 <c:if test="${empty userId}">
@@ -43,7 +43,7 @@
                         <p class="navbar-text"><a href="/intergration/user/settings">设置</a></p>
                     </li>
                     <li>
-                        <p class="navbar-text"><a href="/intergration/user/signout">登出</a></p>
+                        <p class="navbar-text"><a onclick="signout_confirm()">登出</a></p>
                     </li>
                 </ul>
             </c:if>
@@ -66,5 +66,11 @@
         {
         }
     }
+
+    function myFunction()
+    {
+        alert("待拓展！！")
+    }
+</script>
 </script>
 

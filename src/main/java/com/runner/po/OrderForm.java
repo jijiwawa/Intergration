@@ -1,5 +1,7 @@
 package com.runner.po;
 
+import com.mainpage.domain.User;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -20,11 +22,20 @@ public class OrderForm {
     private String remark;                   //备注（货物描述）
     private Timestamp depute_time;           //委托时间
     private Integer trustee_id;              //受托人id
-    private Timestamp take_time;                  //接单时间
+    private Timestamp take_time;             //接单时间
     private String pick_code;                //取货码
     private String pick_phonenum;            //取货手机号码
     private String pick_name;                //取货所需姓名
     private Integer order_state ;            // 订单状态0待接单，1被接单，运送中，2已收货，3废弃或者暂时不用
+    private User user;               //若本人是接单人，则该User是发单人，反之
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;

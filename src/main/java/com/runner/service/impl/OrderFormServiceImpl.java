@@ -62,6 +62,14 @@ public class OrderFormServiceImpl implements OrderFormService {
         return orderFormDao.getUserPickNum(user_id);
     }
 
+    public List<OrderForm> getPickOrderForm_info(int trustee_id) {
+        return orderFormDao.getPickOrderForm_info(trustee_id);
+    }
+
+    public List<OrderForm> getDeputeOrderForm_info(int client_id) {
+        return orderFormDao.getDeputeOrderForm_info(client_id);
+    }
+
     /**
      *增
      */

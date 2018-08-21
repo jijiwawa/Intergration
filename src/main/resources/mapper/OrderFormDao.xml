@@ -78,6 +78,64 @@
         select count(*) from orderform
         where trustee_id=#{user_id} and order_state=1
     </select>
+    <!--发单信息-->
+    <resultMap id="OrderFormAndClientInfo" type="com.runner.po.OrderForm">
+        <id property="id" column="id"/>
+        <result property="depute_time" column="depute_time"/>
+        <result property="order_num" column="order_num"/>
+        <result property="take_time" column="take_time"/>
+        <result property="trustee_id" column="trustee_id"/>
+        <result property="order_state" column="order_state"/>
+        <association property="user" javaType="com.mainpage.domain.User">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="user_name" property="userName"  />
+            <result column="phone_number" property="phoneNumber"  />
+            <result column="credit" property="credit"  />
+        </association>
+    </resultMap>
+    <select id="getDeputeOrderForm_info" resultMap="OrderFormAndClientInfo" parameterType="int">
+        select orderform.id,orderform.depute_time,orderform.order_num,orderform.take_time,orderform.trustee_id,orderform.order_state,
+                user.user_name,user.phone_number,user.credit
+        from orderform
+        left join user on  orderform.trustee_id = user.id
+        where ( order_state=1) and client_id=#{client_id}
+        order by depute_time desc;
+    </select>
+    <!--接单信息-->
+    <resultMap id="OrderFormAndTrusteeInfo" type="com.runner.po.OrderForm">
+        <id property="id" column="id"/>
+        <result property="depute_time" column="depute_time"/>
+        <result property="order_num" column="order_num"/>
+        <result property="pickup_ads" column="pickup_ads"/>
+        <result property="express_company" column="express_company"/>
+        <result property="goods_size" column="goods_size"/>
+        <result property="latest_time" column="latest_time"/>
+        <result property="paymoney" column="paymoney"/>
+        <result property="client_id" column="client_id"/>
+        <result property="remark" column="remark"/>
+        <result property="trustee_id" column="trustee_id"/>
+        <result property="take_time" column="take_time"/>
+        <result property="order_state" column="order_state"/>
+        <result property="pick_code" column="pick_code"/>
+        <result property="pick_phonenum" column="pick_phonenum"/>
+        <result property="pick_name" column="pick_name"/>
+        <association property="user" javaType="com.mainpage.domain.User">
+            <id column="id" property="id" jdbcType="INTEGER" />
+            <result column="user_name" property="userName"  />
+            <result column="phone_number" property="phoneNumber"/>
+            <result column="credit" property="credit" />
+        </association>
+    </resultMap>
+    <select id="getPickOrderForm_info" resultMap="OrderFormAndTrusteeInfo" parameterType="int">
+        select orderform.id,orderform.depute_time,orderform.order_num,orderform.pickup_ads,orderform.express_company,orderform.goods_size,
+                orderform.latest_time,orderform.paymoney,orderform.client_id,orderform.remark,orderform.trustee_id,orderform.take_time,
+                orderform.order_state,orderform.pick_code,orderform.pick_phonenum,orderform.pick_name,
+                u1.id,u1.user_name,u1.phone_number,u1.credit
+        from orderform
+        left join user as u1 on  orderform.client_id = u1.id
+        where trustee_id=#{trustee_id} and order_state=1
+        order by take_time desc;
+    </select>
     <!--
     删
     -->
