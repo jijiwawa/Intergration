@@ -26,6 +26,11 @@
     <select id="getOrderFormNum" resultType="java.lang.Integer">
         select count(*) from dbe.orderform where order_state=0;
     </select>
+    <!--获取发单次数-->
+    <select id="getPutOrderNum" resultType="java.lang.Integer">
+        select count(*) from dbe.orderform where client_id=#{client_id} and 2 > order_state;
+    </select>
+
     <!--查所有order_state=0的订单，用于订单的显示-->
     <resultMap id="showOrderInfoToAll" type="com.runner.po.OrderForm">
         <id property="id" column="id"/>
@@ -98,7 +103,7 @@
                 user.user_name,user.phone_number,user.credit
         from orderform
         left join user on  orderform.trustee_id = user.id
-        where ( order_state=1) and client_id=#{client_id}
+        where ( 2> order_state) and client_id=#{client_id}
         order by depute_time desc;
     </select>
     <!--接单信息-->

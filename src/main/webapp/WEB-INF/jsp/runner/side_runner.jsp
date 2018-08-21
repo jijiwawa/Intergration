@@ -48,84 +48,103 @@
                href="/intergration/updateOrderformShow?pageIndex=${pageIndex}&shouldOrderByTime=${shouldOrderByTime}&isPickOrderForm=0">发单信息</a>
         </div>
         <!-- 订单信息窗口 -->
-        <ul class="list-group" style="width: 100%;height: 430px">
-            <!-- 从订单表中遍历出未接单的信息显示出来 -->
+        <ul class="list-group" style="width: 100%;">
             <c:if test="${isPickOrderForm==1}">
             <c:forEach items="${orderForms_pick}" var="orderfrom">
                 <li class="list-group-item">
-                    <div style="height: 50px;border:#fffa23 2px;">
-                        <div style="float: left;width: 80%;margin-bottom: 5px;display:inline;border:solid 1px;" >
+                    <div style="margin-top: 1px;height: 95px;border:#fffa23 2px;">
+                        <div style="float: left;width: 100%;margin-bottom: 5px;display:inline;border:solid 1px;" >
                             <!--第一行：时间点-->
-                            <div style="height: 25px;width: 100%;background-color: yellow;">
+                            <div style="height: 30px;width: 100%;background-color: yellow;">
                                 <div style="margin-left: 0.5%;height:24px;width: 48%;display:inline;border:yellow 1px;">
-                                    <small class="text-muted">发单时间：${orderfrom.localCreateTime}</small>
+                                    <small class="text-muted">接单于：${orderfrom.localCreateTime1}</small>
                                 </div>
                                 <div style="float:right;margin-left: 0.5%;height:24px;width: 50%;display:inline;border:black 1px;">
                                     <small class="text-muted">最晚取递时间：${orderfrom.latest_time}</small>
                                 </div>
                             </div>
                             <!--第二行-->
-                            <div style="height: 25px;width: 100%;border:black 1px;">
+                            <div style="margin-top:1px;height: 30px;width: 100%;border:black 1px;">
                                 <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
-                                    <small class="text-muted">取递点：${orderfrom.pickup_ads}</small>
+                                    <small class="text-muted">${orderfrom.pickup_ads}</small>
                                 </div>
                                 <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
-                                    <small class="text-muted">快递公司：${orderfrom.express_company}</small>
-                                </div>
-                                <div style="margin-left: 2px;float:left;margin-left: 1%;height: 24px;width: 24%;display:inline;border:1px red;">
-                                    <small class="text-muted">货物大小：${orderfrom.goods_size}</small>
+                                    <small class="text-muted">${orderfrom.express_company}</small>
                                 </div>
                                 <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
-                                    <small class="text-muted">跑腿费：${orderfrom.paymoney}</small>
+                                    <small class="text-muted">${orderfrom.goods_size}</small>
+                                </div>
+                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
+                                    <small class="text-muted">￥${orderfrom.paymoney}</small>
                                 </div>
                             </div>
-                        </div>
-                        <!--接单按钮-->
-                        <div style="width: 6%;float: right;text-align: center;margin-right: 2px;margin-top: 8px;">
-                            <button id="creat_order_${orderfrom.id}" class="btn btn-success btn-block" href="#" onclick="pickOrderForm(${orderfrom.id})" >接单</button>
-                        </div>
-                        <!--备注-->
-                        <div style="width: 12%;float: right;text-align: center;margin-right: 1%;" >
-                            <textarea class="text-muted" id="remark1" name="remark" readonly="readonly" style="resize:none;width: 141px;height: 53px;background-color: whitesmoke;border: 0px" >备注:${orderfrom.remark}</textarea>
+                            <div style="margin-top:1px;height: 30px;width: 100%;border:black 1px;">
+                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;width: 24%;display:inline;border:1px red;">
+                                    <small class="text-muted">name:${orderfrom.user.userName}</small>
+                                </div>
+                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;width: 24%;display:inline;border:1px red;">
+                                    <small class="text-muted">tel:${orderfrom.user.phoneNumber}</small>
+                                </div>
+                                <div style="margin-left: 2px;float:right;margin-left: 1%;width: 24%;display:inline;border:1px red;">
+                                    <button id="showInfo" class="btn btn-success btn-block" href="#" onclick="showInfo_form(${orderfrom.user.credit},${orderfrom.pick_code},${orderfrom.pick_phonenum},'${orderfrom.pick_name}','${orderfrom.remark}')" >取递信息</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </li>
             </c:forEach>
             </c:if>
+
             <c:if test="${isPickOrderForm==0}">
                 <c:forEach items="${orderForms_put}" var="orderfrom">
                     <li class="list-group-item">
-                        <div style="height: 50px;border:#fffa23 2px;">
-                            <div style="float: left;width: 86%;margin-bottom: 5px;display:inline;border:solid 1px;" >
+                        <div style="margin-top: 1px;height: 95px;border:#fffa23 2px;">
+                            <div style="float: left;width: 100%;margin-bottom: 5px;display:inline;border:solid 1px;" >
                                 <!--第一行：时间点-->
-                                <div style="height: 25px;width: 100%;background-color: yellow;">
+                                <div style="height: 30px;width: 100%;background-color: yellow;">
                                     <div style="margin-left: 0.5%;height:24px;width: 48%;display:inline;border:yellow 1px;">
-                                        <small class="text-muted">发单时间：${orderfrom.localCreateTime}</small>
+                                        <small class="text-muted">发单于：${orderfrom.localCreateTime}</small>
                                     </div>
                                     <div style="float:right;margin-left: 0.5%;height:24px;width: 50%;display:inline;border:black 1px;">
-                                        <small class="text-muted">接单时间：${orderfrom.take_time}</small>
+                                        <small class="text-muted">单号：${orderfrom.order_num}</small>
                                     </div>
                                 </div>
                                 <!--第二行-->
-                                <div style="height: 25px;width: 100%;border:black 1px;">
-                                    <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
-                                        <small class="text-muted">单号：${orderfrom.order_num}</small>
+                                <c:if test="${orderfrom.user.userName==null}">
+                                <div style="margin-top:1px;height: 30px;width: 100%;border:black 1px;">
+                                    <small class="text-muted" style="color: red;font-family: 'YaHei Consolas Hybrid','Consolas','Microsoft YaHei','Malgun Gothic', 'Segoe UI', 'Helvetica, Arial'">等待接单中！！</small>
+                                </div>
+                                </c:if>
+                                <c:if test="${orderfrom.user.userName!=null}">
+                                    <div style="margin-top:1px;height: 30px;width: 100%;border:black 1px;">
+                                        <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
+                                            <small class="text-muted">接单时间:${orderfrom.take_time}</small>
+                                        </div>
+                                        <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
+                                            <small class="text-muted">接单人:${orderfrom.user.userName}</small>
+                                        </div>
+                                        <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
+                                            <small class="text-muted">信用度:${orderfrom.user.credit}</small>
+                                        </div>
                                     </div>
-                                    <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
-                                        <small class="text-muted">接单人：${orderfrom.user.userName}</small>
+                            </c:if>
+                            <div style="margin-top:1px;height: 30px;width: 100%;border:black 1px;">
+                                <c:if test="${orderfrom.user.userName!=null}">
+                                    <div style="margin-left: 2px;float:left;margin-left: 0.5%;width: 24%;display:inline;border:1px red;">
+                                        <small class="text-muted">name:${orderfrom.user.userName}</small>
                                     </div>
-                                    <div style="margin-left: 2px;float:left;margin-left: 1%;height: 24px;width: 24%;display:inline;border:1px red;">
-                                        <small class="text-muted">接单人手机号码：${orderfrom.user.phoneNumber}</small>
+                                    <div style="margin-left: 2px;float:left;margin-left: 0.5%;width: 24%;display:inline;border:1px red;">
+                                        <small class="text-muted">tel:${orderfrom.user.phoneNumber}</small>
                                     </div>
-                                    <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
-                                        <small class="text-muted">信用度：${orderfrom.user.credit}</small>
+                                    <div style="margin-left: 2px;float:left;margin-left: 0.5%;width: 24%;display:inline;border:1px red;">
+                                        <small class="text-muted" style="color: green;font-family: 'YaHei Consolas Hybrid','Consolas','Microsoft YaHei','Malgun Gothic', 'Segoe UI', 'Helvetica, Arial'">派件中！！</small>
                                     </div>
+                                </c:if>
+                                <div style="margin-left: 2px;float:right;margin-left: 1%;width: 24%;display:inline;border:1px red;">
+                                    <button id="sure_orderform" class="btn btn-success btn-block" href="#"  >确认收获</button>
                                 </div>
                             </div>
-                            <!--备注-->
-                            <div style="width: 12%;float: right;text-align: center;margin-right: 1%;" >
-                                <textarea class="text-muted" id="remark" name="remark" readonly="readonly" style="resize:none;width: 141px;height: 53px;background-color: whitesmoke;border: 0px" >备注:${orderfrom.remark}</textarea>
-                            </div>
+                        </div>
                         </div>
                     </li>
                 </c:forEach>
@@ -144,4 +163,8 @@
     </div>
 
 </c:if>
-
+<script>
+    function showInfo_form(credit,code,phonenumber,name,remark){
+        alert("委托人信用度:"+credit+"\n取货码："+code+"\n取货手机："+phonenumber+"\n取货姓名:"+name+"\n备注:"+remark);
+    }
+</script>

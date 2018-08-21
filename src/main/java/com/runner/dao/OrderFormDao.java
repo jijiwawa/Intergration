@@ -46,7 +46,8 @@ public interface OrderFormDao {
     public List<OrderForm> getPickOrderForm_info(int trustee_id);
     //获取接单信息
     public List<OrderForm> getDeputeOrderForm_info(int client_id);
-
+    //获取该用户发单次数
+    public int getPutOrderNum(int client_id);
      /**
      * 改
      */

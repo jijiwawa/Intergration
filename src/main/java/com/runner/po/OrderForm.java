@@ -170,4 +170,9 @@ public class OrderForm {
         String date = df.format(this.depute_time);
         return date;
     }
+    public String getLocalCreateTime1() {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd HH:mm:ss");//设置日期格式
+        String date = df.format(this.take_time);
+        return date;
+    }
 }

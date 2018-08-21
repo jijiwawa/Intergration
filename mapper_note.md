@@ -6,3 +6,5 @@
         select * from dbe.user where user_name=#{username}
 </select>
 
+#解决TimeStamp数据类型查出来不是null
+url=jdbc:mysql://www.dengrong.xin:3307/dbe?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull

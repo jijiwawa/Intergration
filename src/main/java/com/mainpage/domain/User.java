@@ -12,6 +12,7 @@ public class User {
     private byte type;
     private String password;
     private double credit;
+    private Integer trade_num;
 
     public int getId() {
         return id;

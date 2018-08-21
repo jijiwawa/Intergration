@@ -70,6 +70,10 @@ public class OrderFormServiceImpl implements OrderFormService {
         return orderFormDao.getDeputeOrderForm_info(client_id);
     }
 
+    public int getPutOrderNum(int client_id) {
+        return orderFormDao.getPutOrderNum(client_id);
+    }
+
     /**
      *增
      */

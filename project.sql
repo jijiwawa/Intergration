@@ -1,3 +1,5 @@
+update orderform set take_time='1970-01-01 00:00:00' where take_time is null
+alter table user add trade_num int(4) default 0
 create table user
 (
   id int(11) not null auto_increment comment '用户唯一ID',
@@ -9,6 +11,7 @@ create table user
   type tinyint not null default 0 comment '用户类型:0表示普通用户，1表示管理员，2表示社团管理人',
   password varchar(50) not null comment '密码',
   credit decimal default 100.0 comment '信誉度',
+  trade_num int(4) default 0 comment '接单数',
   primary key(id)
 )engine =InnoDB auto_increment=12 default charset =utf8;
 

@@ -62,26 +62,35 @@
         <h3 class="panel-title" align="center">发布订单请求</h3>
     </div>
     <div class="panel-body">
-            <div class="form-group" >
-                <label >快递公司</label>
-                <select class="form-control" id="express_company" name="express_company">
-                    <option value="default">---请选择---</option>
-                    <option value="顺丰">顺丰</option>
-                    <option value="申通">申通</option>
-                    <option value="圆通">圆通</option>
-                    <option value="天天">天天</option>
-                    <option value="EMS">EMS</option>
-                    <option value="中通">中通</option>
-                    <option value="韵达">韵达</option>
-                    <option value="万象物流">万象物流</option>
-                    <option value="菜鸟驿站">菜鸟驿站</option>
-                </select>
+        <div class="row" style="margin-bottom: 1%;">
+            <div class="col-md-6">
+                <div class="form-group" >
+                    <label >快递公司</label>
+                    <select class="form-control" id="express_company" name="express_company">
+                        <option value="default">---请选择---</option>
+                        <option value="顺丰">顺丰</option>
+                        <option value="申通">申通</option>
+                        <option value="圆通">圆通</option>
+                        <option value="天天">天天</option>
+                        <option value="EMS">EMS</option>
+                        <option value="中通">中通</option>
+                        <option value="韵达">韵达</option>
+                        <option value="万象物流">万象物流</option>
+                        <option value="菜鸟驿站">菜鸟驿站</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-md-6">
                 <label >快递单号</label>
                 <input type="text" class="form-control" id="order_num" name="order_num">
             </div>
+        </div>
 
-            <div class="form-group">
-                <label >取货地点</label>
+        <div class="row" style="margin-bottom: 1%;">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label >取货地点</label>
                     <select class="form-control" id="pickup_ads" name="pickup_ads">
                         <option value="default">---请选择---</option>
                         <option value="上大浴室对面">上大浴室对面</option>
@@ -89,56 +98,76 @@
                         <option value="新世纪">新世纪</option>
                         <option value="其他">其他</option>
                     </select>
-            </div>
-
-            <div class="form-group">
-                <label >最晚取货时间</label>
-                    <input type="time" class="form-control" id="latest_time" name="latest_time"/>
-            </div>
-
-            <div class="form-group">
-                <label >货物大小</label>
-                <select class="form-control" id="goods_size" name="goods_size">
-                    <option value="大">大</option>
-                    <option value="中">中</option>
-                    <option value="小">小</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label >支付金额</label>
-                <input type="text" class="form-control" id="paymoney" name="paymoney">
-            </div>
-
-            <div class="form-group">
-                <label >取货码</label>
-                <input type="text" class="form-control" id="pick_code" name="pick_code"  >
-            </div>
-
-            <div class="form-group">
-                <label >取货手机号码</label>
-                <input type="tel" class="form-control" id="pick_phonenum" name="pick_phonenum" maxlength="11" >
-             </div>
-
-            <div class="form-group">
-                <label >取货姓名</label>
-                <input type="text" class="form-control" id="pick_name" name="pick_name"  >
-            </div>
-
-            <div class="form-group">
-                <label >备注</label>
-                <textarea class="form-control" id="remark" name="remark"  cols="30" rows="10"></textarea>
-            </div>
-            <p style="text-align: right;color: red;position: absolute" id="info"></p>
-                <div class="row" style="margin-bottom: 1%;">
-                    <div class="col-md-6">
-                        <button id="refresh" class="btn btn-success btn-block" style="display:inline;width: 104%;">重置</button>
-                    </div>
-                    <div class="col-md-6">
-                        <button id="return" class="btn btn-success btn-block" style="float: right;background-color: red;width: 104%;" onclick="window.location.href = '/intergration/updateOrderformShow'" >返回</button>
-                    </div>
                 </div>
-            <button id="creat_order" class="btn btn-success btn-block">发单</button>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label >最晚取货时间</label>
+                    <input type="time" class="form-control" id="latest_time" name="latest_time"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 1%;">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label >货物大小</label>
+                    <select class="form-control" id="goods_size" name="goods_size">
+                        <option value="大">大</option>
+                        <option value="中">中</option>
+                        <option value="小">小</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label >支付金额</label>
+                    <input type="text" class="form-control" id="paymoney" name="paymoney">
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 1%;">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label >取货码</label>
+                    <input type="text" class="form-control" id="pick_code" name="pick_code"  >
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label >取货手机号码</label>
+                    <input type="tel" class="form-control" id="pick_phonenum" name="pick_phonenum" maxlength="11" >
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label >取货姓名</label>
+                    <input type="text" class="form-control" id="pick_name" name="pick_name"  >
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 1%;">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label >备注</label>
+                    <textarea class="form-control" id="remark" name="remark" ></textarea>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: left;color: red;" id="info"></p>
+
+        <div class="row" style="margin-bottom: 1%;">
+            <div class="col-md-6">
+                <button id="refresh" class="btn btn-success btn-block" style="display:inline;width: 104%;">重置</button>
+            </div>
+            <div class="col-md-6">
+                <button id="return" class="btn btn-success btn-block" style="float: right;background-color: red;width: 104%;" onclick="window.location.href = '/intergration/updateOrderformShow'" >返回</button>
+            </div>
+        </div>
+        <button id="creat_order" class="btn btn-success btn-block">发单</button>
     </div>
 </div>
 <!-- 引入footer文件 -->
@@ -187,6 +216,8 @@
                             window.location.href = "/intergration/updateOrderformShow"
                         } else if(data.orderState.trim()=="2"){
                             $("#info").text("提示：余额不足");
+                        } else if(data.orderState.trim()=="3"){
+                            $("#info").text("提示：已发单三次，不能再发单");
                         }
                     }
                 });
