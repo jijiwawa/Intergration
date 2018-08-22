@@ -258,9 +258,9 @@ public class OrderFormController {
     /**
      * 点击确认收获按钮
      */
-    @RequestMapping("/afterGetGood")
+    @RequestMapping("/afterComment")
     @ResponseBody
-    public Object afterGetGood(HttpServletRequest request, HttpSession HttpSession){
+    public Object afterComment(HttpServletRequest request, HttpSession HttpSession){
         //3.确认后，发单者立刻评价接单者，通过公式计算接单着的信用度
         //首先进行评价，获取评价的分数grade和评语 comment
         //计算信用度

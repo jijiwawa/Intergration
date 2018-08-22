@@ -54,7 +54,7 @@
 <!-- 引入header文件 -->
 <%@ include file="../header.jsp"%>
 
-<div class="panel panel-default" style="width: 70%;margin:1% 2% 5% 5%;float: left;" onload="updateOrderForm_for_1s()" id="updateOrderForm_div">
+<div class="panel panel-default" style="width: 65%;margin:1% 2% 5% 5%;float: left;" id="updateOrderForm_div">
     <!-- 检索 -->
     <div class="panel-heading" style="background-color: white">
         <a style="margin-right: 2%" class="btn <c:if test="${shouldOrderByTime==0}">btn-success</c:if>  btn-small"
@@ -78,7 +78,7 @@
                             <div style="margin-left: 0.5%;height:24px;width: 48%;display:inline;border:yellow 1px;">
                                 <small class="text-muted">发单时间：${orderfrom.localCreateTime}</small>
                             </div>
-                            <div style="float:right;margin-left: 0.5%;height:24px;width: 50%;display:inline;border:black 1px;">
+                            <div style="float:right;margin-left: 0.5%;height:24px;width: 48%;display:inline;border:black 1px;">
                                 <small class="text-muted">最晚取递时间：${orderfrom.latest_time}</small>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <!--接单按钮-->
-                    <div style="width: 6%;float: right;text-align: center;margin-right: 2px;margin-top: 8px;">
+                    <div style="width: 6%;float: right;text-align: center;margin-right: 1%;margin-top: 8px;">
                         <button id="creat_order_${orderfrom.id}" class="btn btn-success btn-block" href="#" onclick="pickOrderForm(${orderfrom.id})" >接单</button>
                     </div>
                     <!--备注-->

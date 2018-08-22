@@ -39,7 +39,7 @@
 </script>
 <c:if test="${!empty userId}">
 
-    <div class="container-fluid" style="width: 20%;margin:1% 2% 1% 0%;height: 385px;float: right" >
+    <div class="container-fluid" style="width: 25%;margin:1% 2% 1% 0%;height: 385px;float: right" >
         <!-- 检索 -->
         <div class="panel-heading" style="background-color: white">
             <a style="margin-right: 2%" class="btn <c:if test="${isPickOrderForm==1}">btn-success</c:if>  btn-small"
@@ -118,7 +118,7 @@
                                 <c:if test="${orderfrom.user.userName!=null}">
                                     <div style="margin-top:1px;height: 30px;width: 100%;border:black 1px;">
                                         <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 48%;display:inline;border:1px red;">
-                                            <small class="text-muted">接单时间:${orderfrom.localCreateTime1}</small>
+                                            <small class="text-muted" style="width: auto">接单时间:${orderfrom.localCreateTime1}</small>
                                         </div>
                                         <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;">
                                             <small class="text-muted">接单人:${orderfrom.user.userName}</small>
@@ -141,7 +141,7 @@
                                     </div>
                                 </c:if>
                                 <div style="margin-left: 2px;float:right;margin-left: 1%;width: 24%;display:inline;border:1px red;">
-                                    <button  class="btn btn-success btn-block <c:if test="${orderfrom.order_state==0}" >disabled</c:if>" style="<c:if test="${orderfrom.order_state==0}">cursor:not-allowed;</c:if>" onclick="afterGetGood(${orderfrom.id})">确认收货</button>
+                                    <button  class="btn btn-success btn-block <c:if test="${orderfrom.order_state==0}" >disabled</c:if>" style="<c:if test="${orderfrom.order_state==0}">cursor:not-allowed;</c:if>" <c:if test="${orderfrom.order_state==1}">onclick="sureGetTheGood(${orderfrom.id})"</c:if>>确认收货</button>
                                 </div>
                             </div>
                         </div>
@@ -153,16 +153,16 @@
     </div>
     <!--历史订单-->
     <!-- 发订单按钮 window.location.href='#'-->
-    <div class="panel panel-default" id="sidebar1" style="width: 20%;margin:0% 2% 0% 0%;float: right">
+    <div class="panel panel-default" id="sidebar1" style="width: 25%;margin:0% 2% 0% 0%;float: right">
         <div class="panel-heading" style="background-color: white;text-align: center">
             <button id="history_orderform" class="btn btn-success btn-block" onclick="updateOrderForm_for_1s()">历史订单</button>
         </div>
         <div class="panel-heading" style="background-color: white;text-align: center">
             <button id="signUp" class="btn btn-success btn-block" onclick="window.location.href='/intergration/toSign_order'">申请发单</button>
         </div>
-        <div class="panel-heading" style="background-color: white;text-align: center">
-            <button id="test" class="btn btn-success btn-block">test</button>
-        </div>
+        <%--<div class="panel-heading" style="background-color: white;text-align: center">--%>
+            <%--<button id="test" class="btn btn-success btn-block">test</button>--%>
+        <%--</div>--%>
     </div>
 
 </c:if>
@@ -170,26 +170,32 @@
     function showInfo_form(credit,code,phonenumber,name,remark){
         alert("委托人信用度:"+credit+"\n取货码："+code+"\n取货手机："+phonenumber+"\n取货姓名:"+name+"\n备注:"+remark);
     }
-    function afterGetGood(id) {
-        $("#myModalLabel").text("评价");
-        $('#myModal').modal();
+    function afterComment() {
+        var orderform_id1=$("#orderformid").val();
         var grade1=$("input[name='radio']:checked").val();
         var comment1=$("#txt_statu").val();
-        alert(" "+grade1+".."+comment1+" .."+id)
+        // alert(" "+grade1+".."+comment1+" .."+orderform_id1);
+        // console.log(orderform_id1+","+grade1+","+comment1);
         $.ajax({
             type: "post",
-            url: "/intergration/afterGetGood",
-            data: {"orderform_id": id},
+            url: "/intergration/afterComment",
+            data: {"orderform_id": orderform_id1,
+                   "grade":grade1,
+                   "comment":comment1},
             dataType: "json",
             success: function (data) {
                 if (data.success_state.trim() == "1") {
                     // 弹出评价跑腿者按钮
-                    //window.location.href = "/intergration/orderFormReply_for_client"
+                    window.location.href = "/intergration/updateOrderForm"
                 }
             }
         });
     }
 
+    function sureGetTheGood(id){
+        $('#orderformid').val(id);
+        $('#myModal').modal('show');
+    }
     $("#test").click(function () {
         alert("test");
     });

@@ -9,6 +9,10 @@
             </div>
             <div class="modal-body">
                 <div style="margin-bottom: 10px">
+                    <label for="orderformid">单号</label>
+                    <input type="text" id="orderformid">
+                </div>
+                <div style="margin-bottom: 10px">
                     <label for="radio_60">评分</label>
                 </div>
                 <div>
@@ -48,7 +52,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
-                <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal" onclick="afterGetGood(${orderfrom.id})"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal" onclick="afterComment()"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
             </div>
         </div>
     </div>
