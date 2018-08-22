@@ -64,7 +64,7 @@
                             <p class="form-control-static">${user.property}</p>
                         </div>
                     </div>
-
+                    <a class="btn btn-default" href="/intergration/todo" role="button">充值</a>
                 </form>
 
         </div>
