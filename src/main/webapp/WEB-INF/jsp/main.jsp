@@ -61,19 +61,19 @@
 <div class="row">
     <div class="col-xs-6 col-md-2">
     </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-            <img src="https://www.baidu.com/img/bd_logo1.png" >
+    <div class="col-xs-6 col-md-3"  >
+        <div class="thumbnail" style="height: 500px">
+            <img src="/intergration/img/icon/runner.jpg" style="height: 300px">
             <div class="caption">
                 <h3>跑腿服务</h3>
-                <p>todo</p>
+                <p>快递跑腿平台</p>
                 <a href="/intergration/updateOrderformShow" class="btn btn-primary" role="button">进入</a>
             </div>
         </div>
     </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="thumbnail">
-            <img src="https://www.baidu.com/img/bd_logo1.png" >
+    <div class="col-xs-6 col-md-3" >
+        <div class="thumbnail" style="height: 500px">
+            <img src="/intergration/img/icon/news.jpeg" style="height: 300px">
             <div class="caption">
                 <h3>校园时事</h3>
                 <p>一个传播校园信息的平台</p>

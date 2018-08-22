@@ -49,15 +49,12 @@ a{
 <footer class="footer">
     <div class="container">
         一个提供校园跑腿服务和校园信息的平台
-        <br/><br/><br/>
-        <p>Designed by </span> 。。。</p>
     </div>
     <div class="info">
-        <p style="text-align: center;font-size: 16px;">友情链接</p>
+        <p style="text-align: center;font-size: 16px;">界面支持</p>
         <ul >
-            <li><a href="https://github.com/">Github</a></li>
-            <li><a href="https://www.stackoverflow.com/">Stack Overflow</a></li>
-            <li><a href="https://www.v2ex.com/">v2ex</a></li>
+            <li><a href="http://www.bootcss.com/">Bootstrap</a></li>
+            <li><a href="https://pandao.github.io/editor.md/">Editor.md</a></li>
         </ul>
     </div>
     <div class="info" >

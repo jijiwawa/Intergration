@@ -63,8 +63,8 @@
         <a class="btn <c:if test="${shouldOrderByTime==1}">btn-success</c:if> btn-small"
            href="/intergration/forum/main?pageIndex=1&shouldOrderByTime=1">热评</a>
     </div>
-
-    <ul class="list-group" style="width: 100%">
+    <div style="height: 580px;">
+        <ul class="list-group" style="width: 100%;">
         <c:forEach items="${topics}" var="topic">
             <li class="list-group-item">
                 <div style="height: 50px">
@@ -84,7 +84,8 @@
                 </div>
             </li>
         </c:forEach>
-    </ul>
+        </ul>
+    </div>
     <div>
         共<b>${pageUtil.pageNumber}</b>条
         <a class="btn  btn-small" href="/intergration/forum/main?pageIndex=1&shouldOrderByTime=${shouldOrderByTime}" >首页</a>
