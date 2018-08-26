@@ -48,6 +48,8 @@ public interface OrderFormDao {
     public List<OrderForm> getDeputeOrderForm_info(int client_id);
     //获取该用户发单次数
     public int getPutOrderNum(int client_id);
+    //获取用户的历史订单
+    public List<OrderForm> getHistoryOrderForm(int userId);
      /**
      * 改
      */

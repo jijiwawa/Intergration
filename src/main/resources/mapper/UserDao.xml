@@ -20,9 +20,21 @@
 <select id="getUserByUserName" resultType="com.mainpage.domain.User" parameterType="java.lang.String">
         select * from dbe.user where user_name=#{username}
     </select>
-
-<select id="getUserByUserId" resultType="com.mainpage.domain.User" parameterType="java.lang.Integer">
-        select * from dbe.user where id=#{id}
+<resultMap id="getUserInfo" type="com.mainpage.domain.User">
+    <id property="id" column="id"/>
+    <result property="phoneNumber" column="phone_number"/>
+    <result property="userName" column="user_name"/>
+    <result property="isMale" column="is_male"/>
+    <result property="property" column="property"/>
+    <result property="headSculpture" column="head_sculpture"/>
+    <result property="type" column="type"/>
+    <result property="password" column="password"/>
+    <result property="credit" column="credit"/>
+    <result property="trade_num" column="trade_num"/>
+</resultMap>
+<select id="getUserByUserId" resultMap="getUserInfo" parameterType="java.lang.Integer">
+        select id,phone_number,user_name,is_male,property,head_sculpture,type,password,credit,trade_num
+        from dbe.user where id=#{id}
     </select>
 
     <update id="updateUserById" parameterType="com.mainpage.domain.User">
@@ -45,6 +57,12 @@
             </if>
             <if test="headSculpture != null" >
                 head_sculpture = #{headSculpture},
+            </if>
+            <if test="trade_num != null" >
+                trade_num = #{trade_num},
+            </if>
+            <if test="credit != null" >
+                credit = #{credit},
             </if>
             <if test="type != null" >
                 type = #{type}

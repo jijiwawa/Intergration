@@ -69,6 +69,10 @@ public class OrderFormServiceImpl implements OrderFormService {
     public List<OrderForm> getDeputeOrderForm_info(int client_id) {
         return orderFormDao.getDeputeOrderForm_info(client_id);
     }
+    //获取用户的历史订单
+    public List<OrderForm> getHistoryOrderForm(int userId){
+        return orderFormDao.getHistoryOrderForm(userId);
+    }
 
     public int getPutOrderNum(int client_id) {
         return orderFormDao.getPutOrderNum(client_id);

@@ -45,9 +45,10 @@
                     <%--<label for="txt_departmentlevel">部门级别</label>--%>
                     <%--<input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" placeholder="部门级别">--%>
                 <%--</div>--%>
+                <p style="text-align: left;color: red;" id="info2"></p>
                 <div class="form-group" style="margin-top: 20px;">
-                    <label for="txt_statu">评语</label>
-                    <input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="请评价跑腿者" style="height: 50px">
+                    <label for="comment">评语</label>
+                    <input type="text" name="txt_statu" class="form-control" id="comment" placeholder="请评价跑腿者" style="height: 50px">
                 </div>
             </div>
             <div class="modal-footer">

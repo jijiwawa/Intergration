@@ -5,9 +5,9 @@ import com.forum.util.PageUtil;
 import com.mainpage.domain.User;
 import com.mainpage.service.impl.UserServiceImpl;
 import com.runner.po.OrderForm;
-import com.runner.service.OrderFormService;
 import com.runner.service.impl.OrderFormServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,8 +79,14 @@ public class OrderFormController {
         List<OrderForm> orderForms_pick;
         List<OrderForm> orderForms_put;
         //接单信息
-        orderForms_put=orderFormService.getDeputeOrderForm_info(user.getId());
-        orderForms_pick=orderFormService.getPickOrderForm_info(user.getId());
+        if(user!=null) {
+            orderForms_put = orderFormService.getDeputeOrderForm_info(user.getId());
+            orderForms_pick = orderFormService.getPickOrderForm_info(user.getId());
+        }
+        else{
+            orderForms_put=null;
+            orderForms_pick=null;
+        }
         if(isPickOrderForm==1){
             isPickOrderForm=1;
         }else{
@@ -263,15 +269,25 @@ public class OrderFormController {
     public Object afterComment(HttpServletRequest request, HttpSession HttpSession){
         //3.确认后，发单者立刻评价接单者，通过公式计算接单着的信用度
         //首先进行评价，获取评价的分数grade和评语 comment
-        //计算信用度
-
-        //1.将钱打给接单者，*90%，updateUser
-        Integer orderform_id = Integer.valueOf(request.getParameter("orderform_id"));
-        Integer client_id = (Integer) HttpSession.getAttribute("userId");
-        HashMap<String, String> res = new HashMap<String, String>();
+        int orderform_id = Integer.valueOf(request.getParameter("orderform_id"));
+        int grade = Integer.valueOf(request.getParameter("grade"));
+        String comment = request.getParameter("comment");
         OrderForm orderForm = orderFormService.findOrderFormById(orderform_id);
+        orderForm.setTrustee_grade(grade);
+        orderForm.setTrustee_comment(comment);
+        //1.将钱打给接单者，*90%，updateUser
+        HashMap<String, String> res = new HashMap<String, String>();
         User user = userService.getUserByUserId(orderForm.getTrustee_id());
         user.setProperty(user.getProperty().add(orderForm.getPaymoney().multiply(new BigDecimal(0.9))));
+        //计算接单者信用度------原本信用度乘以交易数加1，再+这次的信用度，除以交易数加2
+        Double credit = (user.getCredit()*(user.getTrade_num()+1)+grade)/(user.getTrade_num()+2);
+        user.setCredit(credit);
+        // 交易数加1
+        user.setTrade_num(user.getTrade_num()+1);
+        // 接单者交易数加1
+        User userjiedan = userService.getUserByUserId(orderForm.getTrustee_id());
+        userjiedan.setTrade_num(userjiedan.getTrade_num()+1);
+        userService.updateUser(userjiedan);
         userService.updateUser(user);
         //2.更改订单状态为2
         orderForm.setOrder_state(2);
@@ -280,5 +296,41 @@ public class OrderFormController {
         res.put("success_state","1");
         // 接单者在历史订单中评价发单者，评价后同样通过公式计算发单者的信用度
         return res;
+    }
+    /**
+     * 评价发单者
+     */
+    @RequestMapping("/afterCommentClient")
+    @ResponseBody
+    public Object afterCommentClient(HttpServletRequest request, HttpSession HttpSession){
+        HashMap<String, String> res = new HashMap<String, String>();
+        //获取传过来的信息
+        Integer orderform_id = Integer.valueOf(request.getParameter("orderform_id"));
+        Integer grade = Integer.valueOf(request.getParameter("grade"));
+        String comment = request.getParameter("comment");
+        //更新orderForm信息
+        OrderForm orderForm = orderFormService.findOrderFormById(orderform_id);
+        orderForm.setClient_grade(grade);
+        orderForm.setClient_comment(comment);
+        // 更新发单人信用度
+        User user = userService.getUserByUserId(orderForm.getClient_id());
+        user.setCredit((user.getCredit()*(user.getTrade_num())+grade)/(user.getTrade_num()+1));
+        userService.updateUser(user);
+        orderFormService.updateOrderForm(orderForm);
+        res.put("success_state","1");
+        return res;
+    }
+
+    /**
+     *历史订单
+     */
+    @RequestMapping("/toHistoryOrderForm")
+    public String getHistoryOrderForm(HttpSession httpSession, HttpServletRequest request){
+        Integer userId = (Integer) httpSession.getAttribute("userId");
+        List<OrderForm> historyOrderForm = orderFormService.getHistoryOrderForm(userId);
+        User user = userService.getUserByUserId(userId);
+        httpSession.setAttribute("user",user);
+        httpSession.setAttribute("history_orderform",historyOrderForm);
+        return "runner/historyform_runner";
     }
 }

@@ -30,4 +30,10 @@ public class UserMapperTest extends BaseTest {
         }
     }
 
+    @Test
+    public void findUser(){
+        User user = userService.getUserByUserId(28);
+        System.out.println(user);
+    }
+
 }

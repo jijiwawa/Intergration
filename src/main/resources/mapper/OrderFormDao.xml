@@ -6,9 +6,35 @@
     <!--
     查
     -->
+    <!--查所有order_state=0的订单，用于订单的显示-->
+    <resultMap id="showOrderFormInfo" type="com.runner.po.OrderForm">
+        <id property="id" column="id"/>
+        <result property="order_num" column="order_num"/>
+        <result property="express_company" column="express_company"/>
+        <result property="pickup_ads" column="pickup_ads"/>
+        <result property="latest_time" column="latest_time"/>
+        <result property="goods_size" column="goods_size"/>
+        <result property="paymoney" column="paymoney"/>
+        <result property="client_id" column="client_id"/>
+        <result property="remark" column="remark"/>
+        <result property="depute_time" column="depute_time"/>
+        <result property="trustee_id" column="trustee_id"/>
+        <result property="take_time" column="take_time"/>
+        <result property="pick_code" column="pick_code"/>
+        <result property="pick_phonenum" column="pick_phonenum"/>
+        <result property="pick_name" column="pick_name"/>
+        <result property="order_state" column="order_state"/>
+        <result property="client_grade" column="client_grade"/>
+        <result property="client_comment" column="client_comment"/>
+        <result property="trustee_grade" column="trustee_grade"/>
+        <result property="trustee_comment" column="trustee_comment"/>
+    </resultMap>
     <!--根据id查询订单-->
-    <select id="findOrderFormById" parameterType="java.lang.Integer" resultType="com.runner.po.OrderForm" >
-        select * from dbe.orderform where id=#{id};
+    <select id="findOrderFormById" parameterType="java.lang.Integer" resultMap="showOrderFormInfo" >
+        select  id,order_num,express_company,pickup_ads,latest_time,goods_size,paymoney,client_id,
+        remark,depute_time,trustee_id,take_time,pick_code,pick_phonenum,pick_name,order_state,
+        client_grade,client_comment,trustee_grade,trustee_comment
+        from dbe.orderform where id=#{id};
     </select>
     <!--根据委托人id查询订单-->
     <select id="findOrderFormByClientId" parameterType="java.lang.Integer" resultType="com.runner.po.OrderForm" >
@@ -141,6 +167,14 @@
         where trustee_id=#{trustee_id} and order_state=1
         order by take_time desc;
     </select>
+    <!--历史订单-->
+    <select id="getHistoryOrderForm" resultMap="showOrderFormInfo" parameterType="int">
+        select  id,order_num,express_company,pickup_ads,latest_time,goods_size,paymoney,client_id,
+        remark,depute_time,trustee_id,take_time,pick_code,pick_phonenum,pick_name,order_state,
+        client_grade,client_comment,trustee_grade,trustee_comment
+        from dbe.orderform where order_state=2 and (client_id=#{userId} or trustee_id=#{userId})
+        order by take_time desc ;
+    </select>
     <!--
     删
     -->
@@ -200,6 +234,18 @@
             </if>
             <if test="order_state != null" >
                 order_state = #{order_state},
+            </if>
+            <if test="client_grade != null" >
+                client_grade = #{client_grade},
+            </if>
+            <if test="client_comment != null" >
+                client_comment = #{client_comment},
+            </if>
+            <if test="trustee_grade != null" >
+                trustee_grade = #{trustee_grade},
+            </if>
+            <if test="trustee_comment != null" >
+                trustee_comment = #{trustee_comment},
             </if>
         </set>
         where id=#{id}

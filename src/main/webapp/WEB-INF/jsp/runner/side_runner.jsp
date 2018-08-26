@@ -155,7 +155,7 @@
     <!-- 发订单按钮 window.location.href='#'-->
     <div class="panel panel-default" id="sidebar1" style="width: 25%;margin:0% 2% 0% 0%;float: right">
         <div class="panel-heading" style="background-color: white;text-align: center">
-            <button id="history_orderform" class="btn btn-success btn-block" onclick="updateOrderForm_for_1s()">历史订单</button>
+            <button id="history_orderform" class="btn btn-success btn-block" onclick="window.location.href='/intergration/toHistoryOrderForm'">历史订单</button>
         </div>
         <div class="panel-heading" style="background-color: white;text-align: center">
             <button id="signUp" class="btn btn-success btn-block" onclick="window.location.href='/intergration/toSign_order'">申请发单</button>
@@ -173,29 +173,36 @@
     function afterComment() {
         var orderform_id1=$("#orderformid").val();
         var grade1=$("input[name='radio']:checked").val();
-        var comment1=$("#txt_statu").val();
+        var comment1=$("#comment").val();
         // alert(" "+grade1+".."+comment1+" .."+orderform_id1);
         // console.log(orderform_id1+","+grade1+","+comment1);
-        $.ajax({
-            type: "post",
-            url: "/intergration/afterComment",
-            data: {"orderform_id": orderform_id1,
-                   "grade":grade1,
-                   "comment":comment1},
-            dataType: "json",
-            success: function (data) {
-                if (data.success_state.trim() == "1") {
-                    // 弹出评价跑腿者按钮
-                    window.location.href = "/intergration/updateOrderForm"
+        if(grade1==''){
+            $("#info2").text("提示：评分不能为空！！");
+        }else{
+            $.ajax({
+                type: "post",
+                url: "/intergration/afterComment",
+                data: {"orderform_id": orderform_id1,
+                    "grade":grade1,
+                    "comment":comment1},
+                dataType: "json",
+                success: function (data) {
+                    if (data.success_state.trim() == "1") {
+                        window.location.href = "/intergration/updateOrderformShow"
+                    }
+                    else{
+                        window.location.href = "/intergration/updateOrderformShow"
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     function sureGetTheGood(id){
         $('#orderformid').val(id);
         $('#myModal').modal('show');
     }
+
     $("#test").click(function () {
         alert("test");
     });

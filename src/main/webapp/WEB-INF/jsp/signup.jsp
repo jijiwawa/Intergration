@@ -81,7 +81,7 @@
 
             <div class="form-group">
                 <label >手机号</label>
-                    <input type="tel" class="form-control" id="tel" name="tel" required="required">
+                    <input type="tel" class="form-control" id="tel" name="tel" required="required" maxlength="11">
             </div>
             <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
 

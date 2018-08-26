@@ -14,6 +14,14 @@ public class User {
     private double credit;
     private Integer trade_num;
 
+    public Integer getTrade_num() {
+        return trade_num;
+    }
+
+    public void setTrade_num(Integer trade_num) {
+        this.trade_num = trade_num;
+    }
+
     public int getId() {
         return id;
     }
@@ -84,5 +92,21 @@ public class User {
 
     public void setCredit(double credit) {
         this.credit = credit;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", userName='" + userName + '\'' +
+                ", isMale=" + isMale +
+                ", property=" + property +
+                ", headSculpture='" + headSculpture + '\'' +
+                ", type=" + type +
+                ", password='" + password + '\'' +
+                ", credit=" + credit +
+                ", trade_num=" + trade_num +
+                '}';
     }
 }

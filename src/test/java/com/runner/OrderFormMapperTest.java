@@ -7,6 +7,7 @@ import com.runner.po.OrderForm;
 import com.runner.service.OrderFormService;
 import com.runner.service.impl.OrderFormServiceImpl;
 import org.apache.ibatis.session.SqlSession;
+import org.aspectj.weaver.ast.Or;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -69,9 +70,9 @@ public class OrderFormMapperTest extends BaseTest{
     }
     @Test
     public void addOrderFormTest4() {
-        List<OrderForm> orderForm = orderFormService.getPickOrderForm_info(35);
-        List<OrderForm> orderForm1 = orderFormService.getDeputeOrderForm_info(28);
-        System.out.println(orderForm.get(1).getUser().getPhoneNumber());
-        System.out.println(orderForm1.get(0).getUser().getPhoneNumber());
+        List<OrderForm> list = orderFormService.getHistoryOrderForm(40);
+        for (OrderForm a:list) {
+            System.out.println(a);
+        }
     }
 }

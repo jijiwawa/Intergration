@@ -28,6 +28,42 @@ public class OrderForm {
     private String pick_name;                //取货所需姓名
     private Integer order_state ;            // 订单状态0待接单，1被接单，运送中，2已收货，3废弃或者暂时不用
     private User user;               //若本人是接单人，则该User是发单人，反之
+    private Integer client_grade;
+    private String client_comment;
+    private Integer trustee_grade;
+    private String trustee_comment;
+
+    public Integer getClient_grade() {
+        return client_grade;
+    }
+
+    public void setClient_grade(Integer client_grade) {
+        this.client_grade = client_grade;
+    }
+
+    public String getClient_comment() {
+        return client_comment;
+    }
+
+    public void setClient_comment(String client_comment) {
+        this.client_comment = client_comment;
+    }
+
+    public Integer getTrustee_grade() {
+        return trustee_grade;
+    }
+
+    public void setTrustee_grade(Integer trustee_grade) {
+        this.trustee_grade = trustee_grade;
+    }
+
+    public String getTrustee_comment() {
+        return trustee_comment;
+    }
+
+    public void setTrustee_comment(String trustee_comment) {
+        this.trustee_comment = trustee_comment;
+    }
 
     public User getUser() {
         return user;
@@ -174,5 +210,32 @@ public class OrderForm {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-M-dd HH:mm:ss");//设置日期格式
         String date = df.format(this.take_time);
         return date;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderForm{" +
+                "id=" + id +
+                ", order_num='" + order_num + '\'' +
+                ", express_company='" + express_company + '\'' +
+                ", pickup_ads='" + pickup_ads + '\'' +
+                ", latest_time='" + latest_time + '\'' +
+                ", goods_size='" + goods_size + '\'' +
+                ", paymoney=" + paymoney +
+                ", client_id=" + client_id +
+                ", remark='" + remark + '\'' +
+                ", depute_time=" + depute_time +
+                ", trustee_id=" + trustee_id +
+                ", take_time=" + take_time +
+                ", pick_code='" + pick_code + '\'' +
+                ", pick_phonenum='" + pick_phonenum + '\'' +
+                ", pick_name='" + pick_name + '\'' +
+                ", order_state=" + order_state +
+                ", user=" + user +
+                ", client_grade=" + client_grade +
+                ", client_comment='" + client_comment + '\'' +
+                ", trustee_grade=" + trustee_grade +
+                ", trustee_comment='" + trustee_comment + '\'' +
+                '}';
     }
 }
