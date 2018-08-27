@@ -79,12 +79,33 @@
                         </div>
                         <!--第二行-->
                         <div style="height: 32px;width: 100%;border:black 1px;">
-                            <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 48%;display:inline;border:1px red;background-color: #00a8c6">
+                            <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;background-color: #00a8c6">
                                 <small class="text-muted">单号：${orderfrom.order_num}</small>
                             </div>
-                            <div style="margin-left: 2px;float:right;margin-left: 0.5%;height: 30px;width: 48%;display:inline;">
-                                <button id="creat_order_${orderfrom.id}" class="btn btn-success btn-block" onclick="showHistoryFormInfo('${orderfrom.express_company}','${orderfrom.goods_size}','${orderfrom.paymoney}')"  style="height: auto;">详细信息</button>
-                            </div>
+                            <!--用户是发单人-->
+                            <c:if test="${orderfrom.client_id==userId}">
+                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;background-color: #00a8c6">
+                                    <small class="text-muted">接单人：${orderfrom.user.userName}</small>
+                                </div>
+                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;background-color: #00a8c6">
+                                    <small class="text-muted">接单人电话：${orderfrom.user.phoneNumber}</small>
+                                </div>
+                                <div style="margin-left: 2px;float:right;margin-left: 0.5%;height: 30px;width: 24%;display:inline;">
+                                    <button id="creat_order_${orderfrom.id}" class="btn btn-success btn-block" onclick="showHistoryFormInfo('${orderfrom.express_company}','${orderfrom.goods_size}','${orderfrom.paymoney}','${orderfrom.remark}','${orderfrom.user.credit}')"  style="height: auto;">详细信息</button>
+                                </div>
+                            </c:if>
+                            <!--用户是接单人-->
+                            <c:if test="${orderfrom.trustee_id==userId}">
+                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;background-color: #00a8c6">
+                                    <small class="text-muted">发单人：${orderfrom.user.userName}</small>
+                                </div>
+                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;background-color: #00a8c6">
+                                    <small class="text-muted">发单人电话：${orderfrom.user.phoneNumber}</small>
+                                </div>
+                                <div style="margin-left: 2px;float:right;margin-left: 0.5%;height: 30px;width: 24%;display:inline;">
+                                    <button id="creat_order_${orderfrom.id}" class="btn btn-success btn-block" onclick="showHistoryFormInfo('${orderfrom.express_company}','${orderfrom.goods_size}','${orderfrom.paymoney}','${orderfrom.remark}','${orderfrom.user.credit}')"  style="height: auto;">详细信息</button>
+                                </div>
+                            </c:if>
                         </div>
                         <!--用户是发单人-->
                         <c:if test="${orderfrom.client_id==userId}">
@@ -113,7 +134,7 @@
                             </div>
                             <div style="width: 100%;margin-top: 5px;text-align: center;margin-right: 1%;height: 24px;">
                                 <c:if test="${orderfrom.client_comment==null}">
-                                    <small class="text-muted" style="color: red;font-family: 'YaHei Consolas Hybrid','Consolas','Microsoft YaHei','Malgun Gothic', 'Segoe UI', 'Helvetica, Arial'">您还为评价发单者，请<a onclick="commentClient('${orderfrom.id}')">评价发单者</a></small>
+                                    <small class="text-muted" style="color: red;font-family: 'YaHei Consolas Hybrid','Consolas','Microsoft YaHei','Malgun Gothic', 'Segoe UI', 'Helvetica, Arial'">您还未评价发单者，请<a onclick="commentClient('${orderfrom.id}')">评价发单者</a></small>
                                 </c:if>
                                 <c:if test="${orderfrom.client_comment!=null}">
                                     <label for="txt1_${trustee.id}" style="float: left;width: 20%;">你对发单者的评价：</label>
@@ -134,8 +155,8 @@
 <%@ include file="../footer.jsp"%>
 </body>
 <script>
-    function showHistoryFormInfo(express_company,goods_size,paymoney){
-        alert("快递公司："+express_company+"\n货物大小："+goods_size+"\n该单金额："+paymoney)
+    function showHistoryFormInfo(express_company,goods_size,paymoney,remark,credit){
+        alert("快递公司："+express_company+"\n货物大小："+goods_size+"\n该单金额："+paymoney+"\n备注："+remark+"\n交易者信用度："+credit)
     }
     function commentClient(id){
         $('#orderformid1').val(id);
@@ -146,10 +167,11 @@
         var orderform_id1 = $("#orderformid1").val();
         var grade1 = $("input[name='radio1']:checked").val();
         var comment1 = $("#comment1").val();
-        alert(" "+grade1+".."+comment1+" .."+orderform_id1);
+        // alert(" "+grade1+".."+comment1+" .."+orderform_id1);
         //console.log(orderform_id1 + "," + grade1 + "," + comment1);
-        if(grade1==''){
-            $("#info1").text("提示：评分不能为空！！");
+        if(typeof grade1 == "undefined"){
+            //$("#info1").text("提示：评分不能为空！！");
+            alert("提示：评分不能为空！！");
         }else{
             $.ajax({
                 type: "post",

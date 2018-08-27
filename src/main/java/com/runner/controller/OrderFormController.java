@@ -171,7 +171,7 @@ public class OrderFormController {
             User user = userService.getUserByUserId(client_id);
             BigDecimal havemoney = user.getProperty();
             if(havemoney.compareTo(paymoney)>=0){
-                if(orderFormService.getPutOrderNum(client_id)<3){
+                if(orderFormService.getPutOrderNum(client_id)<3 && user.getCredit()>=80){
                     OrderForm orderForm = new OrderForm();
                     String order_num = (String) request.getParameter("order_num");
                     String express_company = (String) request.getParameter("express_company");
@@ -236,7 +236,7 @@ public class OrderFormController {
                     // 接单数是否小于等于3
                     if(orderFormService.getUserPickNum(client_id)<3){
                         //是否有未评价的订单
-                        if(3<1){
+                        if(orderFormService.isExistNotCommentForm(client_id)){
                             //存在未评价订单，不能接单
                             res.put("pick_state","3");
                         }else{
@@ -278,16 +278,18 @@ public class OrderFormController {
         //1.将钱打给接单者，*90%，updateUser
         HashMap<String, String> res = new HashMap<String, String>();
         User user = userService.getUserByUserId(orderForm.getTrustee_id());
-        user.setProperty(user.getProperty().add(orderForm.getPaymoney().multiply(new BigDecimal(0.9))));
+        BigDecimal finalmoney = user.getProperty().add(orderForm.getPaymoney().multiply(new BigDecimal(0.9)));
+        user.setProperty(finalmoney);
+        System.out.println(finalmoney);
         //计算接单者信用度------原本信用度乘以交易数加1，再+这次的信用度，除以交易数加2
         Double credit = (user.getCredit()*(user.getTrade_num()+1)+grade)/(user.getTrade_num()+2);
         user.setCredit(credit);
         // 交易数加1
         user.setTrade_num(user.getTrade_num()+1);
         // 接单者交易数加1
-        User userjiedan = userService.getUserByUserId(orderForm.getTrustee_id());
-        userjiedan.setTrade_num(userjiedan.getTrade_num()+1);
-        userService.updateUser(userjiedan);
+        User ziji = userService.getUserByUserId(orderForm.getClient_id());
+        ziji.setTrade_num(ziji.getTrade_num()+1);
+        userService.updateUser(ziji);
         userService.updateUser(user);
         //2.更改订单状态为2
         orderForm.setOrder_state(2);
@@ -332,5 +334,21 @@ public class OrderFormController {
         httpSession.setAttribute("user",user);
         httpSession.setAttribute("history_orderform",historyOrderForm);
         return "runner/historyform_runner";
+    }
+    /**
+     * 删除发单
+     */
+    @RequestMapping("/deleteOrderForm")
+    public ModelAndView deleteOrderForm(HttpSession httpSession, HttpServletRequest request) {
+        int orderId = Integer.parseInt(request.getParameter("orderform_id"));
+        Integer userId = (Integer) httpSession.getAttribute("userId");
+        //获取订单金额，返回给发单者
+        OrderForm orderForm = orderFormService.findOrderFormById(orderId);
+        User user = userService.getUserByUserId(userId);
+        user.setProperty(user.getProperty().add(orderForm.getPaymoney()));
+        userService.updateUser(user);
+        // 删除订单
+        orderFormService.deleteOrderFormById(orderId);
+        return updateOrderformShow(httpSession,request);
     }
 }

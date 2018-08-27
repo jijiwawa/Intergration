@@ -75,10 +75,13 @@
                     <div style="float: left;width: 80%;margin-bottom: 5px;display:inline;border:solid 1px;" >
                         <!--第一行：时间点-->
                         <div style="height: 25px;width: 100%;background-color: yellow;">
-                            <div style="margin-left: 0.5%;height:24px;width: 48%;display:inline;border:yellow 1px;">
+                            <div style="margin-left: 0.5%;height:24px;width: 32%;display:inline;border:yellow 1px;">
                                 <small class="text-muted">发单时间：${orderfrom.localCreateTime}</small>
                             </div>
-                            <div style="float:right;margin-left: 0.5%;height:24px;width: 48%;display:inline;border:black 1px;">
+                            <div style="margin-left: 0.5%;height:24px;width: 32%;display:inline;border:yellow 1px;">
+                                <small class="text-muted">单号：${orderfrom.order_num}</small>
+                            </div>
+                            <div style="float:right;margin-left: 0.5%;height:24px;width: 32%;display:inline;border:black 1px;">
                                 <small class="text-muted">最晚取递时间：${orderfrom.latest_time}</small>
                             </div>
                         </div>

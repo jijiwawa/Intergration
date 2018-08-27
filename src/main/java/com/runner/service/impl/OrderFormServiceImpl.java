@@ -74,6 +74,11 @@ public class OrderFormServiceImpl implements OrderFormService {
         return orderFormDao.getHistoryOrderForm(userId);
     }
 
+    //判断用户是否存在为评价发单者的订单,true代表存在，false代表不存在
+    public boolean isExistNotCommentForm(int client_id){
+        return orderFormDao.isExistNotCommentForm(client_id)>0;
+    }
+
     public int getPutOrderNum(int client_id) {
         return orderFormDao.getPutOrderNum(client_id);
     }
@@ -102,7 +107,14 @@ public class OrderFormServiceImpl implements OrderFormService {
         orderFormDao.updateOrderForm(orderForm);
     }
     /**
-     *删
+     * 删
      */
+    public void deleteOrderForm(OrderForm orderForm){
+        orderFormDao.deleteOrderFormById(orderForm.getId());
+    }
+    public void deleteOrderFormById(int orderform_id){
+        orderFormDao.deleteOrderFormById(orderform_id);
+    }
+
 }
 

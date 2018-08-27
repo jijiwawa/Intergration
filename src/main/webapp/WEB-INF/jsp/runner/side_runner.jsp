@@ -143,6 +143,11 @@
                                 <div style="margin-left: 2px;float:right;margin-left: 1%;width: 24%;display:inline;border:1px red;">
                                     <button  class="btn btn-success btn-block <c:if test="${orderfrom.order_state==0}" >disabled</c:if>" style="<c:if test="${orderfrom.order_state==0}">cursor:not-allowed;</c:if>" <c:if test="${orderfrom.order_state==1}">onclick="sureGetTheGood(${orderfrom.id})"</c:if>>确认收货</button>
                                 </div>
+                                <c:if test="${orderfrom.order_state==0}" >
+                                    <div style="margin-left: 2px;float:right;margin-left: 1%;width: 24%;display:inline;border:1px red;">
+                                        <button  class="btn btn-success btn-block" style="background-color: red;" onclick="deleteForm(${orderfrom.id})">取消发单</button>
+                                    </div>
+                                </c:if>
                             </div>
                         </div>
                         </div>
@@ -170,14 +175,25 @@
     function showInfo_form(credit,code,phonenumber,name,remark){
         alert("委托人信用度:"+credit+"\n取货码："+code+"\n取货手机："+phonenumber+"\n取货姓名:"+name+"\n备注:"+remark);
     }
+    function deleteForm(id) {
+        var r=confirm("确定删除该发单?")
+        if (r==true)
+        {
+            window.location.href="/intergration/deleteOrderForm?orderform_id="+id;
+        }
+        else
+        {
+        }
+    }
     function afterComment() {
         var orderform_id1=$("#orderformid").val();
         var grade1=$("input[name='radio']:checked").val();
         var comment1=$("#comment").val();
         // alert(" "+grade1+".."+comment1+" .."+orderform_id1);
         // console.log(orderform_id1+","+grade1+","+comment1);
-        if(grade1==''){
-            $("#info2").text("提示：评分不能为空！！");
+        if(typeof grade1 == "undefined"){
+            //$("#info2").text("提示：评分不能为空！！");
+            alert("提示：评分不能为空！！");
         }else{
             $.ajax({
                 type: "post",

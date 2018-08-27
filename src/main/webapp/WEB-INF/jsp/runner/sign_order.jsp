@@ -217,7 +217,7 @@
                         } else if(data.orderState.trim()=="2"){
                             $("#info").text("提示：余额不足");
                         } else if(data.orderState.trim()=="3"){
-                            $("#info").text("提示：已发单三次，不能再发单");
+                            $("#info").text("提示：已发单三次，不能再发单或者信用度不够");
                         }
                     }
                 });

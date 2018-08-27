@@ -33,6 +33,8 @@ public interface OrderFormService {
     public int getPutOrderNum(int client_id);
     //获取用户的历史订单
     public List<OrderForm> getHistoryOrderForm(int userId);
+    //判断用户是否存在为评价发单者的订单
+    public boolean isExistNotCommentForm(int client_id);
 
     //新增订单
     public boolean addOrderForm(OrderForm orderForm);
@@ -41,5 +43,10 @@ public interface OrderFormService {
 
     // 更新订单
     public void updateOrderForm(OrderForm orderForm);
+    /**
+     * 删
+     */
+    public void deleteOrderForm(OrderForm orderForm);
+    public void deleteOrderFormById(int orderform_id);
 
 }

@@ -13,7 +13,6 @@
             <li class="list-group-item"><a href="">余额:${user.property}</a></li>
             <li class="list-group-item"><a href="">信誉度:${user.credit}</a></li>
             <li class="list-group-item"><a href="">接单数:${user.trade_num}</a></li>
-            <li class="list-group-item"><a href="">好评数:${user.trade_num}</a></li>
             <button style="float:right;" onclick="window.location.href='/intergration/updateOrderformShow'">返回</button>
         </ul>
     </div>

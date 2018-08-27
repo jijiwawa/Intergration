@@ -18,7 +18,7 @@ public interface OrderFormDao {
     /**
      * 删
      */
-    public void deleteOrderForm(OrderForm orderForm);
+    public void deleteOrderFormById(int orderform_id);
     /**
      * 查
      */
@@ -50,6 +50,8 @@ public interface OrderFormDao {
     public int getPutOrderNum(int client_id);
     //获取用户的历史订单
     public List<OrderForm> getHistoryOrderForm(int userId);
+    //判断用户是否存在为评价发单者的订单
+    public int isExistNotCommentForm(int client_id);
      /**
      * 改
      */

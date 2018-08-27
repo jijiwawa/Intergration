@@ -25,7 +25,7 @@
     <!-- 已登录 -->
     <div class="panel panel-default" id="sidebar2" style="width: 20%;margin:1% 2% 1% 0%;float: right">
         <div class="panel-heading" style="background-color: white;text-align: center">
-            <a href="/member/${user.userName}">${user.userName}</a>
+            <a href="">${sessionScope.username}</a>
         </div>
         <ul class="list-group" style="width: 100%">
             <c:if test="${userType!=0}">

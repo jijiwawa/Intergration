@@ -70,9 +70,13 @@ public class OrderFormMapperTest extends BaseTest{
     }
     @Test
     public void addOrderFormTest4() {
-        List<OrderForm> list = orderFormService.getHistoryOrderForm(40);
-        for (OrderForm a:list) {
-            System.out.println(a);
+//        List<OrderForm> list = orderFormService.getHistoryOrderForm(40);
+//        for (OrderForm a:list) {
+//            System.out.println(a);
+//        }
+        for(int i=40;i<=44;i++){
+            System.out.println(i+":"+orderFormService.isExistNotCommentForm(i));
+
         }
     }
 }
