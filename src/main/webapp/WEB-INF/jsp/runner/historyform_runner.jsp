@@ -56,9 +56,13 @@
 <%@ include file="side_runner_left.jsp"%>
 <div class="pre-scrollable" style="width: 73%;margin:1% 2% 5% 5%;align-self: center;" >
     <!-- 历史订单信息窗口 -->
-    <ul class="list-group" style="width: 100%;height: 430px">
+    <ul class="list-group" style="width: 100%;height: 430px;background-color: whitesmoke">
         <!-- 从订单表中遍历出未接单的信息显示出来 -->
-        <c:if test="${history_orderform==null}">！！！您还未有任何交易完成记录！！！</c:if>
+        <c:if test="${orderfrom==null}">
+            <div style="height: 140px;border:#fffa23 2px;">
+                <small class="text-muted" style="color: red;font-family: 'YaHei Consolas Hybrid','Consolas','Microsoft YaHei','Malgun Gothic', 'Segoe UI', 'Helvetica, Arial'">！！！您还未有任何交易完成记录！！！</small>
+            </div>
+        </c:if>
         <c:forEach items="${history_orderform}" var="orderfrom">
             <li class="list-group-item">
                 <div style="height: 140px;border:#fffa23 2px;">
@@ -79,15 +83,15 @@
                         </div>
                         <!--第二行-->
                         <div style="height: 32px;width: 100%;border:black 1px;">
-                            <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;background-color: #00a8c6">
+                            <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;background-color: pink">
                                 <small class="text-muted">单号：${orderfrom.order_num}</small>
                             </div>
                             <!--用户是发单人-->
                             <c:if test="${orderfrom.client_id==userId}">
-                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;background-color: #00a8c6">
+                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;">
                                     <small class="text-muted">接单人：${orderfrom.user.userName}</small>
                                 </div>
-                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;border:1px red;background-color: #00a8c6">
+                                <div style="margin-left: 2px;float:left;margin-left: 0.5%;height: 24px;width: 24%;display:inline;">
                                     <small class="text-muted">接单人电话：${orderfrom.user.phoneNumber}</small>
                                 </div>
                                 <div style="margin-left: 2px;float:right;margin-left: 0.5%;height: 30px;width: 24%;display:inline;">

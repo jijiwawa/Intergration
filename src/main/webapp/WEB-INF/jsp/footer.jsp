@@ -53,14 +53,15 @@ a{
     <div class="info">
         <p style="text-align: center;font-size: 16px;">界面支持</p>
         <ul >
-            <li><a href="http://www.bootcss.com/">Bootstrap</a></li>
-            <li><a href="https://pandao.github.io/editor.md/">Editor.md</a></li>
+            <li><a href="http://www.bootcss.com/" target="_blank">Bootstrap</a></li>
+            <li><a href="https://pandao.github.io/editor.md/" target="_blank">Editor.md</a></li>
         </ul>
     </div>
     <div class="info" >
         <p style="text-align: center;font-size: 16px;">其他信息</p>
         <ul >
-            <li><a href="https://github.com/jijiwawa/intergration">关于本站</a></li>
+            <li><a href="https://github.com/jijiwawa/intergration" target="_blank">项目源码</a></li>
+            <li><a href="../xiu.jsp" target="_blank">商务合作</a></li>
         </ul>
     </div>
 </footer>
