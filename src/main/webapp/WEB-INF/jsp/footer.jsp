@@ -61,7 +61,7 @@ a{
         <p style="text-align: center;font-size: 16px;">其他信息</p>
         <ul >
             <li><a href="https://github.com/jijiwawa/intergration" target="_blank">项目源码</a></li>
-            <li><a href="../xiu.jsp" target="_blank">商务合作</a></li>
+            <li><a href="/intergration/xiu" target="_blank">商务合作</a></li>
         </ul>
     </div>
 </footer>

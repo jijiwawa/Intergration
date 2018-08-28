@@ -351,4 +351,11 @@ public class OrderFormController {
         orderFormService.deleteOrderFormById(orderId);
         return updateOrderformShow(httpSession,request);
     }
+    /**
+     * 秀
+     */
+    @RequestMapping("/xiu")
+    public String xiu(){
+        return "xiu";
+    }
 }
